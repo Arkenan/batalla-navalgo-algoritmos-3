@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Proyecto de prueba" default="main">
+	
+	<!-- esto deja seteado el camino a las librerias. Se agrega también el destino para que los tests
+	accedan a las clases que tienen que testear una vez que estén construidas -->
+	<path id="librerias">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="compilados"/>
+	</path>
+	
+	<!--Pathconvert: deja las librerias separadas en lineas. 
+		Se guarda en una propiedad creada en el momento, llamada "strLibs". -->
+	<pathconvert pathsep="${line.separator}" property="strLibs" refid="librerias"></pathconvert>
+	
+	<target name="preparar">
+		<delete dir="compilados" />
+		<mkdir dir="compilados" />
+		<delete dir="resultados tests" />
+		<mkdir dir="resultados tests" />
+	</target>
+	
+	<target name="compilar" depends="preparar">
+		<javac destdir="compilados">
+			<src path="src"/>
+			<classpath refid="librerias" />
+		</javac>
+	</target>
+	
+	<target name="testear" depends="compilar">
+	    <junit printsummary="on" fork="true" haltonfailure="yes">
+	      <classpath refid="librerias" />
+	      <formatter type="xml" />
+	      <batchtest todir="resultados tests">
+	        <fileset dir="src">
+	          <include name="**/*Test*.java" />
+	        </fileset>
+	      </batchtest>
+	    </junit>
+  	</target>
+
+	<!-- se ejecutan las otras tareas y se imprime la direccion del proyecto y las librerias -->
+	<target name="main" depends="preparar, compilar, testear">
+		<echo> ${basedir} </echo>
+		<echo> ${strLibs} </echo>		
+	</target>
+	
+</project>
