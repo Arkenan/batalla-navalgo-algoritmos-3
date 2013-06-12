@@ -3,7 +3,6 @@ package disparos;
 import java.util.ArrayList;
 
 import partes.Parte;
-import partes.ParteDanioDisparo;
 import barcos.Vector;
 import casillero.Casillero;
 import escenario.Tablero;
@@ -31,16 +30,8 @@ public class DisparoConvencional extends Disparo {
 	public void explotar() {
 		ArrayList<Parte> partesAfectadas = casilleroAfectado.obtenerPartes();
 		for (int i = 0; i < partesAfectadas.size(); i++) {
-			this.afectar(partesAfectadas.get(i));
+			(partesAfectadas.get(i)).explosion(this);
 		}
-	}
-
-	public void afectar(Parte parte) {
-		parte.disminuirVidaEn(potencia);
-	}
-
-	public void afectar(ParteDanioDisparo parte) {
-		this.afectarNormalmente(parte);
 	}
 
 }

@@ -5,8 +5,10 @@ import excepciones.PosicionInvalida;
 
 public class NaveConDanioTotal extends Barco {
 
-    public NaveConDanioTotal(Vector mov, Vector pos, Vector orient, int tam, int cantVida) throws PosicionInvalida {
-        super(mov, pos, orient, tam, cantVida);
+    public NaveConDanioTotal(Vector mov, Vector pos, Vector orient, int tam) throws PosicionInvalida {
+        super(mov, pos, orient, tam);
+        System.out.println("NaveConDanioTotal");
+        System.out.println(tam);
     }
 
     @Override

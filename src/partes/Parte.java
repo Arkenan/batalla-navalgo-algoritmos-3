@@ -1,6 +1,8 @@
 package partes;
 
 import barcos.Vector;
+import disparos.DisparoConvencional;
+import disparos.Mina;
 
 public class Parte {
 	protected int vidaInicial;
@@ -21,8 +23,12 @@ public class Parte {
 		return (!(vida == vidaInicial));
 	}
 
-	public void disminuirVidaEn(int vidaADisminuir) {
-		vida -= vidaADisminuir;
+	public void explosion(Mina mina) {
+		vida -= 1;
+	}
+
+	public void explosion(DisparoConvencional disparo) {
+		vida -= 1;
 	}
 
 	public void cambiarPosicion(Vector nuevaPosicion) {

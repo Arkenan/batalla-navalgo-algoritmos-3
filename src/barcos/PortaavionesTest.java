@@ -1,7 +1,6 @@
 package barcos;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -17,15 +16,14 @@ import excepciones.PosicionInvalida;
 
 public class PortaavionesTest {
 
-    // TAM = 5
     @Test
     public void testParaComprobarQueSeGuardaCorrectamenteElMovimiento() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones buque = new Portaaviones(movimiento, posicion, orientacion);
 
-        Vector unMovimientoVector = nave.obtenerDireccionMovimiento();
+        Vector unMovimientoVector = buque.obtenerDireccionMovimiento();
 
         assertEquals(unMovimientoVector.x, movimiento.x);
         assertEquals(unMovimientoVector.y, movimiento.y);
@@ -85,7 +83,7 @@ public class PortaavionesTest {
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDestruye() {
+    public void testParaComprobarQueCuandoSeLeDisparaUnaVezSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -95,7 +93,7 @@ public class PortaavionesTest {
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
-        assertEquals(nave.estaDestruido(), false);
+        assertEquals(nave.estaDestruido(), true);
 
     }
 
@@ -149,7 +147,7 @@ public class PortaavionesTest {
     }
 
     @Test
-    public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDestruye() {
+    public void testParaComprobarQueCuandoExplotaUnaMinaSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -162,7 +160,7 @@ public class PortaavionesTest {
 
         unaParte.explosion(mina);
 
-        assertFalse(nave.estaDestruido());
+        assertEquals(nave.estaDestruido(), true);
     }
 
     @Test
@@ -175,7 +173,7 @@ public class PortaavionesTest {
         nave.cambiarPosicion();
         Vector unaPosicion = nave.obtenerPosicion();
         assertEquals(unaPosicion.x(), 6);
-        assertEquals(unaPosicion.y(), 6);
+        assertEquals(unaPosicion.y(), 5);
 
     }
 
@@ -183,24 +181,20 @@ public class PortaavionesTest {
     public void testParaComprobarQueSeColocaCorrectamente() {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 4);
-
         Vector posicion1 = new Vector(5, 4);
         Vector posicion2 = new Vector(5, 5);
         Vector posicion3 = new Vector(5, 6);
         Vector posicion4 = new Vector(5, 7);
-        Vector posicion5 = new Vector(5, 8);
 
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(0, 1);
+        Vector orientacion = new Vector(1, 0);
         Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
 
         ArrayList<Parte> partes = nave.obtenerPartes();
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion5, partes.get(4)), true);
-
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(1)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(2)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(3)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(4)), true);
     }
 
     @Test
@@ -218,17 +212,28 @@ public class PortaavionesTest {
     }
 
     @Test
-    public void testParaComprobarQueCambiaDeDireccionAlLlegarAlBorde() {
-        Vector posicion = new Vector(10, 6);
+    public void testParaComprobarQueSePosicionCambioDeManeraCorrecta() {
+        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(0, 1);
+        Vector orientacion = new Vector(1, 0);
+        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        nave.moverse();
+        Vector posActual = nave.obtenerPosicion();
+        assertEquals(posActual.x(), 6);
+        assertEquals(posActual.y(), 5);
+    }
+
+    public void testParaComprobarQueCambiaDeDireccionAlLlegarAlBorde() {
+        Vector posicion = new Vector(10, 8);
+        Vector movimiento = new Vector(1, 1);
+        Vector orientacion = new Vector(1, 0);
         Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
 
         nave.moverse();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
 
-        assertEquals(nuevoMovimiento.x(), -1);
-        assertEquals(nuevoMovimiento.y(), -1);
+        assertEquals(nuevoMovimiento.x, -1);
+        assertEquals(nuevoMovimiento.y, -1);
 
     }
 
@@ -237,24 +242,22 @@ public class PortaavionesTest {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(0, 1);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Vector orientacion = new Vector(1, 0);
+        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
         Vector posicion3 = new Vector(6, 8);
         Vector posicion4 = new Vector(6, 9);
-        Vector posicion5 = new Vector(6, 10);
 
-        nave.moverse();
+        lancha.moverse();
 
-        ArrayList<Parte> partes = nave.obtenerPartes();
+        ArrayList<Parte> partes = lancha.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion5, partes.get(4)), true);
 
     }
 
@@ -270,7 +273,6 @@ public class PortaavionesTest {
         Vector posicion2 = new Vector(5, 6);
         Vector posicion3 = new Vector(5, 7);
         Vector posicion4 = new Vector(5, 8);
-        Vector posicion5 = new Vector(5, 9);
 
         nave.moverse();
 
@@ -280,8 +282,6 @@ public class PortaavionesTest {
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion5, partes.get(4)), false);
-
     }
 
     @Test
@@ -296,34 +296,24 @@ public class PortaavionesTest {
         Vector posicion1 = new Vector(5, 6);
         Vector posicion2 = new Vector(5, 7);
         Vector posicion3 = new Vector(5, 8);
-        Vector posicion4 = new Vector(5, 9);
 
         ArrayList<Parte> partes = lancha.obtenerPartes();
 
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(3)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(4)));
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(3)), false);
 
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(2)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(3)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(4)));
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(2)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(3)), false);
 
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(0)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(3)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(4)));
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(0)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(3)), false);
 
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(0)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(1)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(4)));
-
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(0)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(1)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(2)));
-        assertFalse(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)));
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(0)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(1)), false);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), false);
 
     }
 }

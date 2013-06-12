@@ -5,7 +5,7 @@ import partes.ParteDanioDisparo;
 public class Destructor extends Barco {
 
     public Destructor(Vector mov, Vector pos, Vector orient) {
-        super(mov, pos, orient, 3, 1);
+        super(mov, pos, orient, 3);
 
     }
 
