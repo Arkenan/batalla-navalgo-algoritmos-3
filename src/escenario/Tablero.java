@@ -9,14 +9,14 @@ import barcos.Barco;
 import barcos.Vector;
 import casillero.Casillero;
 
-// patrón de diseño singleton.
+// patrï¿½n de diseï¿½o singleton.
 public final class Tablero {
 
     private final Map<String, Casillero> casilleros;
     private final int ancho;
     private final int alto;
 
-    // constructor privado, para que no puedan hacerse más.
+    // constructor privado, para que no puedan hacerse mï¿½s.
     // esto hay que llenarlo con los valores iniciales de los atributos que
     // vayamos a tener.
     private Tablero(int ancho, int alto) {
@@ -25,16 +25,16 @@ public final class Tablero {
         this.alto = alto;
     }
 
-    // se crea la instancia al inicio de la ejecución general.
-    // podemos ver de pasarle en algún lado las dimensiones?
+    // se crea la instancia al inicio de la ejecuciï¿½n general.
+    // podemos ver de pasarle en algï¿½n lado las dimensiones?
     private static Tablero tableroUnico = new Tablero(10, 10);
 
-    // método para acceder globalmente a la instancia única.
+    // mï¿½todo para acceder globalmente a la instancia ï¿½nica.
     public static Tablero getTablero() {
         return tableroUnico;
     }
 
-    // por si hay futuros cambios en la implementación del almacenamiento de casilleros.
+    // por si hay futuros cambios en la implementaciï¿½n del almacenamiento de casilleros.
     private String obtenerClave(int x, int y) {
         String clave = (Integer.toString(x) + Integer.toString(y));
         return clave;
@@ -61,7 +61,7 @@ public final class Tablero {
     }
 
     public void removerBarco(Barco barco) {
-        // tiene que sacarlo de la lista y además borrar las referencias
+        // tiene que sacarlo de la lista y ademï¿½s borrar las referencias
         // de todas sus casillas. FATLA IMPLEMENTAR.
     }
 
@@ -70,10 +70,10 @@ public final class Tablero {
     }
 
     public void sacarElemento(Vector posicion, Parte elemento) {
-        obtenerCasillero(posicion).colocarElemento(elemento);
+        obtenerCasillero(posicion).quitarElemento(elemento);
     }
 
-    // devuelve los casilleros afectados por una explosión.
+    // devuelve los casilleros afectados por una explosiï¿½n.
     public LinkedList<Casillero> casillasAfectadas(Vector posicion, int radio) {
         LinkedList<Casillero> lista = new LinkedList<Casillero>();
         for (int columna = posicion.x() - radio; columna <= posicion.x() + radio; columna++) {
@@ -88,7 +88,7 @@ public final class Tablero {
         return obtenerCasillero(posicion).contiene(elemento);
     }
 
-    // métodos para armar. CAMBIAR. 0 horizontal. 1 vertical. OBSOLETO.
+    // mï¿½todos para armar. CAMBIAR. 0 horizontal. 1 vertical. OBSOLETO.
     /*
      * public void ponerBarco(Barco barco, int[] posCabeza) throws FueraDeRango {
      * 
