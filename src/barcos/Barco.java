@@ -23,9 +23,10 @@ public abstract class Barco {
      * (hacia donde apunta).
      */
     public Barco(Vector mov, Vector pos, Vector orient, int tam) throws PosicionInvalida {
-        System.out.print("Barco");
+        System.out.println("Barco");
         tamanio = tam;
-        System.out.println(tam);
+        System.out.print("Tamanio del barco");
+        System.out.println(tamanio);
         orientacion = orient;
         if (this.verificarPosicion(pos) == false) {
             throw new PosicionInvalida("HAY UNA POSICION INVALIDA");
@@ -45,8 +46,8 @@ public abstract class Barco {
         Tablero tablero = Tablero.getTablero();
         for (int i = 0; i < tamanio; i++) {
             Vector vector = new Vector(pos);
+            vector = pos.sumar(orientacion.porEscalar(i));
             System.out.println("vector a probar " + vector.toString());
-            vector = (pos.sumar(orientacion.porEscalar(i)));
             if (tablero.fueraDeRango(vector) == true) {
                 System.out.println("el vector no puede estar " + vector.toString());
                 return false;
@@ -123,6 +124,7 @@ public abstract class Barco {
     }
 
     public void moverPartes() {
+        System.out.println("moverPartes");
         this.sacarPartes();
         this.cambiarPosicion();
         this.colocarPartes();
@@ -130,13 +132,11 @@ public abstract class Barco {
 
     /* quita todas las partes de un barco del tablero */
     public void sacarPartes() {
-        System.out.println("sacando partes");
-        System.out.println("tamanio: " + tamanio);
+        System.out.println("sacarPartes");
         Tablero tablero = Tablero.getTablero();
         for (int i = 0; i < tamanio; i++) {
-
             Vector posParte = new Vector(posicion.sumar(orientacion.porEscalar(i)));
-            System.out.println(posParte);
+            System.out.println(posParte.toString());
             tablero.sacarElemento(posParte, partesDelBarco.get(i));
         }
     }
@@ -151,10 +151,11 @@ public abstract class Barco {
      * Calcula la posicion de cada parte en base a la posicion de la cabeza.
      */
     public void colocarPartes() {
+        System.out.println("colocarPartes");
         Tablero tablero = Tablero.getTablero();
-        System.out.println("antes del for");
         for (int i = 0; i < tamanio; i++) {
             Vector posParte = new Vector(posicion.sumar(orientacion.porEscalar(i)));
+            System.out.print("donde se coloca");
             System.out.println(posParte.toString());
             tablero.colocarElemento(posParte, partesDelBarco.get(i));
         }
