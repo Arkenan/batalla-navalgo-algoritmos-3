@@ -1,26 +1,41 @@
 package disparos;
 
+import partes.Parte;
+import partes.ParteDanioDisparo;
 import barcos.Vector;
 
 public abstract class Disparo {
-    protected int costo;
-    protected String nombre;
+	protected int costo;
+	protected String nombre;
+	protected int potencia;
 
-    public int costo() {
-        return costo;
-    }
+	public Disparo() {
+		potencia = 1;
+	}
 
-    public String obtenerNombre() {
-        return nombre;
-    }
+	public int costo() {
+		return costo;
+	}
 
-    public abstract void cambiarCasillerosAfectados(Vector posicion);
+	public String obtenerNombre() {
+		return nombre;
+	}
 
-    public abstract boolean debeExplotar();
+	public abstract void cambiarCasillerosAfectados(Vector posicion);
 
-    public abstract void explotar();
+	public abstract boolean debeExplotar();
 
-    public void pasarTurno() {
+	public abstract void explotar();
 
-    }
+	public void pasarTurno() {
+
+	}
+
+	public abstract void afectar(Parte parte);
+
+	public abstract void afectar(ParteDanioDisparo parte);
+
+	public void afectarNormalmente(Parte parte) {
+		parte.disminuirVidaEn(potencia);
+	}
 }
