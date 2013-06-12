@@ -184,20 +184,6 @@ public class BuqueTest {
     }
 
     @Test
-    public void testParaComprobarQueSeCambiaCorrectamenteLaPosicion() {
-        Vector posicion = new Vector(5, 5);
-        Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
-        Buque nave = new Buque(movimiento, posicion, orientacion);
-
-        nave.cambiarPosicion();
-        Vector unaPosicion = nave.obtenerPosicion();
-        assertEquals(unaPosicion.x, 6);
-        assertEquals(unaPosicion.y, 6);
-
-    }
-
-    @Test
     public void testParaComprobarQueSeColocaCorrectamente() {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 4);
@@ -210,7 +196,6 @@ public class BuqueTest {
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
         Buque nave = new Buque(movimiento, posicion, orientacion);
-        nave.colocarPartes();
 
         ArrayList<Parte> partes = nave.obtenerPartes();
 

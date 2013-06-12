@@ -21,12 +21,12 @@ public class RompehieloTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo Rompehielo = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
 
-        Vector unMovimientoVector = Rompehielo.obtenerDireccionMovimiento();
+        Vector unMovimientoVector = nave.obtenerDireccionMovimiento();
 
-        assertEquals(unMovimientoVector.x, movimiento.x);
-        assertEquals(unMovimientoVector.y, movimiento.y);
+        assertEquals(unMovimientoVector.x(), movimiento.x());
+        assertEquals(unMovimientoVector.y(), movimiento.y());
 
     }
 
@@ -41,13 +41,13 @@ public class RompehieloTest {
         nave.invertirDireccionMovimiento();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
 
-        assertEquals(nuevoMovimiento.x, movimientoInvertido.x);
-        assertEquals(nuevoMovimiento.y, movimientoInvertido.y);
+        assertEquals(nuevoMovimiento.x(), movimientoInvertido.x());
+        assertEquals(nuevoMovimiento.y(), movimientoInvertido.y());
 
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeLeDisparaSeDania() {
+    public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDania() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -56,6 +56,23 @@ public class RompehieloTest {
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
+        unaParte.explosion(disparo);
+
+        assertEquals(nave.estaDaniado(), false);
+
+    }
+
+    @Test
+    public void testParaComprobarQueCuandoSeLeDisparaDosVezSeDania() {
+        Vector posicion = new Vector(5, 5);
+        Vector movimiento = new Vector(1, 1);
+        Vector orientacion = new Vector(1, 0);
+        DisparoConvencional disparo = new DisparoConvencional();
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+
+        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        Parte unaParte = lasPartes.get(1);
+        unaParte.explosion(disparo);
         unaParte.explosion(disparo);
 
         assertEquals(nave.estaDaniado(), true);
@@ -83,7 +100,7 @@ public class RompehieloTest {
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeLeDisparaUnaVezSeDestruye() {
+    public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -93,12 +110,12 @@ public class RompehieloTest {
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
-        assertEquals(nave.estaDestruido(), true);
+        assertEquals(nave.estaDestruido(), false);
 
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesSeDestruye() {
+    public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesNoSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -110,11 +127,30 @@ public class RompehieloTest {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(disparo);
         }
+        assertEquals(nave.estaDestruido(), false);
+    }
+
+    @Test
+    public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesDosVecesSeDestruye() {
+        Vector posicion = new Vector(5, 5);
+        Vector movimiento = new Vector(1, 1);
+        Vector orientacion = new Vector(1, 0);
+        DisparoConvencional disparo = new DisparoConvencional();
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+
+        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < nave.obtenerTamanio(); i++) {
+                Parte unaParte = lasPartes.get(i);
+                unaParte.explosion(disparo);
+            }
+        }
+
         assertEquals(nave.estaDestruido(), true);
     }
 
     @Test
-    public void testParaComprobarQueCuandoExplotaUnaMinaSeDania() {
+    public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDania() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -127,11 +163,29 @@ public class RompehieloTest {
 
         unaParte.explosion(mina);
 
+        assertEquals(nave.estaDaniado(), false);
+    }
+
+    @Test
+    public void testParaComprobarQueCuandoExplotaUnaMinaDosVecesSeDania() {
+        Vector posicion = new Vector(5, 5);
+        Vector movimiento = new Vector(1, 1);
+        Vector orientacion = new Vector(1, 0);
+        Mina mina = new MinaContacto();
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+
+        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+
+        Parte unaParte = lasPartes.get(1);
+
+        unaParte.explosion(mina);
+        unaParte.explosion(mina);
+
         assertEquals(nave.estaDaniado(), true);
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesSeDestruye() {
+    public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesNoSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -143,11 +197,30 @@ public class RompehieloTest {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(mina);
         }
+        assertEquals(nave.estaDestruido(), false);
+    }
+
+    @Test
+    public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesDosVecesSeDestruye() {
+        Vector posicion = new Vector(5, 5);
+        Vector movimiento = new Vector(1, 1);
+        Vector orientacion = new Vector(1, 0);
+        Mina mina = new MinaContacto();
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+
+        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < nave.obtenerTamanio(); i++) {
+                Parte unaParte = lasPartes.get(i);
+                unaParte.explosion(mina);
+            }
+        }
+
         assertEquals(nave.estaDestruido(), true);
     }
 
     @Test
-    public void testParaComprobarQueCuandoExplotaUnaMinaSeDestruye() {
+    public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDestruye() {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
@@ -160,41 +233,26 @@ public class RompehieloTest {
 
         unaParte.explosion(mina);
 
-        assertEquals(nave.estaDestruido(), true);
-    }
-
-    @Test
-    public void testParaComprobarQueSeCambiaCorrectamenteLaPosicion() {
-        Vector posicion = new Vector(5, 4);
-        Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
-
-        nave.cambiarPosicion();
-        Vector unaPosicion = nave.obtenerPosicion();
-        assertEquals(unaPosicion.x(), 6);
-        assertEquals(unaPosicion.y(), 5);
-
+        assertEquals(nave.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueSeColocaCorrectamente() {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 4);
+
         Vector posicion1 = new Vector(5, 4);
         Vector posicion2 = new Vector(5, 5);
         Vector posicion3 = new Vector(5, 6);
-        Vector posicion4 = new Vector(5, 7);
 
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
+        Vector orientacion = new Vector(0, 1);
         Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
 
         ArrayList<Parte> partes = nave.obtenerPartes();
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(1)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(2)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(3)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(4)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
+        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), true);
     }
 
     @Test
@@ -223,17 +281,18 @@ public class RompehieloTest {
         assertEquals(posActual.y(), 5);
     }
 
+    @Test
     public void testParaComprobarQueCambiaDeDireccionAlLlegarAlBorde() {
-        Vector posicion = new Vector(0, 8);
+        Vector posicion = new Vector(10, 8);
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
+        Vector orientacion = new Vector(0, 1);
         Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
 
         nave.moverse();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
 
-        assertEquals(nuevoMovimiento.x, -1);
-        assertEquals(nuevoMovimiento.y, -1);
+        assertEquals(nuevoMovimiento.x(), -1);
+        assertEquals(nuevoMovimiento.y(), -1);
 
     }
 
@@ -242,22 +301,20 @@ public class RompehieloTest {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Vector orientacion = new Vector(0, 1);
+        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
         Vector posicion3 = new Vector(6, 8);
-        Vector posicion4 = new Vector(6, 9);
 
-        lancha.moverse();
+        nave.moverse();
 
-        ArrayList<Parte> partes = lancha.obtenerPartes();
+        ArrayList<Parte> partes = nave.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), true);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), true);
 
     }
 
@@ -266,13 +323,12 @@ public class RompehieloTest {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
+        Vector orientacion = new Vector(0, 1);
         Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
 
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);
         Vector posicion3 = new Vector(5, 7);
-        Vector posicion4 = new Vector(5, 8);
 
         nave.moverse();
 
@@ -281,7 +337,6 @@ public class RompehieloTest {
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), false);
     }
 
     @Test
@@ -295,25 +350,17 @@ public class RompehieloTest {
         Vector posicion0 = new Vector(5, 5);
         Vector posicion1 = new Vector(5, 6);
         Vector posicion2 = new Vector(5, 7);
-        Vector posicion3 = new Vector(5, 8);
 
         ArrayList<Parte> partes = lancha.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(3)), false);
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(2)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(3)), false);
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(0)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(3)), false);
-
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(0)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(1)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), false);
 
     }
 
