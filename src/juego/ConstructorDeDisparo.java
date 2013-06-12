@@ -8,6 +8,7 @@ import disparos.DisparoConvencional;
 import disparos.MinaContacto;
 import disparos.MinaDobleRadio;
 import disparos.MinaRadio;
+import excepciones.DisparoInvalido;
 
 public class ConstructorDeDisparo {
     ArrayList<Disparo> disparosPosibles;

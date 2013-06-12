@@ -25,6 +25,7 @@ public abstract class Barco {
     public Barco(Vector mov, Vector pos, Vector orient, int tam) throws PosicionInvalida {
         System.out.print("Barco");
         tamanio = tam;
+        System.out.println(tam);
         orientacion = orient;
         if (this.verificarPosicion(pos) == false) {
             throw new PosicionInvalida("HAY UNA POSICION INVALIDA");
@@ -45,7 +46,7 @@ public abstract class Barco {
         for (int i = 0; i < tamanio; i++) {
             Vector vector = new Vector(pos);
             System.out.println("vector a probar " + vector.toString());
-            vector = (pos.sumar(orientacion)).porEscalar(i);
+            vector = (pos.sumar(orientacion.porEscalar(i)));
             if (tablero.fueraDeRango(vector) == true) {
                 System.out.println("el vector no puede estar " + vector.toString());
                 return false;
@@ -129,9 +130,13 @@ public abstract class Barco {
 
     /* quita todas las partes de un barco del tablero */
     public void sacarPartes() {
+        System.out.println("sacando partes");
+        System.out.println("tamanio: " + tamanio);
         Tablero tablero = Tablero.getTablero();
         for (int i = 0; i < tamanio; i++) {
+
             Vector posParte = new Vector(posicion.sumar(orientacion.porEscalar(i)));
+            System.out.println(posParte);
             tablero.sacarElemento(posParte, partesDelBarco.get(i));
         }
     }

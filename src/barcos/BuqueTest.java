@@ -1,6 +1,7 @@
 package barcos;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -304,10 +305,10 @@ public class BuqueTest {
 
         ArrayList<Parte> partes = nave.obtenerPartes();
 
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)), false);
-        assertEquals(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)), false);
+        assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)));
+        assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)));
+        assertFalse(tablero.elementoPerteneceAlCasillero(posicion3, partes.get(2)));
+        assertFalse(tablero.elementoPerteneceAlCasillero(posicion4, partes.get(3)));
 
     }
 

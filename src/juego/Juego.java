@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import barcos.Barco;
 import barcos.Vector;
 import disparos.Disparo;
+import excepciones.DisparoInvalido;
 
 public class Juego {
     private int puntos;

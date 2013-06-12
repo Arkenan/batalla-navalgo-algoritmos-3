@@ -54,7 +54,7 @@ public final class Tablero {
 
     public boolean fueraDeRango(Vector posicion) {
         boolean fuera = false;
-        if (posicion.x() > ancho || posicion.x() < 1 || posicion.y() < 1 || posicion.x() > alto) {
+        if (posicion.x() > ancho || posicion.x() < 1 || posicion.y() < 1 || posicion.y() > alto) {
             fuera = true;
         }
         return fuera;
