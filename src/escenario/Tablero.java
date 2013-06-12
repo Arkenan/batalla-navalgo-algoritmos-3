@@ -5,35 +5,40 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import partes.Parte;
-import barcos.Barco;
 import barcos.Vector;
 import casillero.Casillero;
 
+/* patron de diseño singleton */
 public final class Tablero {
 
     private final Map<String, Casillero> casilleros;
     private final int ancho;
     private final int alto;
 
-    // esto hay que llenarlo con los valores iniciales de los atributos que
-    // vayamos a tener.
     private Tablero(int ancho, int alto) {
         casilleros = new HashMap<String, Casillero>();
         this.ancho = ancho;
         this.alto = alto;
     }
 
+    /* constructor privado para evitar copias extra. */
     private static Tablero tableroUnico = new Tablero(10, 10);
 
+    /* obtencion de la unica instancia */
     public static Tablero getTablero() {
         return tableroUnico;
     }
 
+    /* Utilizado para generar una clave del diccionario a partir de dos numeros */
     private String obtenerClave(int x, int y) {
         String clave = (Integer.toString(x) + Integer.toString(y));
         return clave;
     }
 
+    /*
+     * Utilizado para encontrar un casillero a partir de dos enteros, que pueden venir de un vector
+     * en otro obtenerCasillero(Vector)
+     */
     public Casillero obtenerCasillero(int x, int y) {
         String clave = obtenerClave(x, y);
         if (!casilleros.containsKey(clave)) {
@@ -46,6 +51,7 @@ public final class Tablero {
         return (obtenerCasillero(posicion.x(), posicion.y()));
     }
 
+    /* Retorna verdadero si una posicion descrita por un vector no pertenece al tablero. */
     public boolean fueraDeRango(Vector posicion) {
         boolean fuera = false;
         if (posicion.x() > ancho || posicion.x() < 1 || posicion.y() < 1 || posicion.y() > alto) {
@@ -54,17 +60,18 @@ public final class Tablero {
         return fuera;
     }
 
-    public void removerBarco(Barco barco) {
-        // de todas sus casillas. FATLA IMPLEMENTAR.
-    }
-
+    /* Coloca una parte de un barco. */
     public void colocarElemento(Vector posicion, Parte elemento) {
         obtenerCasillero(posicion).colocarElemento(elemento);
     }
 
+    /* Quita una parte de un barco. */
     public void sacarElemento(Vector posicion, Parte elemento) {
     }
 
+    /*
+     * Metodo utilizado por las minas para obtener las casillas que seran afectadas por su explosion
+     */
     public LinkedList<Casillero> casillasAfectadas(Vector posicion, int radio) {
         LinkedList<Casillero> lista = new LinkedList<Casillero>();
         for (int columna = posicion.x() - radio; columna <= posicion.x() + radio; columna++) {
