@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import partes.Parte;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 import escenario.Tablero;
 
@@ -30,7 +30,7 @@ public class MinaRetardoTest {
     public void testCreoUnaMinaRetardoEnUnaPosicionDondeHayUnaParteHagoQueExploteYLaParteDeberiaResultarDaniada() {
         MinaRetardo mina = new MinaRetardo();
         Vector posicion = new Vector(1, 1);
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
         Tablero tablero = Tablero.getTablero();
         tablero.colocarElemento(posicion, parte);
         mina.cambiarCasillerosAfectados(posicion);

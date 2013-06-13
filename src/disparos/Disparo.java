@@ -1,5 +1,7 @@
 package disparos;
 
+import partes.ParteDanioDisparo;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 
 public abstract class Disparo {
@@ -23,4 +25,9 @@ public abstract class Disparo {
     public void pasarTurno() {
 
     }
+
+    public abstract void afectar(ParteDanioTotal parte);
+
+    public abstract void afectar(ParteDanioDisparo parte);
+
 }

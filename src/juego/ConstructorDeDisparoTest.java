@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import partes.Parte;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 import disparos.Disparo;
 import escenario.Tablero;
@@ -26,7 +26,7 @@ public class ConstructorDeDisparoTest {
         Tablero tablero = Tablero.getTablero();
         ConstructorDeDisparo constructor = new ConstructorDeDisparo();
         Vector posicion = new Vector(1, 2);
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
         tablero.colocarElemento(posicion, parte);
         Disparo disparo = constructor.construirDisparo("disparoconvencional", posicion);
         disparo.explotar();

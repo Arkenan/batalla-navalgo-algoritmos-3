@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import partes.Parte;
+import partes.ParteDanioTotal;
 
 public class CasilleroTest {
 
     @Test
     public void testColocarElementoYVerQueHayAlgo() {
-        Parte parte = new Parte(2);
+        ParteDanioTotal parte = new ParteDanioTotal(2);
         Casillero casillero = new Casillero();
         casillero.colocarElemento(parte);
         assertTrue(casillero.contienePartes());
@@ -20,7 +21,7 @@ public class CasilleroTest {
 
     @Test
     public void testColocarElementoYVerQueTieneEsaParte() {
-        Parte parte = new Parte(2);
+        ParteDanioTotal parte = new ParteDanioTotal(2);
         Casillero casillero = new Casillero();
         casillero.colocarElemento(parte);
         assertTrue(casillero.contiene(parte));
@@ -28,8 +29,8 @@ public class CasilleroTest {
 
     @Test
     public void testDevuelveTodasSusPartes() {
-        Parte parte1 = new Parte(2);
-        Parte parte2 = new Parte(2);
+        ParteDanioTotal parte1 = new ParteDanioTotal(2);
+        ParteDanioTotal parte2 = new ParteDanioTotal(2);
         Casillero casillero = new Casillero();
         casillero.colocarElemento(parte1);
         casillero.colocarElemento(parte2);
@@ -40,8 +41,8 @@ public class CasilleroTest {
 
     @Test
     public void testDevuelveSoloSusPartes() {
-        Parte parte1 = new Parte(2);
-        Parte parte2 = new Parte(2);
+        ParteDanioTotal parte1 = new ParteDanioTotal(2);
+        ParteDanioTotal parte2 = new ParteDanioTotal(2);
         Casillero casillero = new Casillero();
         casillero.colocarElemento(parte1);
         casillero.colocarElemento(parte2);
@@ -51,8 +52,8 @@ public class CasilleroTest {
 
     @Test
     public void testSeQuitaUnElemento() {
-        Parte parte1 = new Parte(2);
-        Parte parte2 = new Parte(2);
+        ParteDanioTotal parte1 = new ParteDanioTotal(2);
+        ParteDanioTotal parte2 = new ParteDanioTotal(2);
         Casillero casillero = new Casillero();
         casillero.colocarElemento(parte1);
         casillero.colocarElemento(parte2);

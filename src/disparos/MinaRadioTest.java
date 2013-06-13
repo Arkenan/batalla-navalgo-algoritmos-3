@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import partes.Parte;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 import escenario.Tablero;
 
@@ -17,7 +17,7 @@ public class MinaRadioTest {
         Vector posicion = new Vector(3, 3);
         mina.cambiarCasillerosAfectados(posicion);
         Vector posicionPertenecienteAlRadio = new Vector(3, 2);
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
         Tablero tablero = Tablero.getTablero();
         tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
         mina.explotar();
@@ -30,7 +30,7 @@ public class MinaRadioTest {
         Vector posicion = new Vector(3, 3);
         mina.cambiarCasillerosAfectados(posicion);
         Vector posicionNoPertenecienteAlRadio = new Vector(9, 9);
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
         Tablero tablero = Tablero.getTablero();
         tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
         mina.explotar();

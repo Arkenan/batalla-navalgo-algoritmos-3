@@ -1,13 +1,15 @@
 package partes;
 
-import disparos.Mina;
+import disparos.Disparo;
 
 public class ParteDanioDisparo extends Parte {
+
     public ParteDanioDisparo(int vidaIni) {
         super(vidaIni);
     }
 
     @Override
-    public void explosion(Mina mina) {
+    public void explosion(Disparo disparo) {
+        disparo.afectar(this);
     }
 }

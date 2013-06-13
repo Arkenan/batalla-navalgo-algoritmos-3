@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import partes.Parte;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 import escenario.Tablero;
 
@@ -27,7 +27,7 @@ public class MinaContactoTest {
 
         MinaContacto mina = new MinaContacto();
 
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
 
         Tablero tablero = Tablero.getTablero();
 
@@ -44,7 +44,7 @@ public class MinaContactoTest {
     public void testAlCrearUnaMinaDeContactoEnUnLugarQueHayUnaParteYHacerlaExplotarLaParteDebeSerDaniada() {
         MinaContacto mina = new MinaContacto();
 
-        Parte parte = new Parte(1);
+        ParteDanioTotal parte = new ParteDanioTotal(1);
 
         Tablero tablero = Tablero.getTablero();
 

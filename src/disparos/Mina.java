@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import partes.Parte;
+import partes.ParteDanioDisparo;
+import partes.ParteDanioTotal;
 import barcos.Vector;
 import casillero.Casillero;
 import escenario.Tablero;
@@ -31,6 +33,13 @@ public abstract class Mina extends Disparo {
                 (partesAfectadas.get(i)).explosion(this);
             }
         }
+    }
+
+    public void afectar(ParteDanioTotal parte) {
+        parte.recibirDanio(1);
+    }
+
+    public void afectar(ParteDanioDisparo parte) {
     }
 
 }
