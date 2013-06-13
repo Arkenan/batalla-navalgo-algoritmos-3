@@ -116,19 +116,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>439.0</double>
+      <double>450.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>380.0</double>
+      <double>509.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>439.0</double>
-     <double>380.0</double>
+     <double>450.0</double>
+     <double>509.0</double>
     </void>
    </object>
   </void>
@@ -211,19 +211,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>649.0</double>
+      <double>556.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>118.0</double>
+      <double>293.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>649.0</double>
-     <double>118.0</double>
+     <double>556.0</double>
+     <double>293.0</double>
     </void>
    </object>
   </void>
@@ -231,15 +231,22 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode5">
     <void property="attributes">
      <void property="text">
-      <string>casilleros=Diccionario</string>
+      <string>-casilleros: Map&lt;String, Casillero&gt;
+-alto: int
+-ancho: int</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>colocarParte
-sacarParte
-colocarMina
-obtenerCasillero</string>
+      <string>+getTablero(): Tablero
++obtenerClave(int x, int y): String
++obtenerCasillero(int x, int y): Casillero
++obtenerCasillero(Vector posicion): Casillero
++fueraDeRango(Vector posicion): boolean
++colocarElemento(Vector posicion, Parte elemento)
++sacarElemento(Vector posicion, Parte elemento)
++casillasAfectadas(Vector posicion, int radio): LinkedList&lt;Casillero&gt;
++elementoPerteneceAlCasillero(Vector posicion, Parte elemento): boolean</string>
      </void>
     </void>
     <void property="name">
@@ -253,19 +260,19 @@ obtenerCasillero</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>56.0</double>
+      <double>-3.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double5"/>
-      <double>325.0</double>
+      <double>306.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>56.0</double>
-     <double>325.0</double>
+     <double>-3.0</double>
+     <double>306.0</double>
     </void>
    </object>
   </void>
@@ -309,6 +316,9 @@ obtenerCasillero</string>
     </void>
     <void property="startArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
     </void>
    </object>
    <object idref="ClassNode0"/>

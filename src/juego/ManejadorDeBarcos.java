@@ -56,8 +56,8 @@ public class ManejadorDeBarcos {
 	}
 
 	private Vector crearPosicionAleatoria() {
-		return new Vector((int) (Math.random() * 5) + 1,
-				(int) (Math.random() * 5) + 1);
+		return new Vector((int) (Math.random() * 4) + 1,
+				(int) (Math.random() * 4) + 1);
 	}
 
 	private Vector crearOrientacionAleatoria() {
