@@ -16,7 +16,7 @@ public class MinaContactoTest {
 
         MinaContacto mina = new MinaContacto();
 
-        mina.cambiarCasillerosAfectados(new Vector(1, 1));
+        mina.cambiarCasillerosAfectados(new Vector(10, 10));
 
         assertFalse(mina.debeExplotar());
 
