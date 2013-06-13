@@ -11,7 +11,6 @@ public abstract class Parte {
 	public Parte(int vidaIni) {
 		vidaInicial = vidaIni;
 		vida = vidaIni;
-		posicion = new Vector(3, 3);
 	}
 
 	public boolean estaDestruida() {
@@ -25,8 +24,12 @@ public abstract class Parte {
 	public abstract void explosion(Disparo disparo);
 
 	public void cambiarPosicion(Vector nuevaPosicion) {
-		posicion.setX(nuevaPosicion.x());
-		posicion.setY(nuevaPosicion.y());
+		if (posicion == null) {
+			posicion = new Vector(nuevaPosicion);
+		} else {
+			posicion.setX(nuevaPosicion.x());
+			posicion.setY(nuevaPosicion.y());
+		}
 	}
 
 	public Vector obtenerPosicion() {
