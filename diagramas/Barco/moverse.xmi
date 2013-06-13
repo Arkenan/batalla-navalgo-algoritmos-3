@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2013-06-13T02:37:10" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+<XMI verified="false" xmi.version="1.2" timestamp="2013-06-13T12:41:54" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://uml.sf.net</XMI.exporter>
@@ -29,43 +29,64 @@
        </UML:Namespace.ownedElement>
       </UML:Package>
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ozfFcieVwHpl" name="Barco"/>
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="fUa67shupL9R" name="Tablero"/>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="fUa67shupL9R" name="Tablero">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="XVPziloU37eP" name="pp"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="NcWiEyBO6YmT" name="colocarElemento(Parte)"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="muFsej2ji0Qd" name="colocarElemento">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="n9iUhwG3Xklj" type="" value="" name="Parte"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="gv5nTrEEjT6O" name="new_operation"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="C67t4YWrfCJL" name=""/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="OQFl03UJBjPo" name="quitarElemento()"/>
+       </UML:Classifier.feature>
+      </UML:Class>
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="1" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="540" canvaswidth="1011" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="geYaWgtEsCIq" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="0" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="28" canvaswidth="98" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="geYaWgtEsCIq" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets/>
         <messages/>
         <associations/>
        </diagram>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="1" showstereotype="1" name="moverse()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="784" canvaswidth="998" localid="3nwx4kif5vlW" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="VK5DFTKgTfIb" documentation="" showscope="1" snapgrid="0" showatts="1" type="3">
+       <diagram showopsig="1" linecolor="#000000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="moverse()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="767" canvaswidth="998" localid="3nwx4kif5vlW" snapcsgrid="0" showgrid="1" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="0" fillcolor="#000000" zoom="100" xmi.id="VK5DFTKgTfIb" documentation="" showscope="1" snapgrid="1" showatts="1" type="3">
         <widgets>
-         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" instancename="buque" x="70" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="dLD8TN9ygEAv" width="94" isinstance="0" multipleinstance="0" usefillcolor="0" fillcolor="#ffff00" xmi.id="ozfFcieVwHpl" height="32" drawasactor="0"/>
-         <objectwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" instancename="tablero" x="364" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="3nwx4kif5vlW" width="108" isinstance="0" multipleinstance="0" usefillcolor="0" fillcolor="#ffff00" xmi.id="fUa67shupL9R" height="32" drawasactor="0"/>
-         <preconditionwidget linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" preconditionname="fueraDeRango(posicion) == false" x="-1" showstereotype="1" y="288" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="236" isinstance="0" usefillcolor="0" fillcolor="none" xmi.id="giQEvn8etigB" documentation="" height="32"/>
-         <combinedFragmentwidget linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="1" x="86" showstereotype="1" y="338" font="Sans Serif,9,-1,0,50,0,0,0,0,0" CombinedFragmenttype="3" combinedFragmentname="tamanio" width="365" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="i5m5qBk97Y6r" documentation="" height="103"/>
-         <combinedFragmentwidget linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="1" x="80" showstereotype="1" y="514" font="Sans Serif,9,-1,0,50,0,0,0,0,0" CombinedFragmenttype="3" combinedFragmentname="tamanio" width="381" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="1Pc8xiztDeZv" documentation="" height="114"/>
+         <objectwidget linecolor="#000000" usesdiagramfillcolor="0" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" instancename="buque" x="70" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="dLD8TN9ygEAv" width="94" isinstance="0" multipleinstance="0" usefillcolor="0" fillcolor="#000000" xmi.id="ozfFcieVwHpl" height="32" drawasactor="0"/>
+         <objectwidget linecolor="#000000" usesdiagramfillcolor="0" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" instancename="tablero" x="364" decon="0" showstereotype="1" y="48" font="Sans Serif,9,-1,0,50,0,1,0,0,0" localid="3nwx4kif5vlW" width="108" isinstance="0" multipleinstance="0" usefillcolor="0" fillcolor="#000000" xmi.id="fUa67shupL9R" height="32" drawasactor="0"/>
+         <combinedFragmentwidget linecolor="#000000" usesdiagramfillcolor="1" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="1" x="100" showstereotype="1" y="540" font="Sans Serif,9,-1,0,50,0,0,0,0,0" CombinedFragmenttype="3" combinedFragmentname="tamanio" width="365" isinstance="0" usefillcolor="0" fillcolor="none" xmi.id="i5m5qBk97Y6r" documentation="" height="103"/>
+         <combinedFragmentwidget linecolor="#000000" usesdiagramfillcolor="0" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="0" x="80" showstereotype="1" y="310" font="Sans Serif,9,-1,0,50,0,0,0,0,0" CombinedFragmenttype="3" combinedFragmentname="tamanio" width="381" isinstance="0" usefillcolor="0" fillcolor="#000000" xmi.id="1Pc8xiztDeZv" documentation="" height="114"/>
+         <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="#000000" usesdiagramusefillcolor="1" x="250" showstereotype="1" y="220" text="false" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="700" width="37" isinstance="0" posttext="" usefillcolor="0" fillcolor="none" xmi.id="5zyjupj7iYEm" height="18"/>
         </widgets>
         <messages>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="9WjEPTjeMEbR" operation="moverse" linewidth="none" textcolor="none" seqnum="" xclicked="10" usesdiagramusefillcolor="1" x="11" showstereotype="1" y="130" widgetaid="dLD8TN9ygEAv" yclicked="119" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="107" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="GX75sGVt3Pq6" height="10" sequencemessagetype="1004">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="16" showstereotype="1" y="112" text=": moverse" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="68" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="9WjEPTjeMEbR" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="SBmUaUwpOaoj" operation="quitarElemento(parte:Parte)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="118" showstereotype="1" y="359" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="299" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="0ujf630DbMqr" height="8" sequencemessagetype="1001">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="220" showstereotype="1" y="340" text=": quitarElemento(parte:Parte)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="184" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="SBmUaUwpOaoj" height="18"/>
          </messagewidget>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="QdES32YAYFNv" operation="verificarPosicion" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="115" showstereotype="1" y="160" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="50" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="pQAuq075VC8L" height="112" sequencemessagetype="1000">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="120" showstereotype="1" y="142" text=": verificarPosicion" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="114" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="QdES32YAYFNv" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="jErIbg93ruVP" operation="colocarElemento(parte:Parte)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="118" showstereotype="1" y="593" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="299" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="KAH8cf0aaiGe" height="8" sequencemessagetype="1001">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="220" showstereotype="1" y="580" text=": colocarElemento(parte:Parte)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="192" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="jErIbg93ruVP" height="18"/>
          </messagewidget>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="e9T7JbSkFgCG" operation="fueraDeRango(posicion)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="117" showstereotype="1" y="200" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="309" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="i6a4K9U7Ze1Q" height="32" sequencemessagetype="1000">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="252" showstereotype="1" y="182" text=": fueraDeRango(posicion)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="161" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="e9T7JbSkFgCG" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="5ERw8uJVKYEJ" operation="fueraDeRango(posicion:Vector)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="117" showstereotype="1" y="191" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="309" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="POOx6cZppR7Q" height="32" sequencemessagetype="1000">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="210" showstereotype="1" y="170" text=": fueraDeRango(posicion:Vector)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="203" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="5ERw8uJVKYEJ" height="18"/>
          </messagewidget>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="rzS4eeKKKjXG" operation="sacarElemento(Parte)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="117" showstereotype="1" y="381" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="309" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="r8IRnKpPRGXk" height="32" sequencemessagetype="1000">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="268" showstereotype="1" y="363" text=": sacarElemento(Parte)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="145" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="rzS4eeKKKjXG" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="WHGLgLjlY8fe" operation="cambiarPosicion()" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="118" showstereotype="1" y="476" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="48" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="ZialQzXpNtkT" height="43" sequencemessagetype="1001">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="120" showstereotype="1" y="460" text=": cambiarPosicion()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="123" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="WHGLgLjlY8fe" height="18"/>
          </messagewidget>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="KrEfYjt2MlQf" operation="cambiarPosicion()" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="115" showstereotype="1" y="457" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="50" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="8MpXcKFUKiYw" height="32" sequencemessagetype="1000">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="120" showstereotype="1" y="439" text=": cambiarPosicion()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="123" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="KrEfYjt2MlQf" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="BNHXGzykGD3x" operation="verificarPosicion()" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="115" showstereotype="1" y="149" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="50" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="2z9LXLc74CqU" height="128" sequencemessagetype="1000">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="120" showstereotype="1" y="130" text=": verificarPosicion()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="123" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="BNHXGzykGD3x" height="18"/>
          </messagewidget>
-         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="3nwx4kif5vlW" textid="CuQOtc6bhseV" operation="colocarElemento(Parte)" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="117" showstereotype="1" y="552" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="309" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="yUhgi22Hcr7r" height="33" sequencemessagetype="1000">
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="257" showstereotype="1" y="534" text=": colocarElemento(Parte)" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="704" width="156" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="CuQOtc6bhseV" height="18"/>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="6CdR2pJEbFSb" operation="moverse()" linewidth="none" textcolor="none" seqnum="" xclicked="13" usesdiagramusefillcolor="1" x="14" showstereotype="1" y="130" widgetaid="dLD8TN9ygEAv" yclicked="130" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="104" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="ud78qB3OtkTk" height="10" sequencemessagetype="1004">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="20" showstereotype="1" y="110" text=": moverse()" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="77" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="6CdR2pJEbFSb" height="18"/>
+         </messagewidget>
+         <messagewidget linecolor="none" usesdiagramfillcolor="1" widgetbid="dLD8TN9ygEAv" textid="o9AgtdQzn3Oo" operation="moverse" linewidth="none" textcolor="none" seqnum="" usesdiagramusefillcolor="1" x="115" showstereotype="1" y="301" widgetaid="dLD8TN9ygEAv" font="Sans Serif,9,-1,0,50,0,0,0,0,0" width="50" isinstance="0" usefillcolor="1" fillcolor="none" xmi.id="28iB5NYx0f6o" height="442" sequencemessagetype="1000">
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="120" showstereotype="1" y="280" text=": moverse" font="Sans Serif,9,-1,0,50,0,0,0,0,0" pretext="" role="705" width="68" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="o9AgtdQzn3Oo" height="18"/>
          </messagewidget>
         </messages>
+        <associations/>
+       </diagram>
+       <diagram showopsig="1" linecolor="#ff0000" snapx="10" showattribassocs="1" snapy="10" linewidth="0" showattsig="1" textcolor="#000000" isopen="0" showpackage="1" showpubliconly="0" showstereotype="1" name="estaDañado" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="28" canvaswidth="98" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#808080" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="100" xmi.id="gaAHRI6dAWz3" documentation="" showscope="1" snapgrid="0" showatts="1" type="3">
+        <widgets/>
+        <messages/>
         <associations/>
        </diagram>
       </diagrams>
@@ -87,7 +108,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="VK5DFTKgTfIb" uniqueid="1Pc8xiztDeZv" documentation=""/>
+  <docsettings viewid="VK5DFTKgTfIb" uniqueid="o9AgtdQzn3Oo" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component View"/>
@@ -107,8 +128,16 @@
       <listitem open="1" type="829" id="hBdfWOC3ivO9"/>
       <listitem open="1" type="829" id="uGcKpMXUX8A1"/>
      </listitem>
+     <listitem open="0" type="810" id="gaAHRI6dAWz3" label="estaDañado"/>
      <listitem open="0" type="810" id="VK5DFTKgTfIb" label="moverse()"/>
-     <listitem open="1" type="813" id="fUa67shupL9R"/>
+     <listitem open="1" type="813" id="fUa67shupL9R">
+      <listitem open="0" type="815" id="C67t4YWrfCJL"/>
+      <listitem open="0" type="815" id="muFsej2ji0Qd"/>
+      <listitem open="0" type="815" id="NcWiEyBO6YmT"/>
+      <listitem open="0" type="815" id="gv5nTrEEjT6O"/>
+      <listitem open="0" type="815" id="XVPziloU37eP"/>
+      <listitem open="0" type="815" id="OQFl03UJBjPo"/>
+     </listitem>
     </listitem>
     <listitem open="1" type="802" id="Use Case View"/>
    </listitem>
