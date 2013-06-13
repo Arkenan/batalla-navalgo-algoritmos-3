@@ -31,7 +31,7 @@ public class JuegoTest {
 	public void testAlTerminarseLosPuntosElMetodoFaltanPuntosParaSeguirDeberiaDarTrue() {
 		Juego juego = new Juego();
 		for (int x = 1; x <= 50; x++) {
-			juego.colocarDisparo("disparoconvencional", new Vector(0, 0));
+			juego.colocarDisparo("disparoconvencional", new Vector(3, 3));
 		}
 		assertTrue(juego.faltanPuntosParaSeguir());
 	}
@@ -54,8 +54,7 @@ public class JuegoTest {
 		ArrayList<Barco> barcos = juego.obtenerBarcos();
 		ArrayList<Parte> partes;
 		Vector posicionDisparo;
-		for (int h = 1; h < 2; h++) {
-			System.out.println((int) Math.random() * 11);
+		for (int h = 1; h <= 2; h++) {
 			for (int i = 0; i < barcos.size(); i++) {
 				partes = (barcos.get(i)).obtenerPartes();
 				for (int j = 0; j < partes.size(); j++) {
