@@ -11,7 +11,6 @@ public class Casillero {
         elementos.add(parte);
     }
 
-    // para qué usamos esto?
     public boolean contienePartes() {
         return !(elementos.isEmpty());
     }
