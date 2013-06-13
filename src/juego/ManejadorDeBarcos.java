@@ -84,10 +84,6 @@ public class ManejadorDeBarcos {
 
 	}
 
-	public void colocarBarcos() {
-
-	}
-
 	public void moverBarcos() {
 		for (int x = 0; x < barcos.size(); x++) {
 			(barcos.get(x)).moverse();
