@@ -19,10 +19,9 @@ public class LanchaTest {
     // TAM = 2
     @Test
     public void testParaComprobarQueSeGuardaCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         Vector unMovimientoVector = lancha.obtenerDireccionMovimiento();
 
@@ -33,11 +32,10 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueSeInvierteCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector movimientoInvertido = new Vector(-1, -1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         lancha.invertirDireccionMovimiento();
         Vector nuevoMovimiento = lancha.obtenerDireccionMovimiento();
@@ -49,11 +47,10 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaSeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = lancha.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
@@ -65,31 +62,28 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDaniado() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         assertEquals(lancha.estaDaniado(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDestruido() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         assertEquals(lancha.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaUnaVezSoloDeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = lancha.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
@@ -100,11 +94,10 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = lancha.obtenerPartes();
         for (int i = 0; i < lancha.obtenerTamanio(); i++) {
@@ -116,11 +109,10 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaSeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = lancha.obtenerPartes();
 
@@ -133,11 +125,10 @@ public class LanchaTest {
 
     @Test
     public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = lancha.obtenerPartes();
         for (int i = 0; i < lancha.obtenerTamanio(); i++) {
@@ -157,7 +148,8 @@ public class LanchaTest {
 
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Lancha nave = new Lancha(movimiento, posicion, orientacion);
+        Lancha nave = new Lancha(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         ArrayList<Parte> partes = nave.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
@@ -170,13 +162,14 @@ public class LanchaTest {
         Vector posicion = new Vector(10, 10);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        boolean valor = false;
+        boolean excepcionLanzada = false;
+        Lancha lancha = new Lancha(movimiento, orientacion);
         try {
-            Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+            lancha.colocarEnTablero(posicion);
         } catch (PosicionInvalida error) {
-            valor = true;
+            excepcionLanzada = true;
         }
-        assertTrue(valor);
+        assertTrue(excepcionLanzada);
     }
 
     @Test
@@ -184,7 +177,8 @@ public class LanchaTest {
         Vector posicion = new Vector(5, 4);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
+        lancha.colocarEnTablero(posicion);
         lancha.moverse();
         Vector posActual = lancha.obtenerPosicion();
         assertEquals(posActual.x(), 6);
@@ -196,8 +190,8 @@ public class LanchaTest {
         Vector posicion = new Vector(10, 8);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
-
+        Lancha lancha = new Lancha(movimiento, orientacion);
+        lancha.colocarEnTablero(posicion);
         lancha.moverse();
         Vector nuevoMovimiento = lancha.obtenerDireccionMovimiento();
 
@@ -212,11 +206,11 @@ public class LanchaTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
-
+        lancha.colocarEnTablero(posicion);
         lancha.moverse();
 
         ArrayList<Parte> partes = lancha.obtenerPartes();
@@ -232,11 +226,12 @@ public class LanchaTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);
 
+        lancha.colocarEnTablero(posicion);
         lancha.moverse();
 
         ArrayList<Parte> partes = lancha.obtenerPartes();
@@ -248,10 +243,9 @@ public class LanchaTest {
     @Test
     public void testParaComprobarCuandoSeColocaSoloSeEncuentraUnaParteEnCadaPosicion() {
         Tablero tablero = Tablero.getTablero();
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Lancha lancha = new Lancha(movimiento, posicion, orientacion);
+        Lancha lancha = new Lancha(movimiento, orientacion);
 
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);

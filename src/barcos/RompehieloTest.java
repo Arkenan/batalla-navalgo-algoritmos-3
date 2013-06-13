@@ -1,6 +1,7 @@
 package barcos;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -18,10 +19,9 @@ public class RompehieloTest {
 
     @Test
     public void testParaComprobarQueSeGuardaCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         Vector unMovimientoVector = nave.obtenerDireccionMovimiento();
 
@@ -32,11 +32,10 @@ public class RompehieloTest {
 
     @Test
     public void testParaComprobarQueSeInvierteCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector movimientoInvertido = new Vector(-1, -1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         nave.invertirDireccionMovimiento();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
@@ -47,65 +46,61 @@ public class RompehieloTest {
     }
 
     @Test
-    public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDania() {
-        Vector posicion = new Vector(5, 5);
+    public void testParaComprobarQueCuandoSeLeDisparaUnaVezSeDaniaPeroNoSeDestruye() {
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
 
-        assertEquals(nave.estaDaniado(), false);
+        assertTrue(unaParte.estaDaniada());
+        assertFalse(unaParte.estaDestruida());
 
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaDosVezSeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
         unaParte.explosion(disparo);
 
-        assertEquals(nave.estaDaniado(), true);
+        assertTrue(nave.estaDaniado());
 
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDaniado() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         assertEquals(nave.estaDaniado(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDestruido() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         assertEquals(nave.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
@@ -116,27 +111,25 @@ public class RompehieloTest {
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int i = 0; i < nave.obtenerTamanio(); i++) {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(disparo);
         }
-        assertEquals(nave.estaDestruido(), false);
+        assertFalse(nave.estaDestruido());
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesDosVecesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int j = 0; j < 2; j++) {
@@ -150,12 +143,11 @@ public class RompehieloTest {
     }
 
     @Test
-    public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDania() {
-        Vector posicion = new Vector(5, 5);
+    public void testParaComprobarQueCuandoExplotaUnaMinaSeDania() {
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
 
@@ -163,16 +155,16 @@ public class RompehieloTest {
 
         unaParte.explosion(mina);
 
-        assertEquals(nave.estaDaniado(), false);
+        assertTrue(nave.estaDaniado());
+        assertFalse(unaParte.estaDestruida());
     }
 
     @Test
-    public void testParaComprobarQueCuandoExplotaUnaMinaDosVecesSeDania() {
-        Vector posicion = new Vector(5, 5);
+    public void testParaComprobarQueCuandoExplotaUnaMinaDosVecesSeDestruyeLaParte() {
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
 
@@ -181,32 +173,30 @@ public class RompehieloTest {
         unaParte.explosion(mina);
         unaParte.explosion(mina);
 
-        assertEquals(nave.estaDaniado(), true);
+        assertTrue(unaParte.estaDestruida());
     }
 
     @Test
     public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int i = 0; i < nave.obtenerTamanio(); i++) {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(mina);
         }
-        assertEquals(nave.estaDestruido(), false);
+        assertFalse(nave.estaDestruido());
     }
 
     @Test
     public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesDosVecesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int j = 0; j < 2; j++) {
@@ -221,11 +211,10 @@ public class RompehieloTest {
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
 
@@ -247,8 +236,8 @@ public class RompehieloTest {
 
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
-
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         ArrayList<Parte> partes = nave.obtenerPartes();
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
@@ -260,13 +249,14 @@ public class RompehieloTest {
         Vector posicion = new Vector(10, 10);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        boolean valor = false;
+        boolean excepcionLanzada = false;
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
         try {
-            Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+            nave.colocarEnTablero(posicion);
         } catch (PosicionInvalida error) {
-            valor = true;
+            excepcionLanzada = true;
         }
-        assertTrue(valor);
+        assertTrue(excepcionLanzada);
     }
 
     @Test
@@ -274,7 +264,8 @@ public class RompehieloTest {
         Vector posicion = new Vector(5, 4);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         nave.moverse();
         Vector posActual = nave.obtenerPosicion();
         assertEquals(posActual.x(), 6);
@@ -286,8 +277,8 @@ public class RompehieloTest {
         Vector posicion = new Vector(10, 8);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
-
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         nave.moverse();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
 
@@ -302,12 +293,12 @@ public class RompehieloTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
         Vector posicion3 = new Vector(6, 8);
-
+        nave.colocarEnTablero(posicion);
         nave.moverse();
 
         ArrayList<Parte> partes = nave.obtenerPartes();
@@ -324,12 +315,12 @@ public class RompehieloTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Rompehielo nave = new Rompehielo(movimiento, posicion, orientacion);
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
 
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);
         Vector posicion3 = new Vector(5, 7);
-
+        nave.colocarEnTablero(posicion);
         nave.moverse();
 
         ArrayList<Parte> partes = nave.obtenerPartes();
@@ -345,13 +336,13 @@ public class RompehieloTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Rompehielo lancha = new Rompehielo(movimiento, posicion, orientacion);
-
+        Rompehielo nave = new Rompehielo(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         Vector posicion0 = new Vector(5, 5);
         Vector posicion1 = new Vector(5, 6);
         Vector posicion2 = new Vector(5, 7);
 
-        ArrayList<Parte> partes = lancha.obtenerPartes();
+        ArrayList<Parte> partes = nave.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)), false);

@@ -67,6 +67,7 @@ public final class Tablero {
 
     /* Quita una parte de un barco. */
     public void sacarElemento(Vector posicion, Parte elemento) {
+        obtenerCasillero(posicion).quitarElemento(elemento);
     }
 
     /*

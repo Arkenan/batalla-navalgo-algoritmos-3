@@ -22,19 +22,20 @@ public abstract class Barco {
      * los datos vendrian a ser cantidad de partes, la vida, direccion de movimiento y de cara
      * (hacia donde apunta).
      */
-    public Barco(Vector mov, Vector pos, Vector orient, int tam) throws PosicionInvalida {
-        System.out.println("Barco");
+    public Barco(Vector mov, Vector orient, int tam, int vida) {
         tamanio = tam;
-        System.out.print("Tamanio del barco");
-        System.out.println(tamanio);
         orientacion = orient;
-        if (this.verificarPosicion(pos) == false) {
+        movimiento = mov;
+        partesDelBarco = new ArrayList<Parte>();
+        this.vida = vida;
+        this.construirPartes();
+    }
+
+    public void colocarEnTablero(Vector posicion) throws PosicionInvalida {
+        if (this.verificarPosicion(posicion) == false) {
             throw new PosicionInvalida("HAY UNA POSICION INVALIDA");
         }
-        movimiento = mov;
-        posicion = pos;
-        vida = 1;
-        this.construirPartes();
+        this.posicion = posicion;
         this.colocarPartes();
     }
 

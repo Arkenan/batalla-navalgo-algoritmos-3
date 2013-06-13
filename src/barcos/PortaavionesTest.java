@@ -20,10 +20,9 @@ public class PortaavionesTest {
     // TAM = 5
     @Test
     public void testParaComprobarQueSeGuardaCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         Vector unMovimientoVector = nave.obtenerDireccionMovimiento();
 
@@ -34,11 +33,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueSeInvierteCorrectamenteElMovimiento() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector movimientoInvertido = new Vector(-1, -1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         nave.invertirDireccionMovimiento();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
@@ -50,11 +48,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaSeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
@@ -66,31 +63,28 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDaniado() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         assertEquals(nave.estaDaniado(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDestruido() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         assertEquals(nave.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaUnaVezNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
@@ -101,11 +95,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int i = 0; i < nave.obtenerTamanio(); i++) {
@@ -117,11 +110,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaSeDania() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
 
@@ -134,11 +126,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
         for (int i = 0; i < nave.obtenerTamanio(); i++) {
@@ -150,11 +141,10 @@ public class PortaavionesTest {
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDestruye() {
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         ArrayList<Parte> lasPartes = nave.obtenerPartes();
 
@@ -178,8 +168,8 @@ public class PortaavionesTest {
 
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
-
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         ArrayList<Parte> partes = nave.obtenerPartes();
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)), true);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)), true);
@@ -194,13 +184,14 @@ public class PortaavionesTest {
         Vector posicion = new Vector(10, 10);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        boolean valor = false;
+        boolean excepcionLanzada = false;
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
         try {
-            Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+            nave.colocarEnTablero(posicion);
         } catch (PosicionInvalida error) {
-            valor = true;
+            excepcionLanzada = true;
         }
-        assertTrue(valor);
+        assertTrue(excepcionLanzada);
     }
 
     @Test
@@ -208,8 +199,8 @@ public class PortaavionesTest {
         Vector posicion = new Vector(10, 6);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
-
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
+        nave.colocarEnTablero(posicion);
         nave.moverse();
         Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
 
@@ -224,14 +215,14 @@ public class PortaavionesTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(0, 1);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
         Vector posicion3 = new Vector(6, 8);
         Vector posicion4 = new Vector(6, 9);
         Vector posicion5 = new Vector(6, 10);
-
+        nave.colocarEnTablero(posicion);
         nave.moverse();
 
         ArrayList<Parte> partes = nave.obtenerPartes();
@@ -250,14 +241,14 @@ public class PortaavionesTest {
         Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones nave = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);
         Vector posicion3 = new Vector(5, 7);
         Vector posicion4 = new Vector(5, 8);
         Vector posicion5 = new Vector(5, 9);
-
+        nave.colocarEnTablero(posicion);
         nave.moverse();
 
         ArrayList<Parte> partes = nave.obtenerPartes();
@@ -273,10 +264,9 @@ public class PortaavionesTest {
     @Test
     public void testParaComprobarCuandoSeColocaSoloSeEncuentraUnaParteEnCadaPosicion() {
         Tablero tablero = Tablero.getTablero();
-        Vector posicion = new Vector(5, 5);
         Vector movimiento = new Vector(1, 1);
         Vector orientacion = new Vector(1, 0);
-        Portaaviones lancha = new Portaaviones(movimiento, posicion, orientacion);
+        Portaaviones nave = new Portaaviones(movimiento, orientacion);
 
         Vector posicion0 = new Vector(5, 5);
         Vector posicion1 = new Vector(5, 6);
@@ -284,7 +274,7 @@ public class PortaavionesTest {
         Vector posicion3 = new Vector(5, 8);
         Vector posicion4 = new Vector(5, 9);
 
-        ArrayList<Parte> partes = lancha.obtenerPartes();
+        ArrayList<Parte> partes = nave.obtenerPartes();
 
         assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)));
         assertFalse(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)));

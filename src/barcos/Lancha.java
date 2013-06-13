@@ -4,7 +4,7 @@ import excepciones.PosicionInvalida;
 
 public class Lancha extends NaveConDanioTotal {
 
-    public Lancha(Vector mov, Vector pos, Vector orient) throws PosicionInvalida {
-        super(mov, pos, orient, 2);
+    public Lancha(Vector mov, Vector orient) throws PosicionInvalida {
+        super(mov, orient, 2, 1);
     }
 }
