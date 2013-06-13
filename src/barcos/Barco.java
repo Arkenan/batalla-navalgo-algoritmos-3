@@ -22,21 +22,23 @@ public abstract class Barco {
      * los datos vendrian a ser cantidad de partes, la vida, direccion de movimiento y de cara
      * (hacia donde apunta).
      */
-    public Barco(Vector mov, Vector pos, Vector orient, int tam, int cantVida) throws PosicionInvalida {
+    public Barco(Vector mov, Vector pos, Vector orient, int tam) throws PosicionInvalida {
+        System.out.println("Barco");
         tamanio = tam;
+        System.out.print("Tamanio del barco");
+        System.out.println(tamanio);
         orientacion = orient;
         if (this.verificarPosicion(pos) == false) {
             throw new PosicionInvalida("HAY UNA POSICION INVALIDA");
         }
-        partesDelBarco = new ArrayList<Parte>();
         movimiento = mov;
         posicion = pos;
-        vida = cantVida;
+        vida = 1;
         this.construirPartes();
         this.colocarPartes();
     }
 
-    /* verifica parte por parte que no est� fuera de rango. */
+    /* verifica parte por parte que no este fuera de rango. */
     private boolean verificarPosicion(Vector pos) {
         Tablero tablero = Tablero.getTablero();
         for (int i = 0; i < tamanio; i++) {
@@ -46,7 +48,6 @@ public abstract class Barco {
             }
         }
         return true;
-
     }
 
     /*
@@ -71,7 +72,6 @@ public abstract class Barco {
 
     // METODOS PRIVADOS
     // para cuando choca con la pared.
-
     public void invertirDireccionMovimiento() {
         movimiento = movimiento.sumar(movimiento.porEscalar(-2));
     }
