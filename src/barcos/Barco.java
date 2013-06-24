@@ -3,6 +3,7 @@ package barcos;
 import java.util.ArrayList;
 
 import partes.Parte;
+import barcos.strategies.MovimientoStrategy;
 import escenario.Tablero;
 import excepciones.PosicionInvalida;
 
@@ -17,18 +18,20 @@ public abstract class Barco {
     protected int tamanio, vida;
     protected Vector movimiento, orientacion, posicion;
     protected ArrayList<Parte> partesDelBarco;
+    protected MovimientoStrategy estrategia;
 
     /*
      * los datos vendrian a ser cantidad de partes, la vida, direccion de movimiento y de cara
      * (hacia donde apunta).
      */
-    public Barco(Vector mov, Vector orient, int tam, int vida) {
+    public Barco(Vector mov, Vector orient, int tam, int vida, MovimientoStrategy estrategia) {
         tamanio = tam;
         orientacion = orient;
         movimiento = mov;
         partesDelBarco = new ArrayList<Parte>();
         this.vida = vida;
         this.construirPartes();
+        this.estrategia = estrategia;
     }
 
     public void colocarEnTablero(Vector posicion) throws PosicionInvalida {
@@ -40,7 +43,7 @@ public abstract class Barco {
     }
 
     /* verifica parte por parte que no este fuera de rango. */
-    private boolean verificarPosicion(Vector pos) {
+    public boolean verificarPosicion(Vector pos) {
         Tablero tablero = Tablero.getTablero();
         for (int i = 0; i < tamanio; i++) {
             Vector vector = pos.sumar(orientacion.porEscalar(i));
@@ -83,11 +86,6 @@ public abstract class Barco {
 
     /* PARA IMPLEMENTAR LUEGO. private string posicionActual(); */
 
-    /* Luego de moverse cambia su posicion */
-    private void cambiarPosicion() {
-        posicion.asignar(posicion.sumar(movimiento));
-    }
-
     public boolean estaDestruido() {
         for (int i = 0; i < tamanio; i++) {
             Parte parte = partesDelBarco.get(i);
@@ -103,18 +101,16 @@ public abstract class Barco {
     }
 
     public void moverse() {
-        if (this.verificarSiguienteMovimiento() == true) {
-            this.moverPartes();
+        Vector nuevaPosicion = estrategia.ejecutar();
+        if (verificarPosicion(nuevaPosicion) == true) {
+            sacarPartes();
+            posicion = nuevaPosicion;
+            colocarPartes();
         } else {
-            this.invertirDireccionMovimiento();
-            this.moverse();
+            // TODO tenemos que charlar de esto!
+            invertirDireccionMovimiento();
+            moverse();
         }
-    }
-
-    public void moverPartes() {
-        this.sacarPartes();
-        this.cambiarPosicion();
-        this.colocarPartes();
     }
 
     /* quita todas las partes de un barco del tablero */
@@ -124,11 +120,6 @@ public abstract class Barco {
             Vector posParte = new Vector(posicion.sumar(orientacion.porEscalar(i)));
             tablero.sacarElemento(posParte, partesDelBarco.get(i));
         }
-    }
-
-    private boolean verificarSiguienteMovimiento() {
-        Vector nuevaPosicion = posicion.sumar(movimiento);
-        return this.verificarPosicion(nuevaPosicion);
     }
 
     /*
