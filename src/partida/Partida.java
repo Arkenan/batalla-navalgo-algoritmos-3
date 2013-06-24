@@ -1,24 +1,23 @@
-package juego;
+package partida;
 
 import java.util.ArrayList;
 
-import barcos.Barco;
+import barcos.Destructible;
 import barcos.Vector;
 import disparos.Disparo;
 import excepciones.DisparoInvalido;
 
-public class Juego {
+public class Partida {
 	private int puntos;
-	private final int decrecimientoDePuntosPorPasoDeTurno;
+	final int decrecimientoDePuntosPorPasoDeTurno = 10;
 	ArrayList<Disparo> disparos;
 	ManejadorDeBarcos manejadorDeBarcos;
 
-	public Juego() {
+	public Partida() {
 		puntos = 10000;
-		decrecimientoDePuntosPorPasoDeTurno = 10;
 		disparos = new ArrayList<Disparo>();
 		manejadorDeBarcos = new ManejadorDeBarcos();
-
+		manejadorDeBarcos.crearBarcosPorDefault();
 	}
 
 	public int getPuntos() {
@@ -34,34 +33,13 @@ public class Juego {
 	// Nos devuelve un booleano que informa si los puntos son suficientes o no
 	// para seguir jugando.
 	public boolean faltanPuntosParaSeguir() {
-		return (puntos < 10);
+		return (puntos < decrecimientoDePuntosPorPasoDeTurno);
 	}
 
 	// Este metodo se ocupa del movimiento de barcos y explosion de minas.
-	private void realizarCambiosPasoTurno() {
-		this.pasoTurnoDisparos();
-		manejadorDeBarcos.moverBarcos();
-	}
-
-	private void pasoTurnoDisparos() {
-		Disparo disparoAuxiliar;
-		int i = 0;
-		while (i < disparos.size()) {
-			if ((disparos.get(i)).debeExplotar()) {
-				disparoAuxiliar = disparos.remove(i);
-				disparoAuxiliar.explotar();
-			} else {
-
-				disparoAuxiliar = disparos.get(i);
-				disparoAuxiliar.pasarTurno();
-				i++;
-			}
-		}
-
-	}
 
 	public boolean gano() {
-		return manejadorDeBarcos.todosLosBarcosEstanDestruidos();
+		return manejadorDeBarcos.todosLosDestructiblesEstanDestruidos();
 	}
 
 	public boolean perdio() {
@@ -81,11 +59,36 @@ public class Juego {
 		this.realizarCambiosPasoTurno();
 	}
 
+	public ArrayList<Destructible> obtenerDestructibles() {
+		return manejadorDeBarcos.obtenerDestructibles();
+	}
+
+	// ------------------- Metodos Privados -----------------------------
+
 	private void reducirPuntosEn(int puntosADisminuir) {
 		puntos -= puntosADisminuir;
 	}
 
-	public ArrayList<Barco> obtenerBarcos() {
-		return manejadorDeBarcos.obtenerBarcos();
+	private void realizarCambiosPasoTurno() {
+		this.pasoTurnoDisparos();
+		manejadorDeBarcos.moverElementos();
 	}
+
+	private void pasoTurnoDisparos() {
+		Disparo disparoAuxiliar;
+		int i = 0;
+		while (i < disparos.size()) {
+			if ((disparos.get(i)).debeExplotar()) {
+				disparoAuxiliar = disparos.remove(i);
+				disparoAuxiliar.explotar();
+			} else {
+
+				disparoAuxiliar = disparos.get(i);
+				disparoAuxiliar.pasarTurno();
+				i++;
+			}
+		}
+
+	}
+
 }

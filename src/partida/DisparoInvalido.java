@@ -1,4 +1,4 @@
-package juego;
+package partida;
 
 public class DisparoInvalido extends RuntimeException {
 
