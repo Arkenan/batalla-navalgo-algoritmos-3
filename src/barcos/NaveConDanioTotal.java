@@ -1,12 +1,12 @@
 package barcos;
 
 import partes.ParteDanioTotal;
-import excepciones.PosicionInvalida;
+import barcos.strategies.MovimientoStrategy;
 
 public class NaveConDanioTotal extends Barco {
 
-    public NaveConDanioTotal(Vector mov, Vector orient, int tam, int vida) throws PosicionInvalida {
-        super(mov, orient, tam, vida);
+    public NaveConDanioTotal(Vector orient, int tam, int vida, MovimientoStrategy estrategia) {
+        super(orient, tam, vida, estrategia);
     }
 
     @Override

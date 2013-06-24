@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import partes.Parte;
+import barcos.strategies.MovimientoLinealStrategy;
 import disparos.DisparoConvencional;
 import disparos.Mina;
 import disparos.MinaContacto;
@@ -19,150 +20,128 @@ public class DestructorTest {
 
     // TAM = 3
     @Test
-    public void testParaComprobarQueSeGuardaCorrectamenteElMovimiento() {
-
-        Vector movimiento = new Vector(1, 1);
-        Vector orientacion = new Vector(1, 0);
-        Destructor nave = new Destructor(movimiento, orientacion);
-
-        Vector unMovimientoVector = nave.obtenerDireccionMovimiento();
-
-        assertEquals(unMovimientoVector.x, movimiento.x);
-        assertEquals(unMovimientoVector.y, movimiento.y);
-
-    }
-
-    @Test
-    public void testParaComprobarQueSeInvierteCorrectamenteElMovimiento() {
-
-        Vector movimiento = new Vector(1, 1);
-        Vector movimientoInvertido = new Vector(-1, -1);
-        Vector orientacion = new Vector(1, 0);
-        Destructor nave = new Destructor(movimiento, orientacion);
-
-        nave.invertirDireccionMovimiento();
-        Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
-
-        assertEquals(nuevoMovimiento.x, movimientoInvertido.x);
-        assertEquals(nuevoMovimiento.y, movimientoInvertido.y);
-
-    }
-
-    @Test
     public void testParaComprobarQueCuandoSeLeDisparaSeDania() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
 
-        assertEquals(nave.estaDaniado(), true);
+        assertEquals(destructor.estaDaniado(), true);
 
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDaniado() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        assertEquals(nave.estaDaniado(), false);
+        assertEquals(destructor.estaDaniado(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeCreaNoEsteDestruido() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        assertEquals(nave.estaDestruido(), false);
+        assertEquals(destructor.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaNoSeDestruye() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
         Parte unaParte = lasPartes.get(1);
         unaParte.explosion(disparo);
-        assertEquals(nave.estaDestruido(), false);
+        assertEquals(destructor.estaDestruido(), false);
 
     }
 
     @Test
     public void testParaComprobarQueCuandoSeLeDisparaEnTodasLasPartesSeDestruye() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         DisparoConvencional disparo = new DisparoConvencional();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
-        for (int i = 0; i < nave.obtenerTamanio(); i++) {
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
+        for (int i = 0; i < destructor.obtenerTamanio(); i++) {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(disparo);
         }
-        assertEquals(nave.estaDestruido(), true);
+        assertEquals(destructor.estaDestruido(), true);
     }
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDania() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
 
         Parte unaParte = lasPartes.get(1);
 
         unaParte.explosion(mina);
 
-        assertFalse(nave.estaDaniado());
+        assertFalse(destructor.estaDaniado());
     }
 
     @Test
     public void testParaComprobarQueCuandoSeExplotaUnaMinaEnTodasLasPartesNoSeDestruye() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
-        for (int i = 0; i < nave.obtenerTamanio(); i++) {
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
+        for (int i = 0; i < destructor.obtenerTamanio(); i++) {
             Parte unaParte = lasPartes.get(i);
             unaParte.explosion(mina);
         }
-        assertEquals(nave.estaDestruido(), false);
+        assertEquals(destructor.estaDestruido(), false);
     }
 
     @Test
     public void testParaComprobarQueCuandoExplotaUnaMinaNoSeDestruye() {
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         Mina mina = new MinaContacto();
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
-        ArrayList<Parte> lasPartes = nave.obtenerPartes();
+        ArrayList<Parte> lasPartes = destructor.obtenerPartes();
 
         Parte unaParte = lasPartes.get(1);
 
         unaParte.explosion(mina);
 
-        assertFalse(nave.estaDestruido());
+        assertFalse(destructor.estaDestruido());
     }
 
     @Test
@@ -172,12 +151,13 @@ public class DestructorTest {
         Vector posicion2 = new Vector(5, 5);
         Vector posicion3 = new Vector(5, 6);
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(0, 1);
-        Destructor nave = new Destructor(movimiento, orientacion);
-        nave.colocarEnTablero(posicion1);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
+        destructor.colocarEnTablero(posicion1);
 
-        ArrayList<Parte> partes = nave.obtenerPartes();
+        ArrayList<Parte> partes = destructor.obtenerPartes();
 
         assertTrue(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)));
         assertTrue(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)));
@@ -187,13 +167,14 @@ public class DestructorTest {
     @Test
     public void testParaComprobarQueLanzaUnaExcepcionCuandoNoSePuedeColocarEnUnaPosicion() throws PosicionInvalida {
         Vector posicion = new Vector(10, 10);
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
         boolean excepcionLanzada = false;
 
-        Destructor nave = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
         try {
-            nave.colocarEnTablero(posicion);
+            destructor.colocarEnTablero(posicion);
         } catch (PosicionInvalida e) {
             excepcionLanzada = true;
         }
@@ -203,25 +184,27 @@ public class DestructorTest {
     @Test
     public void testParaComprobarQueSePosicionCambioDeManeraCorrecta() {
         Vector posicion = new Vector(5, 5);
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(1, 0);
-        Destructor nave = new Destructor(movimiento, orientacion);
-        nave.colocarEnTablero(posicion);
-        nave.moverse();
-        Vector posActual = nave.obtenerPosicion();
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
+        destructor.colocarEnTablero(posicion);
+        destructor.moverse();
+        Vector posActual = destructor.obtenerPosicion();
         assertEquals(posActual.x(), 6);
         assertEquals(posActual.y(), 6);
     }
 
     @Test
     public void testParaComprobarQueCambiaDeDireccionAlLlegarAlBorde() {
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(0, 1);
         Vector posicion = new Vector(8, 8);
-        Destructor nave = new Destructor(movimiento, orientacion);
-        nave.colocarEnTablero(posicion);
-        nave.moverse();
-        Vector nuevoMovimiento = nave.obtenerDireccionMovimiento();
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
+        destructor.colocarEnTablero(posicion);
+        destructor.moverse();
+        Vector nuevoMovimiento = destructor.obtenerDireccionMovimiento();
 
         assertEquals(nuevoMovimiento.x(), -1);
         assertEquals(nuevoMovimiento.y(), -1);
@@ -233,18 +216,19 @@ public class DestructorTest {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 5);
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(0, 1);
-        Destructor nave = new Destructor(movimiento, orientacion);
-        nave.colocarEnTablero(posicion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
+        destructor.colocarEnTablero(posicion);
 
         Vector posicion1 = new Vector(6, 6);
         Vector posicion2 = new Vector(6, 7);
         Vector posicion3 = new Vector(6, 8);
 
-        nave.moverse();
+        destructor.moverse();
 
-        ArrayList<Parte> partes = nave.obtenerPartes();
+        ArrayList<Parte> partes = destructor.obtenerPartes();
 
         assertTrue(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)));
         assertTrue(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)));
@@ -256,17 +240,18 @@ public class DestructorTest {
     public void testParaComprobarQueLasPartesYaNoSeEncuentranEnSuPosicionAnterior() {
         Tablero tablero = Tablero.getTablero();
         Vector posicion = new Vector(5, 5);
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(0, 1);
-        Destructor nave = new Destructor(movimiento, orientacion);
-        nave.colocarEnTablero(posicion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
+        destructor.colocarEnTablero(posicion);
         Vector posicion1 = new Vector(5, 5);
         Vector posicion2 = new Vector(5, 6);
         Vector posicion3 = new Vector(5, 7);
 
-        nave.moverse();
+        destructor.moverse();
 
-        ArrayList<Parte> partes = nave.obtenerPartes();
+        ArrayList<Parte> partes = destructor.obtenerPartes();
 
         assertFalse(tablero.elementoPerteneceAlCasillero(posicion1, partes.get(0)));
         assertFalse(tablero.elementoPerteneceAlCasillero(posicion2, partes.get(1)));
@@ -277,15 +262,16 @@ public class DestructorTest {
     public void testParaComprobarCuandoSeColocaSoloSeEncuentraUnaParteEnCadaPosicion() {
         Tablero tablero = Tablero.getTablero();
 
-        Vector movimiento = new Vector(1, 1);
+        MovimientoLinealStrategy estrategia = new MovimientoLinealStrategy(new Vector(1, 1));
         Vector orientacion = new Vector(0, 1);
-        Destructor lancha = new Destructor(movimiento, orientacion);
+        Destructor destructor = new Destructor(orientacion, estrategia);
+        estrategia.setBarco(destructor);
 
         Vector posicion0 = new Vector(5, 5);
         Vector posicion1 = new Vector(5, 6);
         Vector posicion2 = new Vector(5, 7);
 
-        ArrayList<Parte> partes = lancha.obtenerPartes();
+        ArrayList<Parte> partes = destructor.obtenerPartes();
 
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(1)), false);
         assertEquals(tablero.elementoPerteneceAlCasillero(posicion0, partes.get(2)), false);

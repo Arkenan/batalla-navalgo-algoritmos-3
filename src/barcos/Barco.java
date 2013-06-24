@@ -8,26 +8,22 @@ import escenario.Tablero;
 import excepciones.PosicionInvalida;
 
 /*
- * Direccion de Movimiento Movimiento hori super(mov, pos, orient, 4);zontal -1 izquierda 1 derecha
- * Movimiento vertical -1 abajo 1 arriba
- * 
  * Direccion Cara 1 horizontal 0 vertical
  */
 
 public abstract class Barco {
     protected int tamanio, vida;
-    protected Vector movimiento, orientacion, posicion;
+    protected Vector orientacion, posicion;
     protected ArrayList<Parte> partesDelBarco;
     protected MovimientoStrategy estrategia;
 
     /*
-     * los datos vendrian a ser cantidad de partes, la vida, direccion de movimiento y de cara
-     * (hacia donde apunta).
+     * los datos vendrian a ser cantidad de partes, la vid y orientación de cara (hacia donde
+     * apunta).
      */
-    public Barco(Vector mov, Vector orient, int tam, int vida, MovimientoStrategy estrategia) {
+    public Barco(Vector orient, int tam, int vida, MovimientoStrategy estrategia) {
         tamanio = tam;
         orientacion = orient;
-        movimiento = mov;
         partesDelBarco = new ArrayList<Parte>();
         this.vida = vida;
         this.construirPartes();
@@ -74,14 +70,14 @@ public abstract class Barco {
         return partesDelBarco;
     }
 
-    // METODOS PRIVADOS
-    // para cuando choca con la pared.
-    public void invertirDireccionMovimiento() {
-        movimiento = movimiento.sumar(movimiento.porEscalar(-2));
+    public void metodoPrueba() {
+
     }
 
+    // METODOS PRIVADOS
+
     public Vector obtenerDireccionMovimiento() {
-        return movimiento;
+        return estrategia.obtenerDireccionMovimiento();
     }
 
     /* PARA IMPLEMENTAR LUEGO. private string posicionActual(); */
@@ -102,15 +98,9 @@ public abstract class Barco {
 
     public void moverse() {
         Vector nuevaPosicion = estrategia.ejecutar();
-        if (verificarPosicion(nuevaPosicion) == true) {
-            sacarPartes();
-            posicion = nuevaPosicion;
-            colocarPartes();
-        } else {
-            // TODO tenemos que charlar de esto!
-            invertirDireccionMovimiento();
-            moverse();
-        }
+        sacarPartes();
+        posicion = nuevaPosicion;
+        colocarPartes();
     }
 
     /* quita todas las partes de un barco del tablero */

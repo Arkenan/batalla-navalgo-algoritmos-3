@@ -1,9 +1,11 @@
 package barcos;
 
+import barcos.strategies.MovimientoStrategy;
+
 public class Buque extends NaveConDanioTotal {
 
-    public Buque(Vector mov, Vector orient) {
-        super(mov, orient, 4, 1);
+    public Buque(Vector orient, MovimientoStrategy estrategia) {
+        super(orient, 4, 1, estrategia);
     }
 
     @Override

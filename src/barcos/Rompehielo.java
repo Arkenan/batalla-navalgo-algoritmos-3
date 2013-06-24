@@ -1,8 +1,10 @@
 package barcos;
 
+import barcos.strategies.MovimientoStrategy;
+
 public class Rompehielo extends NaveConDanioTotal {
 
-    public Rompehielo(Vector mov, Vector orient) {
-        super(mov, orient, 3, 2);
+    public Rompehielo(Vector orient, MovimientoStrategy estrategia) {
+        super(orient, 3, 2, estrategia);
     }
 }

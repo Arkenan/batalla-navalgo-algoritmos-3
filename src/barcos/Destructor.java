@@ -1,11 +1,12 @@
 package barcos;
 
 import partes.ParteDanioDisparo;
+import barcos.strategies.MovimientoStrategy;
 
 public class Destructor extends Barco {
 
-    public Destructor(Vector mov, Vector orient) {
-        super(mov, orient, 3, 1);
+    public Destructor(Vector orient, MovimientoStrategy estrategia) {
+        super(orient, 3, 1, estrategia);
 
     }
 

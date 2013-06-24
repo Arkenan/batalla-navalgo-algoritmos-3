@@ -1,10 +1,10 @@
 package barcos;
 
-import excepciones.PosicionInvalida;
+import barcos.strategies.MovimientoStrategy;
 
 public class Lancha extends NaveConDanioTotal {
 
-    public Lancha(Vector mov, Vector orient) throws PosicionInvalida {
-        super(mov, orient, 2, 1);
+    public Lancha(Vector orient, MovimientoStrategy estrategia) {
+        super(orient, 2, 1, estrategia);
     }
 }

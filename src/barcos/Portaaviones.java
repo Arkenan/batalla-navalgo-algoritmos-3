@@ -1,7 +1,9 @@
 package barcos;
 
+import barcos.strategies.MovimientoStrategy;
+
 public class Portaaviones extends NaveConDanioTotal {
-    public Portaaviones(Vector mov, Vector orient) {
-        super(mov, orient, 5, 1);
+    public Portaaviones(Vector orient, MovimientoStrategy estrategia) {
+        super(orient, 5, 1, estrategia);
     }
 }
