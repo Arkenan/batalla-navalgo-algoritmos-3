@@ -9,11 +9,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import partida.Partida;
+import barcos.Barco;
+import barcos.Destructible;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
@@ -22,12 +26,14 @@ public class VentanaPrincipal {
 
 	private JFrame frame;
 	private GameLoop gameLoop;
+	private Partida partida;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					VentanaPrincipal window = new VentanaPrincipal();
@@ -53,7 +59,8 @@ public class VentanaPrincipal {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	private void initialize() throws IOException {
 		frame = new JFrame();
@@ -62,19 +69,21 @@ public class VentanaPrincipal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Proyecto Base para uso del Titiritero");
-		
+
 		JButton btnIniciar = this.addBotonIniciar();
-		
+
 		JButton btnDetener = this.addBotonDetener();
-		
+
+		JButton btnPasarTurno = this.addBotonPasarTurno();
+
 		JPanel panel = this.addSuperficiePanel();
-		
+
 		this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
-		
+
 		this.inicializarModelo();
-		
+
 		this.addMouseListener(panel);
-		
+
 		this.addKeyListener();
 
 		this.setComponentsFocus(btnIniciar, btnDetener);
@@ -82,6 +91,13 @@ public class VentanaPrincipal {
 	}
 
 	private void inicializarModelo() {
+		partida = new Partida();
+		ArrayList<Destructible> destructibles = partida.obtenerDestructibles();
+		ArrayList<Barco> barcos = new ArrayList<Barco>();
+		for (int i = 0; i < destructibles.size(); i++) {
+			this.gameLoop.agregar(new VistaPrueba(50, (Barco) destructibles
+					.get(i)));
+		}
 
 	}
 
@@ -92,32 +108,32 @@ public class VentanaPrincipal {
 	}
 
 	private void addKeyListener() {
-		frame.addKeyListener(new KeyListener(
-				) {
-			
+		frame.addKeyListener(new KeyListener() {
+
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				System.out.println("Key pressed");
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				System.out.println("Ping");
-			}  
-			 	
+			}
+
 		});
 	}
 
 	private void addMouseListener(JPanel panel) {
 		panel.addMouseListener(new MouseAdapter() {
-					
+
 			@Override
-			public void mouseClicked(MouseEvent arg0) {				
-			}});
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
 	}
 
 	private JPanel addSuperficiePanel() {
@@ -131,6 +147,7 @@ public class VentanaPrincipal {
 	private JButton addBotonDetener() {
 		JButton btnDetener = new JButton("Detener");
 		btnDetener.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				gameLoop.detenerEjecucion();
 			}
@@ -140,9 +157,23 @@ public class VentanaPrincipal {
 		return btnDetener;
 	}
 
+	private JButton addBotonPasarTurno() {
+		JButton btnIniciar = new JButton("PasarTurno");
+		btnIniciar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				partida.pasarTurno();
+			}
+		});
+		btnIniciar.setBounds(200, 16, 77, 25);
+		frame.getContentPane().add(btnIniciar);
+		return btnIniciar;
+	}
+
 	private JButton addBotonIniciar() {
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				gameLoop.iniciarEjecucion();
 			}

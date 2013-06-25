@@ -6,12 +6,14 @@ import partes.Parte;
 import barcos.strategies.MovimientoStrategy;
 import escenario.Tablero;
 import excepciones.PosicionInvalida;
+import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 
 /*
  * Direccion Cara 1 horizontal 0 vertical
  */
 
-public abstract class Barco implements Movible, Destructible {
+public abstract class Barco implements Movible, Destructible,
+		ObjetoPosicionable {
 	protected int tamanio, vida;
 	protected Vector orientacion, posicion;
 	protected ArrayList<Parte> partesDelBarco;
@@ -29,6 +31,16 @@ public abstract class Barco implements Movible, Destructible {
 		this.construirPartes();
 		this.estrategia = estrategia;
 		estrategia.setBarco(this);
+	}
+
+	@Override
+	public int getX() {
+		return 20 * (posicion.x());
+	}
+
+	@Override
+	public int getY() {
+		return 20 * (posicion.y());
 	}
 
 	public void colocarEnTablero(Vector posicion) throws PosicionInvalida {
