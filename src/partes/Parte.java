@@ -2,9 +2,8 @@ package partes;
 
 import barcos.Vector;
 import disparos.Disparo;
-import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 
-public abstract class Parte implements ObjetoPosicionable {
+public abstract class Parte {
 	protected int vidaInicial;
 	protected int vida;
 	protected Vector posicion;

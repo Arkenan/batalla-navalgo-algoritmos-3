@@ -100,8 +100,13 @@ public class ManejadorDeBarcos {
 	}
 
 	private MovimientoStrategy crearMovimientoAleatorio() {
-		Vector direccion = new Vector((int) (Math.random() * 2),
-				(int) (Math.random() * 2));
+		int x = (int) (Math.random() * 2);
+		Vector direccion;
+		if (x == 0)
+			direccion = new Vector(x, 1);
+		else {
+			direccion = new Vector(x, (int) (Math.random() * 2));
+		}
 		int posicionAleatoria = (int) (Math.random() * (constructoresDeMovimientosPosibles
 				.size()));
 		AbstractMovimientoFactory constructorAleatorio = constructoresDeMovimientosPosibles

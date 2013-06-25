@@ -93,9 +93,8 @@ public class VentanaPrincipal {
 	private void inicializarModelo() {
 		partida = new Partida();
 		ArrayList<Destructible> destructibles = partida.obtenerDestructibles();
-		ArrayList<Barco> barcos = new ArrayList<Barco>();
 		for (int i = 0; i < destructibles.size(); i++) {
-			this.gameLoop.agregar(new VistaPrueba(50, (Barco) destructibles
+			this.gameLoop.agregar(new VistaPrueba(20, (Barco) destructibles
 					.get(i)));
 		}
 
