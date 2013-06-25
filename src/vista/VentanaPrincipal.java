@@ -15,9 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import partes.Parte;
 import partida.Partida;
-import barcos.Barco;
-import barcos.Destructible;
+import casillero.Casillero;
+import escenario.Tablero;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
@@ -92,10 +93,17 @@ public class VentanaPrincipal {
 
 	private void inicializarModelo() {
 		partida = new Partida();
-		ArrayList<Destructible> destructibles = partida.obtenerDestructibles();
-		for (int i = 0; i < destructibles.size(); i++) {
-			this.gameLoop.agregar(new VistaPrueba(20, (Barco) destructibles
-					.get(i)));
+		Tablero tablero = Tablero.getTablero();
+		Casillero casilleroAuxiliar;
+		ArrayList<Parte> partes;
+		for (int i = 1; i <= 10; i++) {
+			for (int j = 1; i <= 10; i++) {
+				casilleroAuxiliar = tablero.obtenerCasillero(i, j);
+				partes = casilleroAuxiliar.obtenerPartes();
+				for (int k = 0; k < partes.size(); k++) {
+					this.gameLoop.agregar(new VistaPrueba(20, partes.get(k)));
+				}
+			}
 		}
 
 	}
