@@ -1,6 +1,10 @@
 package partida;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.dom4j.Element;
 
 import barcos.Vector;
 import disparos.Disparo;
@@ -47,4 +51,22 @@ public class ConstructorDeDisparo {
 		}
 		throw new DisparoInvalido();
 	}
+
+    // ESTO NO TOMA EN CUENTA HACE CUANTOS TURNOS FUE PUESTA LA MINA. AGREGAR.
+    public ArrayList<Disparo> construirDisparos(Element nodoDisparos) {
+        Element nodoDisparo;
+        ArrayList<Disparo> listaADevolver = new ArrayList<Disparo>();
+
+        // obtengo los nodos de cada disparo en una lista.
+        List<Element> listaNodosDisparo = nodoDisparos.elements();
+        Iterator<Element> iterador = listaNodosDisparo.iterator();
+
+        while (iterador.hasNext()) {
+            nodoDisparo = iterador.next();
+            int x = Integer.parseInt(nodoDisparo.attributeValue("x"));
+            int y = Integer.parseInt(nodoDisparo.attributeValue("y"));
+            listaADevolver.add(this.construirDisparo(nodoDisparo.getName(), new Vector(x, y)));
+        }
+        return listaADevolver;
+    }
 }
