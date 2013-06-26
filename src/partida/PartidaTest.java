@@ -3,8 +3,12 @@ package partida;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import partes.Parte;
+import barcos.Barco;
 import barcos.Vector;
 
 public class PartidaTest {
@@ -13,6 +17,7 @@ public class PartidaTest {
 	public void testAlCrearUnaPartidaNuevaLosPuntosDebenSerMayoresACero() {
 		Partida partida = new Partida();
 		assertTrue(partida.getPuntos() > 0);
+
 	}
 
 	@Test
@@ -50,17 +55,24 @@ public class PartidaTest {
 			partida.colocarDisparo("minacontacto", new Vector(101, 1100));
 		assertEquals(puntosIniciales, partida.getPuntos());
 	}
-	/*
-	 * En este tambien deberia agregarle posicion a movible
-	 * 
-	 * @Test public void testGanarUnaPartida() { Partida partida = new
-	 * Partida(); ArrayList<Barco> barcos = partida.obtener(); ArrayList<Parte>
-	 * partes; Vector posicionDisparo; for (int h = 1; h <= 2; h++) { for (int i
-	 * = 0; i < barcos.size(); i++) { partes = (barcos.get(i)).obtenerPartes();
-	 * for (int j = 0; j < partes.size(); j++) { posicionDisparo =
-	 * (partes.get(j)).obtenerPosicion();
-	 * partida.colocarDisparo("disparoconvencional", posicionDisparo); } } }
-	 * assertTrue(partida.gano()); }
-	 */
+
+	@Test
+	public void testGanarUnaPartida() {
+		Partida partida = new Partida();
+		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
+		ArrayList<Parte> partes;
+		Vector posicionDisparo;
+		for (int h = 1; h <= 2; h++) {
+			for (int i = 0; i < barcos.size(); i++) {
+				partes = (barcos.get(i)).obtenerPartes();
+				for (int j = 0; j < partes.size(); j++) {
+					posicionDisparo = (partes.get(j)).obtenerPosicion();
+					partida.colocarDisparo("disparoconvencional",
+							posicionDisparo);
+				}
+			}
+		}
+		assertTrue(partida.gano());
+	}
 
 }

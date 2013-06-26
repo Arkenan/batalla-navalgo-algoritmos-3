@@ -1,8 +1,14 @@
 package partida;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
+
+import barcos.Barco;
+import barcos.Vector;
 
 public class ManejadorDeBarcosTest {
 
@@ -20,17 +26,15 @@ public class ManejadorDeBarcosTest {
 		assertEquals(manejador.cantidadDeElementosDestruidos(), 0);
 	}
 
-	/*
-	 * Para
-	 * 
-	 * @Test public void
-	 * testAlPedirleQueMuevaLosBarcosDeberiaCambiarSuPosicion() {
-	 * ManejadorDeBarcos manejador = new ManejadorDeBarcos(); ArrayList<Barco>
-	 * barcos = manejador.obtenerBarcos(); Barco barcoAuxiliar = barcos.get(0);
-	 * Vector posicionFinal = barcoAuxiliar.obtenerPosicion(); Vector
-	 * posicionInicial = new Vector(posicionFinal.x(), posicionFinal.y());
-	 * manejador.moverElementos();
-	 * 
-	 * assertFalse(posicionInicial.sonIguales(posicionFinal)); }
-	 */
+	@Test
+	public void testAlPedirleQueMuevaLosBarcosDeberiaCambiarSuPosicion() {
+		ManejadorDeBarcos manejador = new ManejadorDeBarcos();
+		ArrayList<Barco> barcos = manejador.crearBarcosPorDefault();
+		Barco barcoAuxiliar = barcos.get(0);
+		Vector posicionFinal = barcoAuxiliar.obtenerPosicion();
+		Vector posicionInicial = new Vector(posicionFinal.x(),
+				posicionFinal.y());
+		manejador.moverElementos();
+		assertFalse(posicionInicial.sonIguales(posicionFinal));
+	}
 }

@@ -2,7 +2,7 @@ package partida;
 
 import java.util.ArrayList;
 
-import barcos.Destructible;
+import barcos.Barco;
 import barcos.Vector;
 import disparos.Disparo;
 import excepciones.DisparoInvalido;
@@ -17,7 +17,10 @@ public class Partida {
 		puntos = 10000;
 		disparos = new ArrayList<Disparo>();
 		manejadorDeBarcos = new ManejadorDeBarcos();
-		manejadorDeBarcos.crearBarcosPorDefault();
+	}
+
+	public ArrayList<Barco> crearBarcosPorDefault() {
+		return manejadorDeBarcos.crearBarcosPorDefault();
 	}
 
 	public int getPuntos() {
@@ -54,9 +57,7 @@ public class Partida {
 		Disparo unDisparo;
 		try {
 			unDisparo = constructorDeDisparo.construirDisparo(nombre, posicion);
-			System.out.println("entro al try");
 		} catch (DisparoInvalido error) {
-			System.out.println("fallooo");
 			return;
 		}
 		if (unDisparo.costo() <= this.getPuntos()) {
@@ -64,10 +65,6 @@ public class Partida {
 			this.reducirPuntosEn(unDisparo.costo());
 			this.realizarCambiosPasoTurno();
 		}
-	}
-
-	public ArrayList<Destructible> obtenerDestructibles() {
-		return manejadorDeBarcos.obtenerDestructibles();
 	}
 
 	// ------------------- Metodos Privados -----------------------------
