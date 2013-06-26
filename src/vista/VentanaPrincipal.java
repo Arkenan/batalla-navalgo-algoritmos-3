@@ -11,13 +11,13 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import partes.Parte;
 import partida.Partida;
-import vistasbarcos.DefinidorDeColor;
 import vistasbarcos.VistaBarcos;
 import barcos.Barco;
 import barcos.Destructible;
@@ -27,182 +27,214 @@ import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public class VentanaPrincipal {
 
-	private JFrame frame;
-	private GameLoop gameLoop;
-	private Partida partida;
+    private JFrame frame;
+    private GameLoop gameLoop;
+    private Partida partida;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    VentanaPrincipal window = new VentanaPrincipal();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the application.
-	 */
-	public VentanaPrincipal() {
-		try {
-			initialize();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Create the application.
+     */
+    public VentanaPrincipal() {
+        try {
+            initialize();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * Initialize the contents of the frame.
-	 * 
-	 * @throws IOException
-	 */
-	private void initialize() throws IOException {
-		frame = new JFrame();
-		frame.setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setTitle("Proyecto Base para uso del Titiritero");
+    /**
+     * Initialize the contents of the frame.
+     * 
+     * @throws IOException
+     */
+    private void initialize() throws IOException {
+        frame = new JFrame();
+        frame.setForeground(new Color(0, 0, 0));
+        frame.setBounds(100, 100, 800, 1000);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+        frame.setTitle("Batalla Naval - Grupo 11");
 
-		JButton btnIniciar = this.addBotonIniciar();
+        JButton btnIniciar = this.addBotonIniciar();
 
-		JButton btnDetener = this.addBotonDetener();
+        JButton btnDetener = this.addBotonDetener();
 
-		JButton btnPasarTurno = this.addBotonPasarTurno();
+        JButton btnPasarTurno = this.addBotonPasarTurno();
 
-		JButton btnDisparar = this.addBotonDisparar();
+        JButton btnDisparar = this.addBotonDisparar();
 
-		JPanel panel = this.addSuperficiePanel();
+        JButton btnMina = this.addBotonMina();
 
-		this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
+        JButton btnMina1 = this.addBotonMina1();
 
-		this.inicializarModelo();
+        JButton btnMina2 = this.addBotonMina2();
 
-		this.addMouseListener(panel);
+        JPanel panel = this.addSuperficiePanel();
 
-		this.addKeyListener();
+        this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
 
-		this.setComponentsFocus(btnIniciar, btnDetener);
-	}
+        this.inicializarModelo();
 
-	private void inicializarModelo() {
-		partida = new Partida();
-		int radio = 10;
-		DefinidorDeColor definidor = new DefinidorDeColor();
-		ArrayList<Destructible> destructibles = partida.obtenerDestructibles();
-		for (int i = 0; i < destructibles.size(); i++) {
-			Barco barco = (Barco) destructibles.get(i);
-			ArrayList<Parte> partes = barco.obtenerPartes();
-			for (int j = 0; j < partes.size(); j++) {
-				VistaBarcos vista = new VistaBarcos(radio, partes.get(j));
-				vista.setColor(definidor.devolverColor(barco));
-				this.gameLoop.agregar(vista);
-			}
+        this.addMouseListener(panel);
 
-		}
-	}
+        this.addKeyListener();
 
-	private void setComponentsFocus(JButton btnIniciar, JButton btnDetener) {
-		frame.setFocusable(true);
-		btnDetener.setFocusable(false);
-		btnIniciar.setFocusable(false);
-	}
+        this.setComponentsFocus(btnIniciar, btnDetener);
+    }
 
-	private void addKeyListener() {
-		frame.addKeyListener(new KeyListener() {
+    private JButton addBotonMina2() {
+        ImageIcon iconoMinaRadio2 = new ImageIcon("mina_radio2.png");
+        JButton btnMina2 = new JButton("Mina Radio 2", iconoMinaRadio2);
+        btnMina2.setBounds(650, 350, 150, 100);
+        frame.getContentPane().add(btnMina2);
+        return btnMina2;
+    }
 
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				System.out.println("Key pressed");
-			}
+    private JButton addBotonMina1() {
+        ImageIcon iconoMinaRadio1 = new ImageIcon("mina_radio1.png");
+        JButton btnMina1 = new JButton("Mina Radio 2", iconoMinaRadio1);
+        btnMina1.setBounds(650, 250, 150, 100);
+        frame.getContentPane().add(btnMina1);
+        return btnMina1;
+    }
 
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-			}
+    private JButton addBotonMina() {
+        ImageIcon iconoMinaRadio = new ImageIcon("mina_radio.png");
+        JButton btnMina = new JButton("Mina Radio 2", iconoMinaRadio);
+        btnMina.setBounds(650, 150, 150, 100);
+        frame.getContentPane().add(btnMina);
+        return btnMina;
+    }
 
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				System.out.println("Ping");
-			}
+    private JButton addBotonDisparar() {
+        JButton btnDisparar = new JButton("Disparar");
+        btnDisparar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
 
-		});
-	}
+            }
+        });
+        btnDisparar.setBounds(650, 50, 150, 100);
+        frame.getContentPane().add(btnDisparar);
+        return btnDisparar;
+    }
 
-	private void addMouseListener(JPanel panel) {
-		panel.addMouseListener(new MouseAdapter() {
+    private void inicializarModelo() {
+        partida = new Partida();
+        int radio = 10;
+        ArrayList<Destructible> destructibles = partida.obtenerDestructibles();
+        for (int i = 0; i < destructibles.size(); i++) {
+            Barco barco = (Barco) destructibles.get(i);
+            ArrayList<Parte> partes = barco.obtenerPartes();
+            for (int j = 0; j < partes.size(); j++) {
+                VistaBarcos vista = new VistaBarcos(radio, partes.get(j));
+                this.gameLoop.agregar(vista);
+            }
 
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			}
-		});
-	}
+        }
 
-	private JPanel addSuperficiePanel() {
-		JPanel panel = new SuperficiePanel();
-		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(42, 53, 700, 400);
-		frame.getContentPane().add(panel);
-		return panel;
-	}
+    }
 
-	private JButton addBotonDetener() {
-		JButton btnDetener = new JButton("Detener");
-		btnDetener.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gameLoop.detenerEjecucion();
-			}
-		});
-		btnDetener.setBounds(325, 16, 92, 25);
-		frame.getContentPane().add(btnDetener);
-		return btnDetener;
-	}
+    private void setComponentsFocus(JButton btnIniciar, JButton btnDetener) {
+        frame.setFocusable(true);
+        btnDetener.setFocusable(false);
+        btnIniciar.setFocusable(false);
+    }
 
-	private JButton addBotonPasarTurno() {
-		JButton btnIniciar = new JButton("PasarTurno");
-		btnIniciar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				partida.pasarTurno();
-			}
-		});
-		btnIniciar.setBounds(200, 16, 77, 25);
-		frame.getContentPane().add(btnIniciar);
-		return btnIniciar;
-	}
+    private void addKeyListener() {
+        frame.addKeyListener(new KeyListener() {
 
-	private JButton addBotonDisparar() {
-		JButton btnDisparar = new JButton("Disparar");
-		btnDisparar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
+            @Override
+            public void keyTyped(KeyEvent arg0) {
+                System.out.println("Key pressed");
+            }
 
-			}
-		});
-		btnDisparar.setBounds(100, 16, 77, 25);
-		frame.getContentPane().add(btnDisparar);
-		return btnDisparar;
-	}
+            @Override
+            public void keyReleased(KeyEvent arg0) {
+            }
 
-	private JButton addBotonIniciar() {
-		JButton btnIniciar = new JButton("Iniciar");
-		btnIniciar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				gameLoop.iniciarEjecucion();
-			}
-		});
-		btnIniciar.setBounds(42, 16, 77, 25);
-		frame.getContentPane().add(btnIniciar);
-		return btnIniciar;
-	}
+            @Override
+            public void keyPressed(KeyEvent arg0) {
+                System.out.println("Ping");
+            }
+
+        });
+    }
+
+    private void addMouseListener(JPanel panel) {
+        panel.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+            }
+        });
+    }
+
+    private JPanel addSuperficiePanel() {
+        JPanel panel = new SuperficiePanel();
+        panel.setBackground(new Color(0, 0, 0));
+        panel.setBounds(150, 50, 500, 500);
+        frame.getContentPane().add(panel);
+        return panel;
+    }
+
+    private JButton addBotonDetener() {
+        ImageIcon iconoCerrar = new ImageIcon("cerrar.png");
+        JButton btnDetener = new JButton("Detener", iconoCerrar);
+        btnDetener.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameLoop.detenerEjecucion();
+            }
+        });
+        btnDetener.setBounds(0, 250, 150, 100);
+        frame.getContentPane().add(btnDetener);
+        return btnDetener;
+    }
+
+    private JButton addBotonPasarTurno() {
+        ImageIcon iconoPasarTurno = new ImageIcon("pasar_turno.png");
+        JButton btnPasarTurno = new JButton("Pasar Turno", iconoPasarTurno);
+        btnPasarTurno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                partida.pasarTurno();
+            }
+        });
+        btnPasarTurno.setBounds(0, 150, 150, 100);
+        frame.getContentPane().add(btnPasarTurno);
+        return btnPasarTurno;
+    }
+
+    private JButton addBotonIniciar() {
+        ImageIcon iconoIniciar = new ImageIcon("iniciar.png");
+        JButton btnIniciar = new JButton("Iniciar", iconoIniciar);
+        btnIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                gameLoop.iniciarEjecucion();
+            }
+        });
+        btnIniciar.setBounds(0, 50, 150, 100);
+        frame.getContentPane().add(btnIniciar);
+        return btnIniciar;
+    }
 }
