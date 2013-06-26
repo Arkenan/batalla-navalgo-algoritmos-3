@@ -15,6 +15,13 @@ public class VectorTest {
     }
 
     @Test
+    public void testConstructorString() {
+        Vector vector = new Vector("(1,3)");
+        assertEquals(vector.x(), 1);
+        assertEquals(vector.y(), 3);
+    }
+
+    @Test
     public void testSonIguales() {
         Vector vector1 = new Vector(5, 5);
         Vector vector2 = new Vector(5, 5);

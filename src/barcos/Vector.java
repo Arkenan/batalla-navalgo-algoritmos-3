@@ -12,6 +12,11 @@ public class Vector {
         y = enY;
     }
 
+    public Vector(String strVector) {
+        x = Integer.parseInt(strVector.substring(strVector.indexOf("(") + 1, strVector.indexOf(",")));
+        y = Integer.parseInt(strVector.substring(strVector.indexOf(",") + 1, strVector.indexOf(")")));
+    }
+
     public int x() {
         return x;
     }
