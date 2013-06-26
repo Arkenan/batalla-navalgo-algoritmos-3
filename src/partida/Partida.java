@@ -49,14 +49,21 @@ public class Partida {
 		return false;
 	}
 
-	public void colocarDisparo(String nombre, Vector posicion)
-			throws DisparoInvalido {
+	public void colocarDisparo(String nombre, Vector posicion) {
 		ConstructorDeDisparo constructorDeDisparo = new ConstructorDeDisparo();
-		Disparo unDisparo = constructorDeDisparo.construirDisparo(nombre,
-				posicion);
-		disparos.add(unDisparo);
-		this.reducirPuntosEn(unDisparo.costo());
-		this.realizarCambiosPasoTurno();
+		Disparo unDisparo;
+		try {
+			unDisparo = constructorDeDisparo.construirDisparo(nombre, posicion);
+			System.out.println("entro al try");
+		} catch (DisparoInvalido error) {
+			System.out.println("fallooo");
+			return;
+		}
+		if (unDisparo.costo() <= this.getPuntos()) {
+			disparos.add(unDisparo);
+			this.reducirPuntosEn(unDisparo.costo());
+			this.realizarCambiosPasoTurno();
+		}
 	}
 
 	public ArrayList<Destructible> obtenerDestructibles() {

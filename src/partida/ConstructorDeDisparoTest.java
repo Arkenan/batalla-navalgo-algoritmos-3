@@ -11,7 +11,7 @@ import partes.ParteDanioTotal;
 import barcos.Vector;
 import disparos.Disparo;
 import escenario.Tablero;
-import excepciones.PosicionInvalida;
+import excepciones.DisparoInvalido;
 
 public class ConstructorDeDisparoTest {
 
@@ -46,7 +46,7 @@ public class ConstructorDeDisparoTest {
 			ConstructorDeDisparo constructor = new ConstructorDeDisparo();
 			Disparo disparo = constructor.construirDisparo(
 					"disparoconvencional", new Vector(11, 123));
-		} catch (PosicionInvalida error) {
+		} catch (DisparoInvalido error) {
 			valor = true;
 		}
 		assertTrue(valor);

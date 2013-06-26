@@ -1,12 +1,15 @@
 package escenario;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 import partes.Parte;
+import barcos.Barco;
 import barcos.Vector;
 import casillero.Casillero;
+import excepciones.PosicionInvalida;
 
 /* patron de diseño singleton */
 public final class Tablero {
@@ -14,11 +17,13 @@ public final class Tablero {
 	private final Map<String, Casillero> casilleros;
 	private final int ancho;
 	private final int alto;
+	protected ArrayList<Barco> barcos;
 
 	private Tablero(int ancho, int alto) {
 		casilleros = new HashMap<String, Casillero>();
 		this.ancho = ancho;
 		this.alto = alto;
+		barcos = new ArrayList<Barco>();
 	}
 
 	/* constructor privado para evitar copias extra. */
@@ -78,7 +83,10 @@ public final class Tablero {
 	 * Metodo utilizado por las minas para obtener las casillas que seran
 	 * afectadas por su explosion
 	 */
-	public LinkedList<Casillero> casillasAfectadas(Vector posicion, int radio) {
+	public LinkedList<Casillero> casillasAfectadas(Vector posicion, int radio)
+			throws PosicionInvalida {
+		if (this.fueraDeRango(posicion))
+			throw new PosicionInvalida("Hubo una posicion invalida");
 		LinkedList<Casillero> lista = new LinkedList<Casillero>();
 		for (int columna = posicion.x() - radio; columna <= posicion.x()
 				+ radio; columna++) {

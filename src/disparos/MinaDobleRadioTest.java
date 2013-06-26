@@ -8,33 +8,46 @@ import org.junit.Test;
 import partes.ParteDanioTotal;
 import barcos.Vector;
 import escenario.Tablero;
+import excepciones.PosicionInvalida;
 
 public class MinaDobleRadioTest {
 
-    @Test
-    public void testCreoUnaMinaRadio() {
-        MinaDobleRadio mina = new MinaDobleRadio();
-        Vector posicion = new Vector(3, 3);
-        mina.cambiarCasillerosAfectados(posicion);
-        Vector posicionPertenecienteAlRadio = new Vector(3, 1);
-        ParteDanioTotal parte = new ParteDanioTotal(1);
-        Tablero tablero = Tablero.getTablero();
-        tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
-        mina.explotar();
-        assertTrue(parte.estaDaniada());
-    }
+	@Test
+	public void testCreoUnaMinaRadio() {
+		MinaDobleRadio mina = new MinaDobleRadio();
+		Vector posicion = new Vector(3, 3);
+		mina.cambiarCasillerosAfectados(posicion);
+		Vector posicionPertenecienteAlRadio = new Vector(3, 1);
+		ParteDanioTotal parte = new ParteDanioTotal(1);
+		Tablero tablero = Tablero.getTablero();
+		tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
+		mina.explotar();
+		assertTrue(parte.estaDaniada());
+	}
 
-    @Test
-    public void testCreoUnaMinaDobleRadio() {
-        MinaDobleRadio mina = new MinaDobleRadio();
-        Vector posicion = new Vector(3, 3);
-        mina.cambiarCasillerosAfectados(posicion);
-        Vector posicionNoPertenecienteAlRadio = new Vector(9, 9);
-        ParteDanioTotal parte = new ParteDanioTotal(1);
-        Tablero tablero = Tablero.getTablero();
-        tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
-        mina.explotar();
-        assertFalse(parte.estaDaniada());
-    }
+	@Test
+	public void testCreoUnaMinaDobleRadio() {
+		MinaDobleRadio mina = new MinaDobleRadio();
+		Vector posicion = new Vector(3, 3);
+		mina.cambiarCasillerosAfectados(posicion);
+		Vector posicionNoPertenecienteAlRadio = new Vector(9, 9);
+		ParteDanioTotal parte = new ParteDanioTotal(1);
+		Tablero tablero = Tablero.getTablero();
+		tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
+		mina.explotar();
+		assertFalse(parte.estaDaniada());
+	}
+
+	@Test
+	public void testAlCrearlaEnPosicionInvalidaDeberiaDarError() {
+		MinaDobleRadio unaMina = new MinaDobleRadio();
+		boolean valor = false;
+		try {
+			unaMina.cambiarCasillerosAfectados(new Vector(111, 231));
+		} catch (PosicionInvalida error) {
+			valor = true;
+		}
+		assertTrue(valor);
+	}
 
 }

@@ -1,11 +1,11 @@
 package partida;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import barcos.Vector;
-import excepciones.DisparoInvalido;
 
 public class PartidaTest {
 
@@ -37,13 +37,19 @@ public class PartidaTest {
 		Partida partida = new Partida();
 		Vector posicion = new Vector(10, 10);
 		int puntosIniciales = partida.getPuntos();
-		try {
-			partida.colocarDisparo("minacontacto", posicion);
-			assertTrue(puntosIniciales > partida.getPuntos());
-		} catch (DisparoInvalido error) {
-		}
+		partida.colocarDisparo("minacontacto", posicion);
+		assertTrue(puntosIniciales > partida.getPuntos());
+
 	}
 
+	@Test
+	public void testAlTratarDeColocarDisparosEnPosicionesInvalidasNoDeberianDecrecerLosPuntos() {
+		Partida partida = new Partida();
+		int puntosIniciales = partida.getPuntos();
+		for (int i = 0; i < 10; i++)
+			partida.colocarDisparo("minacontacto", new Vector(101, 1100));
+		assertEquals(puntosIniciales, partida.getPuntos());
+	}
 	/*
 	 * En este tambien deberia agregarle posicion a movible
 	 * 

@@ -10,25 +10,29 @@ import barcos.Rompehielo;
 
 public class DefinidorDeColor implements AbstractDefinition {
 
-    @Override
-    public Color devolverColor(Buque buque) {
-        return Color.BLACK;
-    }
+	public Color devolverColor(Buque buque) {
+		return Color.WHITE;
+	}
 
-    public Color devolverColor(Destructor destructor) {
-        return Color.BLUE;
-    }
+	public Color devolverColor(Destructor destructor) {
+		return Color.BLUE;
+	}
 
-    public Color devolverColor(Rompehielo rompehielo) {
-        return Color.GREEN;
-    }
+	public Color devolverColor(Rompehielo rompehielo) {
+		return Color.GREEN;
+	}
 
-    public Color devolverColor(Lancha lancha) {
-        return Color.ORANGE;
-    }
+	public Color devolverColor(Lancha lancha) {
+		return Color.ORANGE;
+	}
 
-    public Color devolverColor(Portaaviones portaaviones) {
-        return Color.RED;
-    }
+	public Color devolverColor(Portaaviones portaaviones) {
+		return Color.RED;
+	}
+
+	@Override
+	public Color identificarColor(Buque buque) {
+		return Color.WHITE;
+	}
 
 }
