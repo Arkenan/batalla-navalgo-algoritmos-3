@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VentanaPrincipal {
+public class VentanaPrincipal implements MouseListener {
 
     private JFrame frame;
     private GameLoop gameLoop;
@@ -191,6 +192,7 @@ public class VentanaPrincipal {
     private JPanel addSuperficiePanel() {
         JPanel panel = new SuperficiePanel();
         panel.setBackground(new Color(0, 0, 0));
+        panel.addMouseListener(this);
         panel.setBounds(150, 50, 500, 500);
         frame.getContentPane().add(panel);
         return panel;
@@ -236,5 +238,32 @@ public class VentanaPrincipal {
         btnIniciar.setBounds(0, 50, 150, 100);
         frame.getContentPane().add(btnIniciar);
         return btnIniciar;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println(e.getX());
+        System.out.println(e.getY());
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
