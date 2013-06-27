@@ -120,6 +120,13 @@ public class VentanaPrincipal implements MouseListener {
 	private JButton addBotonMina() {
 		ImageIcon iconoMinaRadio = new ImageIcon("mina_radio.png");
 		JButton btnMina = new JButton("Mina Radio 2", iconoMinaRadio);
+		btnMina.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				partida.colocarDisparo("minadobleradio",
+						ultimaPosicionClickeada);
+			}
+		});
 		btnMina.setBounds(650, 150, 150, 100);
 		frame.getContentPane().add(btnMina);
 		return btnMina;
