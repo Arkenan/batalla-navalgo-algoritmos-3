@@ -159,6 +159,8 @@ public class ManejadorDeBarcos {
                 default:
                     throw new Error("Barco no reconocido: " + nodoBarco.getName());
             }
+            elementosAMoverPorTurno.add(barcoActual);
+            elementosADestruirParaGanar.add(barcoActual);
         }
 
     }
