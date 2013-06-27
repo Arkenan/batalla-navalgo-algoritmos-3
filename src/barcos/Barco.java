@@ -16,7 +16,7 @@ import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 public abstract class Barco implements Movible, Destructible,
 		ObjetoPosicionable {
 	protected int tamanio, vida;
-	protected Vector orientacion, posicion;
+	protected Vector orientacion, posicionCabeza;
 	protected ArrayList<Parte> partesDelBarco;
 	protected MovimientoStrategy estrategia;
 
@@ -38,19 +38,19 @@ public abstract class Barco implements Movible, Destructible,
 
 	@Override
 	public int getX() {
-		return 20 * (posicion.x());
+		return 20 * (posicionCabeza.x());
 	}
 
 	@Override
 	public int getY() {
-		return 20 * (posicion.y());
+		return 20 * (posicionCabeza.y());
 	}
 
 	public void colocarEnTablero(Vector posicion) throws PosicionInvalida {
 		if (this.verificarPosicion(posicion) == false) {
 			throw new PosicionInvalida("HAY UNA POSICION INVALIDA");
 		}
-		this.posicion = posicion;
+		this.posicionCabeza = posicion;
 		this.colocarPartes();
 	}
 
@@ -110,14 +110,14 @@ public abstract class Barco implements Movible, Destructible,
 	}
 
 	public Vector obtenerPosicion() {
-		return posicion;
+		return posicionCabeza;
 	}
 
 	@Override
 	public void moverse() {
 		Vector nuevaPosicion = estrategia.ejecutar();
 		sacarPartes();
-		posicion = nuevaPosicion;
+		posicionCabeza = nuevaPosicion;
 		colocarPartes();
 	}
 
@@ -125,7 +125,7 @@ public abstract class Barco implements Movible, Destructible,
 	private void sacarPartes() {
 		Tablero tablero = Tablero.getTablero();
 		for (int i = 0; i < tamanio; i++) {
-			Vector posParte = new Vector(posicion.sumar(orientacion
+			Vector posParte = new Vector(posicionCabeza.sumar(orientacion
 					.porEscalar(i)));
 			tablero.sacarElemento(posParte, partesDelBarco.get(i));
 		}
@@ -137,7 +137,7 @@ public abstract class Barco implements Movible, Destructible,
 	private void colocarPartes() {
 		Tablero tablero = Tablero.getTablero();
 		for (int i = 0; i < tamanio; i++) {
-			Vector posParte = new Vector(posicion.sumar(orientacion
+			Vector posParte = new Vector(posicionCabeza.sumar(orientacion
 					.porEscalar(i)));
 			partesDelBarco.get(i).cambiarPosicion(posParte);
 			tablero.colocarElemento(posParte, partesDelBarco.get(i));
