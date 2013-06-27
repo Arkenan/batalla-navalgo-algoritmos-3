@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Partida nombre="Nivel Medio" puntos="2500">
+  <Disparos></Disparos>
+  <Barcos>
+    <Destructor orientacion="(0,1)" posicion="(5,5)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Destructor>
+    <Destructor orientacion="(1,0)" posicion="(1,3)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>
+    </Destructor>
+    <Portaaviones orientacion="(1,0)" posicion="(1,1)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Portaaviones>
+    <Lancha orientacion="(1,0)" posicion="(1,10)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,1)"></Estrategia>
+    </Lancha>
+    <Rompehielo orientacion="(0,1)" posicion="(1,1)"  completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
+    </Rompehielo>
+  </Barcos>
+</Partida>

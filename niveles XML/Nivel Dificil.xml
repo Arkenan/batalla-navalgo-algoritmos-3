@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Partida nombre="Nivel Medio" puntos="3000">
+  <Disparos></Disparos>
+  <Barcos>
+    <Rompehielo orientacion="(0,1)" posicion="(3,3)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Rompehielo>
+    <Rompehielo orientacion="(0,1)" posicion="(7,7)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Rompehielo>
+    <Rompehielo orientacion="(0,1)" posicion="(3,7)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Rompehielo>
+    <Rompehielo orientacion="(0,1)" posicion="(7,3)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>
+    </Rompehielo>
+    <Portaaviones orientacion="(1,0)" posicion="(1,5)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>
+    </Portaaviones>
+    <Lancha orientacion="(0,1)" posicion="(10,1)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,1)"></Estrategia>
+    </Lancha>
+    <Lancha orientacion="(0,1)" posicion="(10,1)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,-1)"></Estrategia>
+    </Lancha>
+    <Destructor orientacion="(0,1)" posicion="(1,1)"  completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
+    </Destructor>
+    <Destructor orientacion="(0,1)" posicion="(10,6)"  completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(-1,-1)"></Estrategia>
+    </Destructor>
+    <Destructor orientacion="(1,0)" posicion="(1,10)"  completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>
+    </Destructor>
+  
+  </Barcos>
+</Partida>

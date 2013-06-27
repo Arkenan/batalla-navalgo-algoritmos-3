@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Partida nombre="Nivel Facil" puntos="2000">
+  <Disparos></Disparos>
+  <Barcos>
+    <Portaaviones orientacion="(0,1)" posicion="(5,3)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
+    </Portaaviones>
+    <Portaaviones orientacion="(1,0)" posicion="(3,5)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>
+    </Portaaviones>
+    <Portaaviones orientacion="(1,0)" posicion="(1,10)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,1)"></Estrategia>
+    </Portaaviones>
+  </Barcos>
+</Partida>
