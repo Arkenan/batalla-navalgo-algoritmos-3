@@ -18,8 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.dom4j.Element;
-
 import partida.Partida;
 import barcos.Barco;
 import barcos.Vector;
@@ -95,6 +93,11 @@ public class VentanaPrincipal implements MouseListener {
 
         this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
 
+        ImageIcon icono = new ImageIcon("imagenes/mar.png");
+        JLabel background = new JLabel("algo", icono, JLabel.CENTER);
+
+        background.setBounds(200, 100, 300, 300);
+
         this.inicializarModelo();
 
         puntaje = this.addCosaPrueba();
@@ -106,6 +109,7 @@ public class VentanaPrincipal implements MouseListener {
         this.addKeyListener();
 
         this.setComponentsFocus(btnIniciar, btnDetener);
+
     }
 
     private JLabel addCosaPrueba() {
@@ -125,7 +129,7 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonMina2() {
-        ImageIcon iconoMinaRadio2 = new ImageIcon("imagenes/mina_radio2.png");
+        ImageIcon iconoMinaRadio2 = new ImageIcon("imagenes/iconos/mina_radio2.png");
         JButton btnMina2 = new JButton("Mina Radio 2", iconoMinaRadio2);
         btnMina2.addActionListener(new ActionListener() {
             @Override
@@ -141,7 +145,7 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonMina1() {
-        ImageIcon iconoMinaRadio1 = new ImageIcon("imagenes/mina_radio1.png");
+        ImageIcon iconoMinaRadio1 = new ImageIcon("imagenes/iconos/mina_radio1.png");
         JButton btnMina1 = new JButton("Mina Radio 1", iconoMinaRadio1);
         btnMina1.addActionListener(new ActionListener() {
             @Override
@@ -156,7 +160,7 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonMina() {
-        ImageIcon iconoMinaRadio = new ImageIcon("imagenes/mina_contacto.png");
+        ImageIcon iconoMinaRadio = new ImageIcon("imagenes/iconos/mina_contacto.png");
         JButton btnMina = new JButton("Mina Contacto", iconoMinaRadio);
         btnMina.addActionListener(new ActionListener() {
             @Override
@@ -171,8 +175,8 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonDisparar() {
-        ImageIcon iconoDisparar = new ImageIcon("imagenes/disparo.png");
-        JButton btnDisparar = new JButton("Disparar", iconoDisparar);
+        ImageIcon icono = new ImageIcon("imagenes/iconos/disparo.png");
+        JButton btnDisparar = new JButton("Disparar", icono);
         btnDisparar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -186,16 +190,16 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private void inicializarModelo() throws IOException {
-
-        Element nodoPartida = Partida.obtenerNodoPartida("niveles XML/pruebaBarcosRotos.xml");
-        partida = new Partida(nodoPartida);
-        ArrayList<Barco> barcos = partida.crearBarcos(nodoPartida);
+        /*
+         * PARA NIVELES ArrayList<Disparo> disparos = new ArrayList<Disparo>(); Element nodoPartida
+         * = Partida.obtenerNodoPartida("niveles XML/pruebas.xml"); partida = new
+         * Partida(nodoPartida); ArrayList<Barco> barcos = partida.crearBarcos(nodoPartida);
+         */
 
         ultimaPosicionClickeada = new Vector(0, 0);
-        // partida = new Partida();
-        // Fondo fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
-        // gameLoop.agregar(fondo);
-        // ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
+        partida = new Partida();
+
+        ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
         ArrayList<VistaParte> vistasDePartes;
         Barco barcoAux;
         for (int i = 0; i < barcos.size(); i++) {
@@ -205,6 +209,8 @@ public class VentanaPrincipal implements MouseListener {
                 this.gameLoop.agregar(vistasDePartes.get(j));
             }
         }
+        Fondo fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
+        this.gameLoop.agregar(fondo);
     }
 
     private void setComponentsFocus(JButton btnIniciar, JButton btnDetener) {
@@ -244,15 +250,20 @@ public class VentanaPrincipal implements MouseListener {
 
     private JPanel addSuperficiePanel() {
         JPanel panel = new SuperficiePanel();
-        panel.setBackground(Color.BLUE);
+        panel.setOpaque(true);
+        panel.setVisible(true);
         panel.addMouseListener(this);
         panel.setBounds(150, 50, 400, 400);
         frame.getContentPane().add(panel);
+
         return panel;
     }
 
     private JButton addBotonDetener() {
-        ImageIcon iconoCerrar = new ImageIcon("imagenes/cerrar.png");
+        // I
+        // JPanel fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
+        // panel.add(comp)
+        ImageIcon iconoCerrar = new ImageIcon("imagenes/iconos/cerrar.png");
         JButton btnDetener = new JButton("Detener", iconoCerrar);
         btnDetener.addActionListener(new ActionListener() {
             @Override
@@ -266,7 +277,7 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonPasarTurno() {
-        ImageIcon iconoPasarTurno = new ImageIcon("imagenes/pasar_turno.png");
+        ImageIcon iconoPasarTurno = new ImageIcon("imagenes/iconos/pasar_turno.png");
         JButton btnPasarTurno = new JButton("Pasar Turno", iconoPasarTurno);
         btnPasarTurno.addActionListener(new ActionListener() {
             @Override
@@ -281,7 +292,7 @@ public class VentanaPrincipal implements MouseListener {
     }
 
     private JButton addBotonIniciar() {
-        ImageIcon iconoIniciar = new ImageIcon("imagenes/iniciar.png");
+        ImageIcon iconoIniciar = new ImageIcon("imagenes/iconos/iniciar.png");
         JButton btnIniciar = new JButton("Iniciar", iconoIniciar);
         btnIniciar.addActionListener(new ActionListener() {
             @Override
