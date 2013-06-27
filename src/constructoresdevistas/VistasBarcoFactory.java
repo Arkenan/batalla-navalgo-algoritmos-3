@@ -12,26 +12,27 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	ArrayList<String> directorioImagenesPartesDestruidas;
 	ArrayList<Parte> partes;
 
-	protected VistasBarcoFactory(int tamanio, Vector orientacionBarco,
+	public VistasBarcoFactory(int tamanio, Vector orientacionBarco,
 			String nombreBarco, ArrayList<Parte> partesAUtilizar) {
 		partes = partesAUtilizar;
 		String orientacion;
-		directorioImagenesPartesSanas = new ArrayList<String>();
 		if (orientacionBarco.x() == 0) {
-			orientacion = "Vertical";
+			orientacion = "vertical/";
 		} else {
-			orientacion = "Horizontal";
+			orientacion = "horizontal/";
 		}
+		directorioImagenesPartesSanas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
 			directorioImagenesPartesSanas.add("imagenes/" + nombreBarco
-					+ "/sano/" + orientacion + Integer.toString(i)
-					+ nombreBarco + ".png");
+					+ "/sano/" + orientacion + nombreBarco
+					+ Integer.toString(i) + ".png");
 		}
+
 		directorioImagenesPartesDestruidas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
-			directorioImagenesPartesSanas.add("imagenes/" + nombreBarco
-					+ "/destruido/" + orientacion + Integer.toString(i)
-					+ nombreBarco + ".png");
+			directorioImagenesPartesDestruidas.add("imagenes/" + nombreBarco
+					+ "/destruido/" + orientacion + nombreBarco
+					+ Integer.toString(i) + ".png");
 		}
 	}
 
@@ -45,7 +46,7 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 						directorioImagenesPartesDestruidas.get(i), partes
 								.get(i)));
 			} catch (IOException error) {
-
+				System.out.println(error);
 			}
 		}
 		return vistasADevolver;

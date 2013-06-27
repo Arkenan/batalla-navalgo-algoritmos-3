@@ -202,6 +202,8 @@ public class VentanaPrincipal implements MouseListener {
 
 		ultimaPosicionClickeada = new Vector(0, 0);
 		partida = new Partida();
+		Fondo fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
+		gameLoop.agregar(fondo);
 		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
 		ArrayList<VistaParte> vistasDePartes;
 		Barco barcoAux;
