@@ -26,7 +26,7 @@ public class ConstructorDeDisparoTest {
 	}
 
 	@Test
-	public void testCreoUnDisparoConElConstructorHacerloExplotarYVeoSiLaParteQuedoDaniada() {
+	public void testCreoUnDisparoConElConstructorHacerloExplotarYVeoSiLaParteQuedoDestruida() {
 		Tablero tablero = Tablero.getTablero();
 		ConstructorDeDisparo constructor = new ConstructorDeDisparo();
 		Vector posicion = new Vector(1, 2);
@@ -36,7 +36,7 @@ public class ConstructorDeDisparoTest {
 				posicion);
 		disparo.explotar();
 
-		assertTrue(parte.estaDaniada());
+		assertTrue(parte.estaDestruida());
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class ConstructorDeDisparoTest {
 	}
 
 	@Test
-	public void testAlCrearUnaMinaConElConstructorHacerlaExplotarYVerSiLaParteDanioDisparQuedoDaniadaDeberiaSerFalso() {
+	public void testAlCrearUnaMinaConElConstructorHacerlaExplotarYVerSiLaParteDanioDisparQuedoDestruidaDeberiaSerFalso() {
 		Tablero tablero = Tablero.getTablero();
 		ConstructorDeDisparo constructor = new ConstructorDeDisparo();
 		Vector posicion = new Vector(1, 2);
@@ -63,6 +63,6 @@ public class ConstructorDeDisparoTest {
 				posicion);
 		disparo.explotar();
 
-		assertFalse(parte.estaDaniada());
+		assertFalse(parte.estaDestruida());
 	}
 }
