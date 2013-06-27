@@ -174,25 +174,34 @@ public class VentanaPrincipal implements MouseListener {
         return btnDisparar;
     }
 
-    private void inicializarModelo() {
-        ArrayList<Color> Lista = new ArrayList<Color>();
-        Lista.add(Color.BLUE);
-        Lista.add(Color.GREEN);
-        Lista.add(Color.YELLOW);
-        Lista.add(Color.ORANGE);
+    private void inicializarModelo() throws IOException {
+        ArrayList<Color> colores = new ArrayList<Color>();
+        colores.add(Color.BLUE);
+        colores.add(Color.GREEN);
+        colores.add(Color.YELLOW);
+        colores.add(Color.WHITE);
+        colores.add(Color.GREEN);
+        colores.add(Color.CYAN);
+        colores.add(Color.ORANGE);
+        /*
+         * PARA NIVELES ArrayList<Disparo> disparos = new ArrayList<Disparo>(); Element nodoPartida
+         * = Partida.obtenerNodoPartida("niveles XML/pruebas.xml"); partida = new
+         * Partida(nodoPartida); ArrayList<Barco> barcos = partida.crearBarcos(nodoPartida);
+         */
+
         ultimaPosicionClickeada = new Vector(0, 0);
         partida = new Partida();
         ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
+
         Parte parte;
         ArrayList<Parte> partes;
         for (int i = 0; i < barcos.size(); i++) {
             partes = barcos.get(i).obtenerPartes();
-            int posicion = (int) (Math.random() * Lista.size());
-            Color definido = Lista.get(posicion);
+            Color color = colores.get((int) (Math.random() * colores.size()));
             for (int j = 0; j < partes.size(); j++) {
                 parte = partes.get(j);
                 VistaBarcos vistaBarco = new VistaBarcos(40, parte);
-                vistaBarco.setColor(definido);
+                vistaBarco.setColor(color);
                 this.gameLoop.agregar(vistaBarco);
             }
         }

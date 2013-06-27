@@ -35,25 +35,27 @@ public class Partida {
         disparos = constructorDeDisparo.construirDisparos(nodoPartida.element("Disparos"));
 
         manejadorDeBarcos = new ManejadorDeBarcos();
-        manejadorDeBarcos.crearBarcos(nodoPartida.element("Barcos"));
 
     }
 
-    public Partida recuperarPartida(String dirArchivo) throws IOException {
-        Partida partida;
+    public ArrayList<Barco> crearBarcos(Element nodoPartida) {
+        return manejadorDeBarcos.crearBarcos(nodoPartida.element("Barcos"));
+    }
+
+    public static Element obtenerNodoPartida(String dirArchivo) throws IOException {
+        Element nodoPartida;
         SAXReader lector = new SAXReader();
         try {
             // aca buscamos el documento segun su direccion.
             Document documento = lector.read(dirArchivo);
             // el Element es el nodo. Sacamos el nodo raiz (suponemos que es una persona).
-            Element nodoPartida = documento.getRootElement();
+            nodoPartida = documento.getRootElement();
             // aca, una vez obtenido el nodo XML que representa a la persona, creamos la persona
             // para devolver.
-            partida = new Partida(nodoPartida);
         } catch (DocumentException ex) {
             throw new IOException("ERROR AL TRABAJAR CON EL ARCHIVO");
         }
-        return partida;
+        return nodoPartida;
     }
 
     public ArrayList<Barco> crearBarcosPorDefault() {

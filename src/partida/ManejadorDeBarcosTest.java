@@ -36,5 +36,4 @@ public class ManejadorDeBarcosTest {
         manejador.moverElementos();
         assertFalse(posicionInicial.sonIguales(posicionFinal));
     }
-
 }

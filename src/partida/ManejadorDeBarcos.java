@@ -117,24 +117,25 @@ public class ManejadorDeBarcos {
         return constructorAleatorio.crearMovimientoStrategy(direccion);
     }
 
-    public void crearBarcos(Element nodoBarcos) {
+    public ArrayList<Barco> crearBarcos(Element nodoBarcos) {
         // primero busco la lista de nodos de barcos. Primero para barcos completos.
         ArrayList<Barco> ListaBarcos = new ArrayList<Barco>();
         List<Element> listaNodosBarcos = nodoBarcos.elements();
         Iterator<Element> it = listaNodosBarcos.iterator();
+
         while (it.hasNext()) {
             Element nodoBarco = it.next();
 
             // busco la estrategia.
             MovimientoStrategy estrategiaActual;
-            Element nodoEstrategia = nodoBarco.element("estrategia");
+            Element nodoEstrategia = nodoBarco.element("Estrategia");
             Vector direccionActual = new Vector(nodoEstrategia.attributeValue("direccionActual"));
-            switch (nodoEstrategia.getName()) {
+            switch (nodoEstrategia.attributeValue("tipo")) {
                 case "MovimientoLinealStrategy":
                     estrategiaActual = new MovimientoLinealStrategy(direccionActual);
                     break;
                 default:
-                    throw new Error("No se reconoce la estrategia " + nodoEstrategia.getName());
+                    throw new Error("No se reconoce la estrategia " + nodoEstrategia.attributeValue("tipo"));
             }
 
             // busco el barco.
@@ -159,9 +160,12 @@ public class ManejadorDeBarcos {
                 default:
                     throw new Error("Barco no reconocido: " + nodoBarco.getName());
             }
+            ListaBarcos.add(barcoActual);
+            barcoActual.colocarEnTablero(new Vector(nodoBarco.attributeValue("posicion")));
             elementosAMoverPorTurno.add(barcoActual);
             elementosADestruirParaGanar.add(barcoActual);
         }
 
+        return ListaBarcos;
     }
 }
