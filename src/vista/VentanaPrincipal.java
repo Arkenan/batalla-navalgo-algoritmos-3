@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -20,7 +21,6 @@ import javax.swing.JPanel;
 
 import partes.Parte;
 import partida.Partida;
-import vistasbarcos.VistaBarcos;
 import barcos.Barco;
 import barcos.Vector;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
@@ -207,10 +207,11 @@ public class VentanaPrincipal implements MouseListener {
 			partes = barcos.get(i).obtenerPartes();
 			Color color = colores.get((int) (Math.random() * colores.size()));
 			for (int j = 0; j < partes.size(); j++) {
+				URL imgURL = getClass().getResource("imagenes/barco1.jpg");
 				parte = partes.get(j);
-				VistaBarcos vistaBarco = new VistaBarcos(40, parte);
-				vistaBarco.setColor(color);
-				this.gameLoop.agregar(vistaBarco);
+				VistaPrueba vistaParte = new VistaPrueba("imagenes/barco1.jpg",
+						parte);
+				this.gameLoop.agregar(vistaParte);
 			}
 		}
 	}
@@ -252,7 +253,7 @@ public class VentanaPrincipal implements MouseListener {
 
 	private JPanel addSuperficiePanel() {
 		JPanel panel = new SuperficiePanel();
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(Color.BLUE);
 		panel.addMouseListener(this);
 		panel.setBounds(150, 50, 400, 400);
 		frame.getContentPane().add(panel);
