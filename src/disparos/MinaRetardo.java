@@ -1,6 +1,8 @@
 package disparos;
 
-public class MinaRetardo extends Mina {
+import org.dom4j.Element;
+
+public abstract class MinaRetardo extends Mina {
     protected int cantidadDeTurnosAEsperar;
 
     MinaRetardo() {
@@ -22,4 +24,7 @@ public class MinaRetardo extends Mina {
             return false;
         }
     }
+
+    @Override
+    public abstract Element generarNodo();
 }

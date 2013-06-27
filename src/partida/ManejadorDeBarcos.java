@@ -7,6 +7,7 @@ import java.util.List;
 import movimientostrategyfactory.AbstractMovimientoFactory;
 import movimientostrategyfactory.MovimientoLinealFactory;
 
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import barcofactory.AbstractBarcoFactory;
@@ -143,19 +144,39 @@ public class ManejadorDeBarcos {
             Vector orientacionActual = new Vector(nodoBarco.attributeValue("orientacion"));
             switch (nodoBarco.getName()) {
                 case "Lancha":
-                    barcoActual = new Lancha(orientacionActual, estrategiaActual);
+                    if (nodoBarco.attributeValue("completo").equals("si")) {
+                        barcoActual = new Lancha(orientacionActual, estrategiaActual);
+                    } else {
+                        barcoActual = new Lancha(nodoBarco, estrategiaActual);
+                    }
                     break;
                 case "Buque":
-                    barcoActual = new Buque(orientacionActual, estrategiaActual);
+                    if (nodoBarco.attributeValue("completo").equals("si")) {
+                        barcoActual = new Buque(orientacionActual, estrategiaActual);
+                    } else {
+                        barcoActual = new Buque(nodoBarco, estrategiaActual);
+                    }
                     break;
                 case "Destructor":
-                    barcoActual = new Destructor(orientacionActual, estrategiaActual);
+                    if (nodoBarco.attributeValue("completo").equals("si")) {
+                        barcoActual = new Destructor(orientacionActual, estrategiaActual);
+                    } else {
+                        barcoActual = new Destructor(nodoBarco, estrategiaActual);
+                    }
                     break;
                 case "Rompehielo":
-                    barcoActual = new Rompehielo(orientacionActual, estrategiaActual);
+                    if (nodoBarco.attributeValue("completo").equals("si")) {
+                        barcoActual = new Rompehielo(orientacionActual, estrategiaActual);
+                    } else {
+                        barcoActual = new Rompehielo(nodoBarco, estrategiaActual);
+                    }
                     break;
                 case "Portaaviones":
-                    barcoActual = new Portaaviones(orientacionActual, estrategiaActual);
+                    if (nodoBarco.attributeValue("completo").equals("si")) {
+                        barcoActual = new Portaaviones(orientacionActual, estrategiaActual);
+                    } else {
+                        barcoActual = new Portaaviones(nodoBarco, estrategiaActual);
+                    }
                     break;
                 default:
                     throw new Error("Barco no reconocido: " + nodoBarco.getName());
@@ -167,5 +188,16 @@ public class ManejadorDeBarcos {
         }
 
         return ListaBarcos;
+    }
+
+    public Element generarNodoBarcos() {
+        Element nodoADevolver = DocumentHelper.createElement("Barcos");
+        // PROVISORIO
+        Iterator<Destructible> it = elementosADestruirParaGanar.iterator();
+        while (it.hasNext()) {
+            Destructible barcoActual = it.next();
+            nodoADevolver.add(barcoActual.generarNodo());
+        }
+        return nodoADevolver;
     }
 }

@@ -1,5 +1,8 @@
 package disparos;
 
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import casillero.Casillero;
 
 public class MinaContacto extends Mina {
@@ -14,6 +17,12 @@ public class MinaContacto extends Mina {
     public boolean debeExplotar() {
         Casillero casilleroAfectado = casillerosAfectados.get(0);
         return casilleroAfectado.contienePartes();
+    }
+
+    @Override
+    public Element generarNodo() {
+        Element nodoADevolver = DocumentHelper.createElement("MinaContacto");
+        return nodoADevolver;
     }
 
 }
