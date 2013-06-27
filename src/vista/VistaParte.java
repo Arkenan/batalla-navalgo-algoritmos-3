@@ -13,14 +13,14 @@ import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VistaPrueba implements ObjetoDibujable {
+public class VistaParte implements ObjetoDibujable {
 
 	protected final BufferedImage imagenSana;
 	protected final BufferedImage imagenDestruida;
 	protected Parte parte;
 	protected ObjetoPosicionable objetoPosicionable;
 
-	public VistaPrueba(String dirSana, String dirDestruida,
+	public VistaParte(String dirSana, String dirDestruida,
 			ObjetoPosicionable posicionable) throws IOException {
 		parte = (Parte) posicionable;
 		imagenDestruida = ImageIO.read(new File(dirDestruida));

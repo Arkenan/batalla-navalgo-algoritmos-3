@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -34,6 +33,7 @@ public class VentanaPrincipal implements MouseListener {
 	private Partida partida;
 	private Vector ultimaPosicionClickeada;
 	JLabel puntaje;
+	JLabel posicionClickeada;
 
 	/**
 	 * Launch the application.
@@ -98,6 +98,8 @@ public class VentanaPrincipal implements MouseListener {
 
 		puntaje = this.addCosaPrueba();
 
+		posicionClickeada = this.addCosaPrueba2();
+
 		this.addMouseListener(panel);
 
 		this.addKeyListener();
@@ -108,7 +110,17 @@ public class VentanaPrincipal implements MouseListener {
 	private JLabel addCosaPrueba() {
 		int puntaje = partida.getPuntos();
 		JLabel coso = new JLabel("Puntaje:" + Integer.toString(puntaje));
-		coso.setBounds(200, 15, 200, 50);
+		coso.setBounds(200, 10, 200, 20);
+		frame.add(coso);
+		return coso;
+	}
+
+	private JLabel addCosaPrueba2() {
+		int puntaje = partida.getPuntos();
+		JLabel coso = new JLabel("Posicion a afectar: ("
+				+ Integer.toString(ultimaPosicionClickeada.x()) + ","
+				+ Integer.toString(ultimaPosicionClickeada.y()) + ")");
+		coso.setBounds(300, 10, 200, 20);
 		frame.add(coso);
 		return coso;
 	}
@@ -181,14 +193,6 @@ public class VentanaPrincipal implements MouseListener {
 	}
 
 	private void inicializarModelo() throws IOException {
-		ArrayList<Color> colores = new ArrayList<Color>();
-		colores.add(Color.BLUE);
-		colores.add(Color.GREEN);
-		colores.add(Color.YELLOW);
-		colores.add(Color.WHITE);
-		colores.add(Color.GREEN);
-		colores.add(Color.CYAN);
-		colores.add(Color.ORANGE);
 		/*
 		 * PARA NIVELES ArrayList<Disparo> disparos = new ArrayList<Disparo>();
 		 * Element nodoPartida =
@@ -200,18 +204,15 @@ public class VentanaPrincipal implements MouseListener {
 		ultimaPosicionClickeada = new Vector(0, 0);
 		partida = new Partida();
 		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
-
+		ArrayList<VistaParte> vistasDePartes;
 		Parte parte;
 		ArrayList<Parte> partes;
+		Barco barcoAux;
 		for (int i = 0; i < barcos.size(); i++) {
-			partes = barcos.get(i).obtenerPartes();
-			Color color = colores.get((int) (Math.random() * colores.size()));
-			for (int j = 0; j < partes.size(); j++) {
-				URL imgURL = getClass().getResource("imagenes/barco1.jpg");
-				parte = partes.get(j);
-				VistaPrueba vistaParte = new VistaPrueba("imagenes/barco1.jpg",
-						parte);
-				this.gameLoop.agregar(vistaParte);
+			barcoAux = barcos.get(i);
+			vistasDePartes = barcoAux.getVistasFactory().crearVistas();
+			for (int j = 0; j < vistasDePartes.size(); j++) {
+				this.gameLoop.agregar(vistasDePartes.get(j));
 			}
 		}
 	}
@@ -308,6 +309,9 @@ public class VentanaPrincipal implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		ultimaPosicionClickeada.setX((e.getX() / 40) + 1);
 		ultimaPosicionClickeada.setY((e.getY() / 40) + 1);
+		posicionClickeada.setText("Posicion a afectar: ("
+				+ Integer.toString(ultimaPosicionClickeada.x()) + ","
+				+ Integer.toString(ultimaPosicionClickeada.y()) + ")");
 	}
 
 	@Override

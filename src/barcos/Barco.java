@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import partes.Parte;
 import barcos.strategies.MovimientoStrategy;
+import constructoresdevistas.AbstractVistasBarcoFactory;
 import escenario.Tablero;
 import excepciones.PosicionInvalida;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
@@ -32,6 +33,8 @@ public abstract class Barco implements Movible, Destructible,
 		this.estrategia = estrategia;
 		estrategia.setBarco(this);
 	}
+
+	public abstract AbstractVistasBarcoFactory getVistasFactory();
 
 	@Override
 	public int getX() {
