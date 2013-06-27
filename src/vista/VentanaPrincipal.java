@@ -119,6 +119,8 @@ public class VentanaPrincipal implements MouseListener {
         posicionY1 += tamY;
         JButton btnMina2 = this.addBotonMina2(posicionX, posicionY1, tamX, tamY);
 
+        this.addAyudaBuque();
+
         this.gameLoop = new GameLoop((SuperficieDeDibujo) panel);
 
         this.inicializarModelo();
@@ -141,6 +143,24 @@ public class VentanaPrincipal implements MouseListener {
         coso.setBounds(200, 10, 200, 20);
         frame.add(coso);
         return coso;
+
+    }
+
+    private void addAyudaBuque() {
+        ImageIcon icono = new ImageIcon("imagenes/lancha/lancha.png");
+        JLabel iconoBuque = new JLabel(icono);
+        // JLabel vida = new JLabel("Vida:1");
+        // JLabel factores = new JLabel("Factores que lo dañan");
+        // JLabel minaContacto = new JLabel("Mina Contacto : SI");
+        // JLabel minaRadio = new JLabel("Mina Radio : SI");
+        // JLabel disparo = new JLabel("Disparo : SI");
+        iconoBuque.setBounds(0, 500, 500, 200);
+        frame.getContentPane().add(iconoBuque);
+        // frame.getContentPane().add(vida);
+        // frame.getContentPane().add(factores);
+        // frame.getContentPane().add(minaContacto);
+        // frame.getContentPane().add(minaRadio);
+        // frame.getContentPane().add(disparo);
     }
 
     private JLabel addCosaPrueba2() {
@@ -158,6 +178,7 @@ public class VentanaPrincipal implements MouseListener {
             public void actionPerformed(ActionEvent arg0) {
                 partida.colocarDisparo("minadobleradio", ultimaPosicionClickeada);
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+                verificarFinDelJuego();
 
             }
         });
@@ -174,6 +195,7 @@ public class VentanaPrincipal implements MouseListener {
             public void actionPerformed(ActionEvent arg0) {
                 partida.colocarDisparo("minaradio", ultimaPosicionClickeada);
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+                verificarFinDelJuego();
             }
         });
         btnMina1.setBounds(posicionX, posicionY, tamX, tamY);
@@ -189,6 +211,7 @@ public class VentanaPrincipal implements MouseListener {
             public void actionPerformed(ActionEvent arg0) {
                 partida.colocarDisparo("minacontacto", ultimaPosicionClickeada);
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+                verificarFinDelJuego();
             }
         });
 
@@ -206,6 +229,7 @@ public class VentanaPrincipal implements MouseListener {
             public void actionPerformed(ActionEvent arg0) {
                 partida.colocarDisparo("disparoconvencional", ultimaPosicionClickeada);
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+                verificarFinDelJuego();
             }
         });
         btnDisparar.setBounds(posicionX, posicionY, tamX, tamY);
@@ -308,11 +332,41 @@ public class VentanaPrincipal implements MouseListener {
             public void actionPerformed(ActionEvent arg0) {
                 partida.pasarTurno();
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+                verificarFinDelJuego();
             }
         });
         btnPasarTurno.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnPasarTurno);
         return btnPasarTurno;
+    }
+
+    public void verificarFinDelJuego() {
+        if (partida.gano()) {
+            JFrame frame2 = new JFrame();
+            frame2.setForeground(new Color(0, 0, 0));
+            frame2.setBounds(100, 100, 800, 1000);
+            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame2.getContentPane().setLayout(null);
+            frame2.setTitle("Batalla Naval - Grupo 11");
+            frame.dispose();
+            frame2.setVisible(true);
+            JLabel gano = new JLabel("Has ganado");
+            gano.setBounds(200, 200, 200, 200);
+            frame2.add(gano);
+        }
+        if (partida.perdio()) {
+            JFrame frame2 = new JFrame();
+            frame2.setForeground(new Color(0, 0, 0));
+            frame2.setBounds(100, 100, 800, 1000);
+            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame2.getContentPane().setLayout(null);
+            frame2.setTitle("Batalla Naval - Grupo 11");
+            frame.dispose();
+            frame2.setVisible(true);
+            JLabel perdio = new JLabel("Has perdido..");
+            perdio.setBounds(200, 200, 200, 200);
+            frame2.add(perdio);
+        }
     }
 
     private JButton addBotonIniciar(int posicionX, int posicionY, int tamX, int tamY) {
@@ -338,21 +392,26 @@ public class VentanaPrincipal implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
+
 }
