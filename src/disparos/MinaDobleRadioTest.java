@@ -13,7 +13,7 @@ import excepciones.PosicionInvalida;
 public class MinaDobleRadioTest {
 
 	@Test
-	public void testCreoUnaMinaRadio() {
+	public void testCreoUnaMinaRadioYAlHaberUnaParteSuceptibleConUnaSolaVidaEstaRecibeSuImpactoYEsDestruida() {
 		MinaDobleRadio mina = new MinaDobleRadio();
 		Vector posicion = new Vector(3, 3);
 		mina.cambiarCasillerosAfectados(posicion);
@@ -22,11 +22,11 @@ public class MinaDobleRadioTest {
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
 		mina.explotar();
-		assertTrue(parte.estaDaniada());
+		assertTrue(parte.estaDestruida());
 	}
 
 	@Test
-	public void testCreoUnaMinaDobleRadio() {
+	public void testCreoUnaMinaDobleRadioYAlHaberUnaParteSuceptibleConUnaSolaVidaEstaRecibeSuImpactoYEsDestruida() {
 		MinaDobleRadio mina = new MinaDobleRadio();
 		Vector posicion = new Vector(3, 3);
 		mina.cambiarCasillerosAfectados(posicion);
@@ -35,7 +35,7 @@ public class MinaDobleRadioTest {
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
 		mina.explotar();
-		assertFalse(parte.estaDaniada());
+		assertFalse(parte.estaDestruida());
 	}
 
 	@Test

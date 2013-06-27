@@ -12,9 +12,10 @@ public class Buque extends NaveConDanioTotal {
 
 	@Override
 	public boolean estaDestruido() {
-		return this.estaDaniado();
+		return this.obtenerPartes().get(0).estaDestruida();
 	}
 
+	@Override
 	public AbstractVistasBarcoFactory getVistasFactory() {
 		return new VistasBuqueFactory(this.obtenerOrientacion(),
 				this.obtenerPartes());

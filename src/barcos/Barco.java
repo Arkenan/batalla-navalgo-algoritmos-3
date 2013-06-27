@@ -70,7 +70,6 @@ public abstract class Barco implements Movible, Destructible,
 	 * // METODOS PUBLICOS // para el principio de cada turno. public void
 	 * moverse() { this.cambiarPosicion(); this.moverPartes(); }
 	 */
-	abstract boolean estaDaniado();
 
 	abstract void construirPartes();
 

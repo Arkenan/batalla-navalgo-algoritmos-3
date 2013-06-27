@@ -20,17 +20,6 @@ public abstract class NaveConDanioTotal extends Barco {
 	}
 
 	@Override
-	public boolean estaDaniado() {
-		for (int i = 0; i < tamanio; i++) {
-			ParteDanioTotal unaParte = (ParteDanioTotal) partesDelBarco.get(i);
-			if (unaParte.estaDaniada()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public abstract AbstractVistasBarcoFactory getVistasFactory();
 
 }

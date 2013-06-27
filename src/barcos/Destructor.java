@@ -20,17 +20,6 @@ public class Destructor extends Barco {
 	}
 
 	@Override
-	public boolean estaDaniado() {
-		for (int i = 0; i < tamanio; i++) {
-			ParteDanioDisparo unaParte = (ParteDanioDisparo) partesDelBarco
-					.get(i);
-			if (unaParte.estaDestruida()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public AbstractVistasBarcoFactory getVistasFactory() {
 		return new VistasDestructorFactory(this.obtenerOrientacion(),
 				this.obtenerPartes());
