@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import partes.Parte;
 import partida.Partida;
 import barcos.Barco;
 import barcos.Vector;
@@ -205,8 +204,6 @@ public class VentanaPrincipal implements MouseListener {
 		partida = new Partida();
 		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
 		ArrayList<VistaParte> vistasDePartes;
-		Parte parte;
-		ArrayList<Parte> partes;
 		Barco barcoAux;
 		for (int i = 0; i < barcos.size(); i++) {
 			barcoAux = barcos.get(i);
