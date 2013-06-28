@@ -28,13 +28,13 @@ import barcos.Vector;
 import barcos.strategies.MovimientoLinealStrategy;
 import barcos.strategies.MovimientoStrategy;
 
-public class ManejadorDeBarcos {
+public class ManejadorDeElementosDelTablero {
 
     protected ArrayList<Movible> elementosAMoverPorTurno;
     protected ArrayList<Destructible> elementosADestruirParaGanar;
     final ArrayList<AbstractMovimientoFactory> constructoresDeMovimientosPosibles;
 
-    public ManejadorDeBarcos() {
+    public ManejadorDeElementosDelTablero() {
         elementosAMoverPorTurno = new ArrayList<Movible>();
         elementosADestruirParaGanar = new ArrayList<Destructible>();
         constructoresDeMovimientosPosibles = new ArrayList<AbstractMovimientoFactory>();

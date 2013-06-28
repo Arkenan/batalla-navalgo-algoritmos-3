@@ -10,25 +10,25 @@ import org.junit.Test;
 import barcos.Barco;
 import barcos.Vector;
 
-public class ManejadorDeBarcosTest {
+public class ManejadorDeElementosDelTableroTest {
 
     @Test
-    public void testAlCrearUnManejadorDeBarcosPedirleLaCantidadDebeSerLaPredeterminada() {
-        ManejadorDeBarcos manejador = new ManejadorDeBarcos();
+    public void testAlCrearUnManejadorDeElementosDelTableroPedirleLaCantidadDebeSerLaPredeterminada() {
+        ManejadorDeElementosDelTablero manejador = new ManejadorDeElementosDelTablero();
         manejador.crearBarcosPorDefault();
         assertEquals(manejador.cantidadDeElementosADestruirParaGanar(), 7);
     }
 
     @Test
-    public void testAlCrearElManejadorDeBarcosConDosBarcosNoDeberianHaberBarcosDestruidos() {
-        ManejadorDeBarcos manejador = new ManejadorDeBarcos();
+    public void testAlCrearElManejadorDeElementosDelTableroConDosBarcosNoDeberianHaberBarcosDestruidos() {
+        ManejadorDeElementosDelTablero manejador = new ManejadorDeElementosDelTablero();
         manejador.crearBarcosPorDefault();
         assertEquals(manejador.cantidadDeElementosDestruidos(), 0);
     }
 
     @Test
     public void testAlPedirleQueMuevaLosBarcosDeberiaCambiarSuPosicion() {
-        ManejadorDeBarcos manejador = new ManejadorDeBarcos();
+        ManejadorDeElementosDelTablero manejador = new ManejadorDeElementosDelTablero();
         ArrayList<Barco> barcos = manejador.crearBarcosPorDefault();
         Barco barcoAuxiliar = barcos.get(0);
         Vector posicionFinal = barcoAuxiliar.obtenerPosicion();
