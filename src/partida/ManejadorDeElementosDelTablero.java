@@ -30,174 +30,191 @@ import barcos.strategies.MovimientoStrategy;
 
 public class ManejadorDeElementosDelTablero {
 
-    protected ArrayList<Movible> elementosAMoverPorTurno;
-    protected ArrayList<Destructible> elementosADestruirParaGanar;
-    final ArrayList<AbstractMovimientoFactory> constructoresDeMovimientosPosibles;
+	protected ArrayList<Movible> elementosAMoverPorTurno;
+	protected ArrayList<Destructible> elementosADestruirParaGanar;
+	final ArrayList<AbstractMovimientoFactory> constructoresDeMovimientosPosibles;
 
-    public ManejadorDeElementosDelTablero() {
-        elementosAMoverPorTurno = new ArrayList<Movible>();
-        elementosADestruirParaGanar = new ArrayList<Destructible>();
-        constructoresDeMovimientosPosibles = new ArrayList<AbstractMovimientoFactory>();
-        constructoresDeMovimientosPosibles.add(new MovimientoLinealFactory());
-    }
+	public ManejadorDeElementosDelTablero() {
+		elementosAMoverPorTurno = new ArrayList<Movible>();
+		elementosADestruirParaGanar = new ArrayList<Destructible>();
+		constructoresDeMovimientosPosibles = new ArrayList<AbstractMovimientoFactory>();
+		constructoresDeMovimientosPosibles.add(new MovimientoLinealFactory());
+	}
 
-    public ArrayList<Barco> crearBarcosPorDefault() {
-        ArrayList<AbstractBarcoFactory> factorysDeBarco = new ArrayList<AbstractBarcoFactory>();
-        for (int i = 0; i < 2; i++) {
-            factorysDeBarco.add(new LanchaFactory());
-            factorysDeBarco.add(new DestructorFactory());
-        }
-        factorysDeBarco.add(new BuqueFactory());
-        factorysDeBarco.add(new PortaavionesFactory());
-        factorysDeBarco.add(new RompehieloFactory());
-        return crearBarcosConParametrosAleatoriosDeLosConstructores(factorysDeBarco);
-    }
+	public ArrayList<Barco> crearBarcosPorDefault() {
+		ArrayList<AbstractBarcoFactory> factorysDeBarco = new ArrayList<AbstractBarcoFactory>();
+		for (int i = 0; i < 2; i++) {
+			factorysDeBarco.add(new LanchaFactory());
+			factorysDeBarco.add(new DestructorFactory());
+		}
+		factorysDeBarco.add(new BuqueFactory());
+		factorysDeBarco.add(new PortaavionesFactory());
+		factorysDeBarco.add(new RompehieloFactory());
+		return crearBarcosConParametrosAleatoriosDeLosConstructores(factorysDeBarco);
+	}
 
-    public ArrayList<Barco> crearBarcosConParametrosAleatoriosDeLosConstructores(ArrayList<AbstractBarcoFactory> factorysDeBarco) {
-        AbstractBarcoFactory factoryDeBarcoAuxiliar;
-        ArrayList<Barco> barcosCreados = new ArrayList<Barco>();
-        Barco barcoAuxiliar;
-        for (int i = 0; i < factorysDeBarco.size(); i++) {
-            factoryDeBarcoAuxiliar = factorysDeBarco.get(i);
-            barcoAuxiliar = factoryDeBarcoAuxiliar.crearBarco(this.crearOrientacionAleatoria(), this.crearMovimientoAleatorio());
-            elementosAMoverPorTurno.add(barcoAuxiliar);
-            elementosADestruirParaGanar.add(barcoAuxiliar);
-            barcoAuxiliar.colocarEnTablero(this.crearPosicionAleatoria());
-            barcosCreados.add(barcoAuxiliar);
-        }
-        return barcosCreados;
-    }
+	public ArrayList<Barco> crearBarcosConParametrosAleatoriosDeLosConstructores(
+			ArrayList<AbstractBarcoFactory> factorysDeBarco) {
+		AbstractBarcoFactory factoryDeBarcoAuxiliar;
+		ArrayList<Barco> barcosCreados = new ArrayList<Barco>();
+		Barco barcoAuxiliar;
+		for (int i = 0; i < factorysDeBarco.size(); i++) {
+			factoryDeBarcoAuxiliar = factorysDeBarco.get(i);
+			barcoAuxiliar = factoryDeBarcoAuxiliar.crearBarco(
+					this.crearOrientacionAleatoria(),
+					this.crearMovimientoAleatorio());
+			elementosAMoverPorTurno.add(barcoAuxiliar);
+			elementosADestruirParaGanar.add(barcoAuxiliar);
+			barcoAuxiliar.colocarEnTablero(this.crearPosicionAleatoria());
+			barcosCreados.add(barcoAuxiliar);
+		}
+		return barcosCreados;
+	}
 
-    public int cantidadDeElementosADestruirParaGanar() {
-        return elementosADestruirParaGanar.size();
-    }
+	public int cantidadDeElementosADestruirParaGanar() {
+		return elementosADestruirParaGanar.size();
+	}
 
-    public int cantidadDeElementosDestruidos() {
-        int contador = 0;
-        for (int x = 0; x < elementosADestruirParaGanar.size(); x++) {
-            if ((elementosADestruirParaGanar.get(x)).estaDestruido()) {
-                contador++;
-            }
-        }
-        return contador;
+	public int cantidadDeElementosDestruidos() {
+		int contador = 0;
+		for (int x = 0; x < elementosADestruirParaGanar.size(); x++) {
+			if ((elementosADestruirParaGanar.get(x)).estaDestruido()) {
+				contador++;
+			}
+		}
+		return contador;
 
-    }
+	}
 
-    public void moverElementos() {
-        for (int x = 0; x < elementosAMoverPorTurno.size(); x++) {
-            (elementosAMoverPorTurno.get(x)).moverse();
-        }
+	public void moverElementos() {
+		for (int x = 0; x < elementosAMoverPorTurno.size(); x++) {
+			(elementosAMoverPorTurno.get(x)).moverse();
+		}
 
-    }
+	}
 
-    public boolean todosLosDestructiblesEstanDestruidos() {
-        return (this.cantidadDeElementosDestruidos()) == (this.cantidadDeElementosADestruirParaGanar());
-    }
+	public boolean todosLosDestructiblesEstanDestruidos() {
+		return (this.cantidadDeElementosDestruidos()) == (this
+				.cantidadDeElementosADestruirParaGanar());
+	}
 
-    // ----------------- Metodos Privados --------------------------------
+	public ArrayList<Barco> crearBarcos(Element nodoBarcos) {
+		// primero busco la lista de nodos de barcos. Primero para barcos
+		// completos.
+		ArrayList<Barco> ListaBarcos = new ArrayList<Barco>();
+		List<Element> listaNodosBarcos = nodoBarcos.elements();
+		Iterator<Element> it = listaNodosBarcos.iterator();
 
-    private Vector crearPosicionAleatoria() {
-        return new Vector((int) (Math.random() * 4) + 1, (int) (Math.random() * 4) + 1);
-    }
+		while (it.hasNext()) {
+			Element nodoBarco = it.next();
 
-    private Vector crearOrientacionAleatoria() {
-        int x = (int) (Math.random() * 2);
-        return new Vector(x, 1 - x);
-    }
+			// busco la estrategia.
+			MovimientoStrategy estrategiaActual;
+			Element nodoEstrategia = nodoBarco.element("Estrategia");
+			Vector direccionActual = new Vector(
+					nodoEstrategia.attributeValue("direccionActual"));
+			switch (nodoEstrategia.attributeValue("tipo")) {
+			case "MovimientoLinealStrategy":
+				estrategiaActual = new MovimientoLinealStrategy(direccionActual);
+				break;
+			default:
+				throw new Error("No se reconoce la estrategia "
+						+ nodoEstrategia.attributeValue("tipo"));
+			}
 
-    private MovimientoStrategy crearMovimientoAleatorio() {
-        int x = (int) (Math.random() * 2);
-        Vector direccion;
-        if (x == 0)
-            direccion = new Vector(x, 1);
-        else {
-            direccion = new Vector(x, (int) (Math.random() * 2));
-        }
-        int posicionAleatoria = (int) (Math.random() * (constructoresDeMovimientosPosibles.size()));
-        AbstractMovimientoFactory constructorAleatorio = constructoresDeMovimientosPosibles.get(posicionAleatoria);
-        return constructorAleatorio.crearMovimientoStrategy(direccion);
-    }
+			// busco el barco.
+			Barco barcoActual;
+			Vector orientacionActual = new Vector(
+					nodoBarco.attributeValue("orientacion"));
+			switch (nodoBarco.getName()) {
+			case "Lancha":
+				if (nodoBarco.attributeValue("completo").equals("si")) {
+					barcoActual = new Lancha(orientacionActual,
+							estrategiaActual);
+				} else {
+					barcoActual = new Lancha(nodoBarco, estrategiaActual);
+				}
+				break;
+			case "Buque":
+				if (nodoBarco.attributeValue("completo").equals("si")) {
+					barcoActual = new Buque(orientacionActual, estrategiaActual);
+				} else {
+					barcoActual = new Buque(nodoBarco, estrategiaActual);
+				}
+				break;
+			case "Destructor":
+				if (nodoBarco.attributeValue("completo").equals("si")) {
+					barcoActual = new Destructor(orientacionActual,
+							estrategiaActual);
+				} else {
+					barcoActual = new Destructor(nodoBarco, estrategiaActual);
+				}
+				break;
+			case "Rompehielo":
+				if (nodoBarco.attributeValue("completo").equals("si")) {
+					barcoActual = new Rompehielo(orientacionActual,
+							estrategiaActual);
+				} else {
+					barcoActual = new Rompehielo(nodoBarco, estrategiaActual);
+				}
+				break;
+			case "Portaaviones":
+				if (nodoBarco.attributeValue("completo").equals("si")) {
+					barcoActual = new Portaaviones(orientacionActual,
+							estrategiaActual);
+				} else {
+					barcoActual = new Portaaviones(nodoBarco, estrategiaActual);
+				}
+				break;
+			default:
+				throw new Error("Barco no reconocido: " + nodoBarco.getName());
+			}
+			ListaBarcos.add(barcoActual);
+			barcoActual.colocarEnTablero(new Vector(nodoBarco
+					.attributeValue("posicion")));
+			elementosAMoverPorTurno.add(barcoActual);
+			elementosADestruirParaGanar.add(barcoActual);
+		}
 
-    public ArrayList<Barco> crearBarcos(Element nodoBarcos) {
-        // primero busco la lista de nodos de barcos. Primero para barcos completos.
-        ArrayList<Barco> ListaBarcos = new ArrayList<Barco>();
-        List<Element> listaNodosBarcos = nodoBarcos.elements();
-        Iterator<Element> it = listaNodosBarcos.iterator();
+		return ListaBarcos;
+	}
 
-        while (it.hasNext()) {
-            Element nodoBarco = it.next();
+	public Element generarNodoBarcos() {
+		Element nodoADevolver = DocumentHelper.createElement("Barcos");
+		// PROVISORIO
+		Iterator<Destructible> it = elementosADestruirParaGanar.iterator();
+		while (it.hasNext()) {
+			Destructible barcoActual = it.next();
+			nodoADevolver.add(barcoActual.generarNodo());
+		}
+		return nodoADevolver;
+	}
 
-            // busco la estrategia.
-            MovimientoStrategy estrategiaActual;
-            Element nodoEstrategia = nodoBarco.element("Estrategia");
-            Vector direccionActual = new Vector(nodoEstrategia.attributeValue("direccionActual"));
-            switch (nodoEstrategia.attributeValue("tipo")) {
-                case "MovimientoLinealStrategy":
-                    estrategiaActual = new MovimientoLinealStrategy(direccionActual);
-                    break;
-                default:
-                    throw new Error("No se reconoce la estrategia " + nodoEstrategia.attributeValue("tipo"));
-            }
+	// ----------------- Metodos Privados --------------------------------
 
-            // busco el barco.
-            Barco barcoActual;
-            Vector orientacionActual = new Vector(nodoBarco.attributeValue("orientacion"));
-            switch (nodoBarco.getName()) {
-                case "Lancha":
-                    if (nodoBarco.attributeValue("completo").equals("si")) {
-                        barcoActual = new Lancha(orientacionActual, estrategiaActual);
-                    } else {
-                        barcoActual = new Lancha(nodoBarco, estrategiaActual);
-                    }
-                    break;
-                case "Buque":
-                    if (nodoBarco.attributeValue("completo").equals("si")) {
-                        barcoActual = new Buque(orientacionActual, estrategiaActual);
-                    } else {
-                        barcoActual = new Buque(nodoBarco, estrategiaActual);
-                    }
-                    break;
-                case "Destructor":
-                    if (nodoBarco.attributeValue("completo").equals("si")) {
-                        barcoActual = new Destructor(orientacionActual, estrategiaActual);
-                    } else {
-                        barcoActual = new Destructor(nodoBarco, estrategiaActual);
-                    }
-                    break;
-                case "Rompehielo":
-                    if (nodoBarco.attributeValue("completo").equals("si")) {
-                        barcoActual = new Rompehielo(orientacionActual, estrategiaActual);
-                    } else {
-                        barcoActual = new Rompehielo(nodoBarco, estrategiaActual);
-                    }
-                    break;
-                case "Portaaviones":
-                    if (nodoBarco.attributeValue("completo").equals("si")) {
-                        barcoActual = new Portaaviones(orientacionActual, estrategiaActual);
-                    } else {
-                        barcoActual = new Portaaviones(nodoBarco, estrategiaActual);
-                    }
-                    break;
-                default:
-                    throw new Error("Barco no reconocido: " + nodoBarco.getName());
-            }
-            ListaBarcos.add(barcoActual);
-            barcoActual.colocarEnTablero(new Vector(nodoBarco.attributeValue("posicion")));
-            elementosAMoverPorTurno.add(barcoActual);
-            elementosADestruirParaGanar.add(barcoActual);
-        }
+	private Vector crearPosicionAleatoria() {
+		return new Vector((int) (Math.random() * 4) + 1,
+				(int) (Math.random() * 4) + 1);
+	}
 
-        return ListaBarcos;
-    }
+	private Vector crearOrientacionAleatoria() {
+		int x = (int) (Math.random() * 2);
+		return new Vector(x, 1 - x);
+	}
 
-    public Element generarNodoBarcos() {
-        Element nodoADevolver = DocumentHelper.createElement("Barcos");
-        // PROVISORIO
-        Iterator<Destructible> it = elementosADestruirParaGanar.iterator();
-        while (it.hasNext()) {
-            Destructible barcoActual = it.next();
-            nodoADevolver.add(barcoActual.generarNodo());
-        }
-        return nodoADevolver;
-    }
+	private MovimientoStrategy crearMovimientoAleatorio() {
+		int x = (int) (Math.random() * 2);
+		Vector direccion;
+		if (x == 0)
+			direccion = new Vector(x, 1);
+		else {
+			direccion = new Vector(x, (int) (Math.random() * 2));
+		}
+		int posicionAleatoria = (int) (Math.random() * (constructoresDeMovimientosPosibles
+				.size()));
+		AbstractMovimientoFactory constructorAleatorio = constructoresDeMovimientosPosibles
+				.get(posicionAleatoria);
+		return constructorAleatorio.crearMovimientoStrategy(direccion);
+	}
+
 }
