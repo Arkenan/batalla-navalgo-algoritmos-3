@@ -5,30 +5,24 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
     <void property="attributes">
      <void property="text">
-      <string>-ManejadorDeBarcos
--manejadorDeTablero
--puntos : Integer
--disparos : Collection
--decrecimientoDePuntosPorPasoDeTurno</string>
+      <string> +manjadorDeElementosDelTablero
++puntos
++decrecimientoPorPasoDeTurnos
++disparos</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+pasarTurno()
-+getPuntos(): int
-+faltanPuntosParaSeguir(): Boolean
-+colocarDisparo(String nombre ,Vector posicion )
-+gano(): Boolean
-+perdio(): Boolean
-+obtenerBarcos(): ArrayList&lt;Barco&gt;
--CambiosPasoTurno()
--faltanPuntosParaSeguir(): Boolean
--pasoTurnoDisparos()</string>
+      <string> +crearBarcosPorDefault(): Collection&lt;Barco&gt;
++crearBarcosConParametrosAleatoriosDeLosConstructores
+(Collection&lt;AbstractBarco&gt; constructores):Collection&lt;Barco&gt;
++colocarDisparo(String nombre , Vector posicion)
++gano(): boolean</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>Juego</string>
+      <string>Partida</string>
      </void>
     </void>
    </object>
@@ -37,19 +31,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>314.9116882454314</double>
+      <double>27.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>-2.523340597112991</double>
+      <double>3.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>314.9116882454314</double>
-     <double>-2.523340597112991</double>
+     <double>27.0</double>
+     <double>3.0</double>
     </void>
    </object>
   </void>
@@ -57,17 +51,24 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
     <void property="attributes">
      <void property="text">
-      <string>-disparosPosibles</string>
+      <string>- elementosAMoverPorTurno: Collection&lt;Movible&gt;
+-elementosADestruirParaGanar: Collection&lt;Destructible&gt;
+-constructoresDeMovimientosPosibles: 
+Collection&lt;MovimientoStrategy&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string> +construirDisparo (String nombre, Vector posicion ): Disparo</string>
+      <string> +todosLosDestructiblesEstanDestruidos(): boolean
++crearBarcosConParametrosAleatoriosDeLosConstructores
+(ArrayList&lt;AbstractBarcoFactory&gt; factorysDeBarco) :
+Collection&lt;Barco&gt;
++crearBarcosPorDefault(): Collection&lt;Barco&gt;</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>ConstructorDeDisparo</string>
+      <string>ManejadorDeElementosDelTablero</string>
      </void>
     </void>
    </object>
@@ -76,19 +77,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>450.0</double>
+      <double>460.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>509.0</double>
+      <double>3.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>450.0</double>
-     <double>509.0</double>
+     <double>460.0</double>
+     <double>3.0</double>
     </void>
    </object>
   </void>
@@ -96,26 +97,17 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
     <void property="attributes">
      <void property="text">
-      <string> -barcos: ArrayList&lt;Barco&gt;</string>
+      <string>+disparosPosibles: Collection&lt;Disparo&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+crearBarcosConDireccionYSentidoAleatorio()
--crearPosicionAleatoria():Vector
--crearOrientacionAleatoria(): Vector
--crearDireccionAleatoria() : Vector
-+cantidadDeBarcos(): int
-+cantidadDeBarcosDestruidos(): int
-+moverBarcos()
-+obtenerBarcos(): ArrayList&lt;Barco&gt;
-+todosLosBarcosEstanDestruidos():Boolean
-</string>
+      <string> +construirDisparo(String nombre, Vector posicion): Disparo</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>ManejadorDeBarcos</string>
+      <string>ConstructorDeDisparo</string>
      </void>
     </void>
    </object>
@@ -131,12 +123,12 @@
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>50.0</double>
+      <double>289.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>3.0</double>
-     <double>50.0</double>
+     <double>289.0</double>
     </void>
    </object>
   </void>
@@ -150,14 +142,11 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+costo(): int
-+obtenerNombre(): String
+      <string>+obtenerNombre(): String
 +cambiarCasillerosAfectados(Vector posicion)
 +debeExplotar(): boolean
 +explotar()
-+pasarTurno()
-+afectar(ParteDanioTotal parte)
-+afectar(ParteDanioDisparo parte)</string>
++pasarTurno()</string>
      </void>
     </void>
     <void property="name">
@@ -171,19 +160,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>556.0</double>
+      <double>281.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>293.0</double>
+      <double>394.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>556.0</double>
-     <double>293.0</double>
+     <double>281.0</double>
+     <double>394.0</double>
     </void>
    </object>
   </void>
@@ -191,27 +180,23 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
     <void property="attributes">
      <void property="text">
-      <string>-casilleros: Map&lt;String, Casillero&gt;
--alto: int
--ancho: int</string>
+      <string>-posicionCabeza
+-movimiento
+-orientacion
+-partesDelBarco</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+getTablero(): Tablero
-+obtenerClave(int x, int y): String
-+obtenerCasillero(int x, int y): Casillero
-+obtenerCasillero(Vector posicion): Casillero
-+fueraDeRango(Vector posicion): boolean
-+colocarElemento(Vector posicion, Parte elemento)
-+sacarElemento(Vector posicion, Parte elemento)
-+casillasAfectadas(Vector posicion, int radio): LinkedList&lt;Casillero&gt;
-+elementoPerteneceAlCasillero(Vector posicion, Parte elemento): boolean</string>
+      <string>+colocarEnTablero(Vector posicion)
++obtenerPartes():ArrayList&lt;Parte&gt; 
+-estaDestruido(): boolean
+-moverse()</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>Tablero</string>
+      <string>Barco</string>
      </void>
     </void>
    </object>
@@ -220,21 +205,39 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>-3.0</double>
+      <double>503.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>306.0</double>
+      <double>219.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>-3.0</double>
-     <double>306.0</double>
+     <double>503.0</double>
+     <double>219.0</double>
     </void>
    </object>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endLabel">
+     <string>1</string>
+    </void>
+    <void property="startArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
+   <object idref="ClassNode1"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
@@ -245,25 +248,7 @@
      <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
-   <object idref="ClassNode0"/>
-   <object idref="ClassNode1"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
-    </void>
-    <void property="endLabel">
-     <string>*</string>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
-    </void>
-    <void property="startLabel">
-     <string>1</string>
-    </void>
-   </object>
-   <object idref="ClassNode0"/>
+   <object idref="ClassNode2"/>
    <object idref="ClassNode3"/>
   </void>
   <void method="connect">
@@ -282,6 +267,18 @@
     </void>
    </object>
    <object idref="ClassNode0"/>
+   <object idref="ClassNode3"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
    <object idref="ClassNode2"/>
   </void>
   <void method="connect">
@@ -293,26 +290,20 @@
      <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
-   <object idref="ClassNode2"/>
+   <object idref="ClassNode1"/>
    <object idref="ClassNode4"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
-    <void property="endLabel">
-     <string>*</string>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="BLACK_DIAMOND"/>
-    </void>
-    <void property="startLabel">
-     <string>1</string>
+    <void property="lineStyle">
+     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
-   <object idref="ClassNode1"/>
-   <object idref="ClassNode3"/>
+   <object idref="ClassNode0"/>
+   <object idref="ClassNode4"/>
   </void>
  </object>
 </java>
