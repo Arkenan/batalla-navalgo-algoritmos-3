@@ -110,11 +110,11 @@ DeBarcos</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>405.0</double>
+      <double>454.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>405.0</double>
+     <double>454.0</double>
      <double>0.0</double>
     </void>
    </object>
@@ -126,7 +126,7 @@ DeBarcos</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>437.0</double>
+      <double>486.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
@@ -137,7 +137,7 @@ DeBarcos</string>
      </void>
     </void>
     <void method="setLocation">
-     <double>437.0</double>
+     <double>486.0</double>
      <double>128.0</double>
     </void>
    </object>
@@ -154,7 +154,7 @@ DeBarcos</string>
   <void method="connect">
    <object class="com.horstmann.violet.CallEdge">
     <void property="middleLabel">
-     <string>todosLosBarcosEstanDestruidos()</string>
+     <string>todosLosDestructiblesEstanDestruidos()</string>
     </void>
    </object>
    <object idref="ActivationBarNode1"/>

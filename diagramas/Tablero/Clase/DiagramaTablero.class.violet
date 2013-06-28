@@ -13,10 +13,7 @@
     <void property="methods">
      <void property="text">
       <string>+getTablero(): Tablero
-+obtenerClave(int x, int y): String
-+obtenerCasillero(int x, int y): Casillero
 +obtenerCasillero(Vector posicion): Casillero
-+fueraDeRango(Vector posicion): boolean
 +colocarElemento(Vector posicion, Parte elemento)
 +sacarElemento(Vector posicion, Parte elemento)
 +casillasAfectadas(Vector posicion, int radio): LinkedList&lt;Casillero&gt;
@@ -96,19 +93,14 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
     <void property="attributes">
      <void property="text">
-      <string>-vidaInicial: int
--vida: int
+      <string>-vida: int
 -posicion: Vector</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+estaDestruida()
-+estaDaniada()
-+explosion(Disparo disparo)
-+cambiarPosicion(Vector nuevaPosicion)
-+obtenerPosicion(): Vector
-+recibirDanio(int danio)</string>
+      <string>+cambiarPosicion(Vector nuevaPosicion)
++obtenerPosicion(): Vector</string>
      </void>
     </void>
     <void property="name">
@@ -122,19 +114,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>268.0</double>
+      <double>265.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>238.0</double>
+      <double>262.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>268.0</double>
-     <double>238.0</double>
+     <double>265.0</double>
+     <double>262.0</double>
     </void>
    </object>
   </void>
@@ -142,33 +134,12 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
     <void property="attributes">
      <void property="text">
-      <string>-posicion
--vida
--tamanio
--movimiento
--orientacion
--partesDelBarco</string>
+      <string>-posicion</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+colocarEnTablero(Vector posicion)
--verificarPosicion(Vector pos): boolean
-+estaDaniado(): boolean
-+construirPartes()
-+obtenerTamanio(): int
-+obtenerOrientacion(): Vector
-+obtenerPartes():ArrayList&lt;Parte&gt; 
--invertirDireccionMovimiento()
--obtenerDireccionMovimiento(): Vector
--cambiarPosicion()
--estaDestruido(): boolean
--obtenerPosicion(): Vector
--moverse()
--moverPartes()
--sacarPartes()
--verificarSiguienteMovimiento(): boolean
--colocarPartes()</string>
+      <string>+colocarEnTablero(Vector posicion)</string>
      </void>
     </void>
     <void property="name">
@@ -182,19 +153,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>551.0</double>
+      <double>455.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>-3.0</double>
+      <double>98.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>551.0</double>
-     <double>-3.0</double>
+     <double>455.0</double>
+     <double>98.0</double>
     </void>
    </object>
   </void>

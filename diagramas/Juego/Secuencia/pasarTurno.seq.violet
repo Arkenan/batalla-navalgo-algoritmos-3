@@ -21,7 +21,7 @@
    <object class="com.horstmann.violet.ImplicitParameterNode" id="LifelineNode1">
     <void property="name">
      <void property="text">
-      <string>:Juego</string>
+      <string>:Partida</string>
      </void>
     </void>
    </object>
