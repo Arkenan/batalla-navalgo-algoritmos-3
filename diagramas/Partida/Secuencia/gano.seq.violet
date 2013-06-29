@@ -14,7 +14,7 @@
    <object class="com.horstmann.violet.ImplicitParameterNode" id="LifelineNode1">
     <void property="name">
      <void property="text">
-      <string>:Juego</string>
+      <string>:Partida</string>
      </void>
     </void>
    </object>
@@ -43,7 +43,8 @@
           <void property="name">
            <void property="text">
             <string>:Manejador
-DeBarcos</string>
+DeElementos
+DelTablero</string>
            </void>
           </void>
          </object>
@@ -71,12 +72,12 @@ DeBarcos</string>
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>80.0</double>
+      <double>100.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>32.0</double>
-     <double>80.0</double>
+     <double>100.0</double>
     </void>
    </object>
   </void>
@@ -94,12 +95,12 @@ DeBarcos</string>
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>104.0</double>
+      <double>124.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>217.0</double>
-     <double>104.0</double>
+     <double>124.0</double>
     </void>
    </object>
   </void>
@@ -133,12 +134,12 @@ DeBarcos</string>
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>128.0</double>
+      <double>148.0</double>
      </void>
     </void>
     <void method="setLocation">
      <double>486.0</double>
-     <double>128.0</double>
+     <double>148.0</double>
     </void>
    </object>
   </void>
