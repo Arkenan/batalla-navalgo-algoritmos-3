@@ -20,12 +20,12 @@ public class MinaRadioTest {
 		ParteDanioTotal parte = new ParteDanioTotal(1);
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
-		mina.explotar();
+		mina.daniar();
 		assertTrue(parte.estaDestruida());
 	}
 
 	@Test
-	public void testCreoUnaMinaRadioYUnaParteFueraDeSuRadioYLaHagoExplotarLaParteNoDeberiaResultarDestruida() {
+	public void testCreoUnaMinaRadioYUnaParteFueraDeSuRadioYLaHagodaniarLaParteNoDeberiaResultarDestruida() {
 		MinaRadio mina = new MinaRadio();
 		Vector posicion = new Vector(3, 3);
 		mina.cambiarCasillerosAfectados(posicion);
@@ -33,7 +33,7 @@ public class MinaRadioTest {
 		ParteDanioTotal parte = new ParteDanioTotal(1);
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
-		mina.explotar();
+		mina.daniar();
 		assertFalse(parte.estaDestruida());
 	}
 

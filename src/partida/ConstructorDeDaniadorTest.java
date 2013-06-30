@@ -13,11 +13,11 @@ import disparos.Disparo;
 import escenario.Tablero;
 import excepciones.DisparoInvalido;
 
-public class ConstructorDeDisparoTest {
+public class ConstructorDeDaniadorTest {
 
 	@Test
 	public void testAlCrearUnaMinaDeContactoConElConstructor() {
-		ConstructorDeDisparo constructor = new ConstructorDeDisparo();
+		ConstructorDeDaniador constructor = new ConstructorDeDaniador();
 		Vector posicion = new Vector(1, 2);
 		Disparo disparo = constructor
 				.construirDisparo("minacontacto", posicion);
@@ -26,15 +26,15 @@ public class ConstructorDeDisparoTest {
 	}
 
 	@Test
-	public void testCreoUnDisparoConElConstructorHacerloExplotarYVeoSiLaParteQuedoDestruida() {
+	public void testCreoUnDisparoConElConstructorHacerloDaniarYVeoSiLaParteQuedoDestruida() {
 		Tablero tablero = Tablero.getTablero();
-		ConstructorDeDisparo constructor = new ConstructorDeDisparo();
+		ConstructorDeDaniador constructor = new ConstructorDeDaniador();
 		Vector posicion = new Vector(1, 2);
 		ParteDanioTotal parte = new ParteDanioTotal(1);
 		tablero.colocarElemento(posicion, parte);
 		Disparo disparo = constructor.construirDisparo("disparoconvencional",
 				posicion);
-		disparo.explotar();
+		disparo.daniar();
 
 		assertTrue(parte.estaDestruida());
 	}
@@ -43,7 +43,7 @@ public class ConstructorDeDisparoTest {
 	public void testAlConstruirUnDisparoEnUnaPosicionFueraDelTableroDeberiaDarError() {
 		boolean valor = false;
 		try {
-			ConstructorDeDisparo constructor = new ConstructorDeDisparo();
+			ConstructorDeDaniador constructor = new ConstructorDeDaniador();
 			Disparo disparo = constructor.construirDisparo(
 					"disparoconvencional", new Vector(11, 123));
 		} catch (DisparoInvalido error) {
@@ -53,15 +53,15 @@ public class ConstructorDeDisparoTest {
 	}
 
 	@Test
-	public void testAlCrearUnaMinaConElConstructorHacerlaExplotarYVerSiLaParteDanioDisparQuedoDestruidaDeberiaSerFalso() {
+	public void testAlCrearUnaMinaConElConstructorHacerlaDaniarYVerSiLaParteDanioDisparQuedoDestruidaDeberiaSerFalso() {
 		Tablero tablero = Tablero.getTablero();
-		ConstructorDeDisparo constructor = new ConstructorDeDisparo();
+		ConstructorDeDaniador constructor = new ConstructorDeDaniador();
 		Vector posicion = new Vector(1, 2);
 		ParteDanioDisparo parte = new ParteDanioDisparo(1);
 		tablero.colocarElemento(posicion, parte);
 		Disparo disparo = constructor.construirDisparo("minadobleradio",
 				posicion);
-		disparo.explotar();
+		disparo.daniar();
 
 		assertFalse(parte.estaDestruida());
 	}

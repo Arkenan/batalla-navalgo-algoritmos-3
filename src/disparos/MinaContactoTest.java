@@ -13,18 +13,18 @@ import excepciones.PosicionInvalida;
 public class MinaContactoTest {
 
 	@Test
-	public void testAlCrearUnaMinaContactoYPreguntarleSiDebeExplotarSiendoQueNoHayBarcosDebeSerFalso() {
+	public void testAlCrearUnaMinaContactoYPreguntarleSiDebeDaniarSiendoQueNoHayBarcosDebeSerFalso() {
 
 		MinaContacto mina = new MinaContacto();
 
 		mina.cambiarCasillerosAfectados(new Vector(10, 10));
 
-		assertFalse(mina.debeExplotar());
+		assertFalse(mina.debeDaniarEnEsteTurno());
 
 	}
 
 	@Test
-	public void testAlCrearUnaMInaDeContactoEnElLugarQueHayUnaParteYPreguntarleSiDebeExplotarDebeDarTrue() {
+	public void testAlCrearUnaMInaDeContactoEnElLugarQueHayUnaParteYPreguntarleSiDebedaniarDebeDarTrue() {
 
 		MinaContacto mina = new MinaContacto();
 
@@ -38,7 +38,7 @@ public class MinaContactoTest {
 
 		mina.cambiarCasillerosAfectados(posicion);
 
-		assertTrue(mina.debeExplotar());
+		assertTrue(mina.debeDaniarEnEsteTurno());
 	}
 
 	@Test

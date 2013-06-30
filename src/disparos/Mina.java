@@ -27,7 +27,7 @@ public abstract class Mina extends Disparo {
 	}
 
 	@Override
-	public void explotar() {
+	public void daniar() {
 		for (int j = 0; j < casillerosAfectados.size(); j++) {
 			Casillero casilleroAfectado = casillerosAfectados.get(j);
 			ArrayList<Parte> partesAfectadas = casilleroAfectado

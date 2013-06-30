@@ -21,7 +21,7 @@ public class MinaDobleRadioTest {
 		ParteDanioTotal parte = new ParteDanioTotal(1);
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionPertenecienteAlRadio, parte);
-		mina.explotar();
+		mina.daniar();
 		assertTrue(parte.estaDestruida());
 	}
 
@@ -34,7 +34,7 @@ public class MinaDobleRadioTest {
 		ParteDanioTotal parte = new ParteDanioTotal(1);
 		Tablero tablero = Tablero.getTablero();
 		tablero.colocarElemento(posicionNoPertenecienteAlRadio, parte);
-		mina.explotar();
+		mina.daniar();
 		assertFalse(parte.estaDestruida());
 	}
 

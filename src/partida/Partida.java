@@ -13,18 +13,19 @@ import org.dom4j.io.SAXReader;
 
 import barcos.Barco;
 import barcos.Vector;
+import disparos.Daniador;
 import disparos.Disparo;
 import excepciones.DisparoInvalido;
 
 public class Partida {
 	private int puntos;
 	final int decrecimientoDePuntosPorPasoDeTurno = 10;
-	ArrayList<Disparo> disparos;
+	ArrayList<Daniador> daniadores;
 	ManejadorDeElementosDelTablero manejadorDeElementosDelTablero;
 
 	public Partida() {
 		puntos = 10000;
-		disparos = new ArrayList<Disparo>();
+		daniadores = new ArrayList<Daniador>();
 		manejadorDeElementosDelTablero = new ManejadorDeElementosDelTablero();
 	}
 
@@ -36,8 +37,8 @@ public class Partida {
 
 		puntos = Integer.parseInt(nodoPartida.attributeValue("puntos"));
 
-		ConstructorDeDisparo constructorDeDisparo = new ConstructorDeDisparo();
-		disparos = constructorDeDisparo.construirDisparos(nodoPartida
+		ConstructorDeDaniador ConstructorDeDaniador = new ConstructorDeDaniador();
+		daniadores = ConstructorDeDaniador.construirDisparos(nodoPartida
 				.element("Disparos"));
 
 		manejadorDeElementosDelTablero = new ManejadorDeElementosDelTablero();
@@ -55,11 +56,11 @@ public class Partida {
 		ArrayList<Element> listaNodosAGuardar = new ArrayList<Element>();
 		// acá tengo que recorrer las listas de destructibles, movibles y
 		// disparos.
-		Iterator<Disparo> it = disparos.iterator();
+		Iterator<Daniador> it = daniadores.iterator();
 		Element nodoDisparos = DocumentHelper.createElement("Disparos");
 		while (it.hasNext()) {
-			Disparo disparo = it.next();
-			nodoDisparos.add(disparo.generarNodo());
+			Daniador daniador = it.next();
+			nodoDisparos.add(daniador.generarNodo());
 		}
 		nodoPartida.add(nodoDisparos);
 		// ESTO ES PROVISORIO.
@@ -102,16 +103,17 @@ public class Partida {
 		return puntos;
 	}
 
-	public void colocarDisparo(String nombre, Vector posicion) {
-		ConstructorDeDisparo constructorDeDisparo = new ConstructorDeDisparo();
+	public void colocarDaniador(String nombre, Vector posicion) {
+		ConstructorDeDaniador constructorDeDaniador = new ConstructorDeDaniador();
 		Disparo unDisparo;
 		try {
-			unDisparo = constructorDeDisparo.construirDisparo(nombre, posicion);
+			unDisparo = constructorDeDaniador
+					.construirDisparo(nombre, posicion);
 		} catch (DisparoInvalido error) {
 			return;
 		}
 		if (unDisparo.costo() <= this.getPuntos()) {
-			disparos.add(unDisparo);
+			daniadores.add(unDisparo);
 			this.reducirPuntosEn(unDisparo.costo());
 			this.realizarCambiosPasoTurno();
 		}
@@ -157,16 +159,16 @@ public class Partida {
 	}
 
 	private void pasoTurnoDisparos() {
-		Disparo disparoAuxiliar;
+		Daniador daniadorAuxiliar;
 		int i = 0;
-		while (i < disparos.size()) {
-			if ((disparos.get(i)).debeExplotar()) {
-				disparoAuxiliar = disparos.remove(i);
-				disparoAuxiliar.explotar();
+		while (i < daniadores.size()) {
+			if ((daniadores.get(i)).debeDaniarEnEsteTurno()) {
+				daniadorAuxiliar = daniadores.remove(i);
+				daniadorAuxiliar.daniar();
 			} else {
 
-				disparoAuxiliar = disparos.get(i);
-				disparoAuxiliar.pasarTurno();
+				daniadorAuxiliar = daniadores.get(i);
+				daniadorAuxiliar.pasarTurno();
 				i++;
 			}
 		}

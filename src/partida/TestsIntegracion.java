@@ -12,16 +12,18 @@ public class TestsIntegracion {
 	@Test
 	public void testNoGanaAlComienzo() {
 		Partida partida = new Partida();
+		partida.crearBarcosPorDefault();
 		assertFalse(partida.gano());
 	}
 
 	@Test
 	public void testPierdeAlGastarMuchosPuntos() {
 		Partida partida = new Partida();
+		partida.crearBarcosPorDefault();
 		Vector posicion = new Vector(1, 1);
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 60; i++) {
 			try {
-				partida.colocarDisparo("disparoconvencional", posicion);
+				partida.colocarDaniador("disparoconvencional", posicion);
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
@@ -35,7 +37,7 @@ public class TestsIntegracion {
 		Vector posicion = new Vector(1, 1);
 		for (int i = 0; i < 20; i++) {
 			try {
-				partida.colocarDisparo("disparoconvencional", posicion);
+				partida.colocarDaniador("disparoconvencional", posicion);
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
@@ -49,7 +51,7 @@ public class TestsIntegracion {
 		Vector posicion = new Vector(1, 1);
 		for (int i = 0; i < 20; i++) {
 			try {
-				partida.colocarDisparo("disparoconvencional", posicion);
+				partida.colocarDaniador("disparoconvencional", posicion);
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
