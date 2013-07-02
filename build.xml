@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Proyecto de prueba" default="main">
+<project name="Batalla Navalgo" default="main">
 	
 	<!-- esto deja seteado el camino a las librerias. Se agrega también el destino para que los tests
 	accedan a las clases que tienen que testear una vez que estén construidas -->

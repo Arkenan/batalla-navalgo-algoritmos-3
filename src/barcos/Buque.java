@@ -1,7 +1,10 @@
 package barcos;
 
+import java.util.Iterator;
+
 import org.dom4j.Element;
 
+import partes.Parte;
 import barcos.strategies.MovimientoStrategy;
 import constructoresdevistas.AbstractVistasBarcoFactory;
 import constructoresdevistas.VistasBuqueFactory;
@@ -18,7 +21,15 @@ public class Buque extends NaveConDanioTotal {
 
     @Override
     public boolean estaDestruido() {
-        return this.obtenerPartes().get(0).estaDestruida();
+        Iterator<Parte> it = this.obtenerPartes().iterator();
+        boolean hayUnaParteDestruida = false;
+        while (it.hasNext()) {
+            Parte parteActual = it.next();
+            if (parteActual.estaDestruida()) {
+                hayUnaParteDestruida = true;
+            }
+        }
+        return hayUnaParteDestruida;
     }
 
     @Override

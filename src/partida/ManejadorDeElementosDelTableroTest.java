@@ -31,9 +31,9 @@ public class ManejadorDeElementosDelTableroTest {
         ManejadorDeElementosDelTablero manejador = new ManejadorDeElementosDelTablero();
         ArrayList<Barco> barcos = manejador.crearBarcosPorDefault();
         Barco barcoAuxiliar = barcos.get(0);
-        Vector posicionFinal = barcoAuxiliar.obtenerPosicion();
-        Vector posicionInicial = new Vector(posicionFinal.x(), posicionFinal.y());
+        Vector posicionInicial = new Vector(barcoAuxiliar.obtenerPosicion());
         manejador.moverElementos();
+        Vector posicionFinal = new Vector(barcoAuxiliar.obtenerPosicion());
         assertFalse(posicionInicial.sonIguales(posicionFinal));
     }
 }
