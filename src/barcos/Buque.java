@@ -22,14 +22,13 @@ public class Buque extends NaveConDanioTotal {
     @Override
     public boolean estaDestruido() {
         Iterator<Parte> it = this.obtenerPartes().iterator();
-        boolean hayUnaParteDestruida = false;
         while (it.hasNext()) {
             Parte parteActual = it.next();
             if (parteActual.estaDestruida()) {
-                hayUnaParteDestruida = true;
+                return true;
             }
         }
-        return hayUnaParteDestruida;
+        return false;
     }
 
     @Override
