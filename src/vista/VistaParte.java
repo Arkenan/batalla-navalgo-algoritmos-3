@@ -2,10 +2,7 @@ package vista;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import observador.Observador;
 import partes.Parte;
@@ -15,21 +12,19 @@ import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VistaParte implements ObjetoDibujable, Observador {
+public abstract class VistaParte implements ObjetoDibujable, Observador {
 
 	protected BufferedImage imagenActual;
-	protected final BufferedImage imagenSana;
-	protected final BufferedImage imagenDestruida;
 	protected Parte parte;
 	protected ObjetoPosicionable objetoPosicionable;
+	protected Vector direccion;
 
-	public VistaParte(String dirSana, String dirDestruida,
-			ObjetoPosicionable posicionable) throws IOException {
+	public VistaParte(ObjetoPosicionable posicionable, Vector unaDireccion)
+			throws IOException {
 		parte = (Parte) posicionable;
-		imagenDestruida = ImageIO.read(new File(dirDestruida));
-		imagenSana = ImageIO.read(new File(dirSana));
 		objetoPosicionable = posicionable;
-		imagenActual = imagenSana;
+		direccion = unaDireccion;
+
 	}
 
 	private int conversionDeCoordenada(int coordenada) {
@@ -46,12 +41,5 @@ public class VistaParte implements ObjetoDibujable, Observador {
 				null);
 	}
 
-	@Override
-	public void actualizar() {
-		if (parte.getVida() == 0)
-			imagenActual = imagenDestruida;
-	}
-
-	public void cambiarDireccion(Vector direccion) {
-	}
+	public abstract void cambiarDireccion(Vector direccion);
 }

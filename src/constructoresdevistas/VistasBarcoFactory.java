@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import partes.Parte;
 import vista.VistaParte;
+import vista.VistaParteHorizontal;
+import vista.VistaParteVertical;
 import vistasbarcos.VistaBarco;
 import barcos.Barco;
 import barcos.Vector;
@@ -15,6 +17,7 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	ArrayList<Parte> partes;
 	String nombreBarco;
 	Barco barco;
+	String orientacion;
 
 	public VistasBarcoFactory(String nombreDeUnBarco) {
 		nombreBarco = nombreDeUnBarco;
@@ -31,24 +34,23 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	public void setParametros(int tamanio, Vector orientacionBarco,
 			String nombreBarco, ArrayList<Parte> partesAUtilizar) {
 		partes = partesAUtilizar;
-		String orientacion;
 		if (orientacionBarco.x() == 0) {
-			orientacion = "vertical/";
+			orientacion = "vertical";
 		} else {
-			orientacion = "horizontal/";
+			orientacion = "horizontal";
 		}
 		directorioImagenesPartesSanas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
 			directorioImagenesPartesSanas.add("imagenes/" + nombreBarco
-					+ "/sano/" + orientacion + nombreBarco
-					+ Integer.toString(i) + ".png");
+					+ "/sano/" + orientacion + "/" + nombreBarco
+					+ Integer.toString(i));
 		}
 
 		directorioImagenesPartesDestruidas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
 			directorioImagenesPartesDestruidas.add("imagenes/" + nombreBarco
-					+ "/destruido/" + orientacion + nombreBarco
-					+ Integer.toString(i) + ".png");
+					+ "/destruido/" + orientacion + "/" + nombreBarco
+					+ Integer.toString(i));
 		}
 	}
 
@@ -56,20 +58,39 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	public VistaBarco crearVista() {
 		ArrayList<VistaParte> vistasDePartes = new ArrayList<VistaParte>();
 		Parte parteAuxiliar;
-		for (int i = 0; i < partes.size(); i++) {
-			try {
-				parteAuxiliar = partes.get(i);
-				VistaParte vistaParteAuxiliar = new VistaParte(
-						directorioImagenesPartesSanas.get(i),
-						directorioImagenesPartesDestruidas.get(i),
-						parteAuxiliar);
+		switch (orientacion) {
+		case "horizontal":
+			for (int i = 0; i < partes.size(); i++) {
+				try {
+					parteAuxiliar = partes.get(i);
+					VistaParte vistaParteAuxiliar = new VistaParteHorizontal(
+							directorioImagenesPartesSanas.get(i),
+							directorioImagenesPartesDestruidas.get(i),
+							parteAuxiliar, barco.obtenerDireccionMovimiento());
+					vistasDePartes.add(vistaParteAuxiliar);
+					parteAuxiliar.agregarObservador(vistaParteAuxiliar);
 
-				vistasDePartes.add(vistaParteAuxiliar);
-				parteAuxiliar.agregarObservador(vistaParteAuxiliar);
-
-			} catch (IOException error) {
-				System.out.println("error en la creacion de las vistas");
+				} catch (IOException error) {
+					System.out.println("error en la creacion de las vistas");
+				}
 			}
+			break;
+		case "vertical":
+			for (int i = 0; i < partes.size(); i++) {
+				try {
+					parteAuxiliar = partes.get(i);
+					VistaParte vistaParteAuxiliar = new VistaParteVertical(
+							directorioImagenesPartesSanas.get(i),
+							directorioImagenesPartesDestruidas.get(i),
+							parteAuxiliar, barco.obtenerDireccionMovimiento());
+					vistasDePartes.add(vistaParteAuxiliar);
+					parteAuxiliar.agregarObservador(vistaParteAuxiliar);
+
+				} catch (IOException error) {
+					System.out.println("error en la creacion de las vistas");
+				}
+			}
+			break;
 		}
 		VistaBarco vistaBarco = new VistaBarco(vistasDePartes, barco);
 		return vistaBarco;

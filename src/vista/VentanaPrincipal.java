@@ -31,6 +31,7 @@ public class VentanaPrincipal extends Ventana {
 	private JFrame frame;
 	private GameLoop gameLoop;
 	private Partida partida;
+	private String disparoSeleccionado;
 	private Vector ultimaPosicionClickeada;
 	JLabel puntaje;
 	JLabel posicionClickeada;
