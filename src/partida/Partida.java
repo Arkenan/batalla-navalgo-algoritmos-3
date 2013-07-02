@@ -13,6 +13,12 @@ import org.dom4j.io.SAXReader;
 
 import barcos.Barco;
 import barcos.Vector;
+import constructoresdevistas.AbstractVistasBarcoFactory;
+import constructoresdevistas.VistaLanchaFactory;
+import constructoresdevistas.VistasBuqueFactory;
+import constructoresdevistas.VistasDestructorFactory;
+import constructoresdevistas.VistasPortaavionesFactory;
+import constructoresdevistas.VistasRompehieloFactory;
 import disparos.Daniador;
 import disparos.Disparo;
 import excepciones.DisparoInvalido;
@@ -175,4 +181,16 @@ public class Partida {
 
 	}
 
+	public ArrayList<AbstractVistasBarcoFactory> getConstructoresDeVistasPorDefault() {
+		ArrayList<AbstractVistasBarcoFactory> constructoresADevolver = new ArrayList<AbstractVistasBarcoFactory>();
+		for (int i = 0; i < 2; i++) {
+			constructoresADevolver.add(new VistaLanchaFactory());
+			constructoresADevolver.add(new VistasDestructorFactory());
+		}
+		constructoresADevolver.add(new VistasBuqueFactory());
+		constructoresADevolver.add(new VistasPortaavionesFactory());
+		constructoresADevolver.add(new VistasRompehieloFactory());
+
+		return constructoresADevolver;
+	}
 }

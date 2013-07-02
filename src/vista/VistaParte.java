@@ -7,14 +7,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import observador.Observador;
 import partes.Parte;
+import barcos.Vector;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
 import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VistaParte implements ObjetoDibujable {
+public class VistaParte implements ObjetoDibujable, Observador {
 
+	protected BufferedImage imagenActual;
 	protected final BufferedImage imagenSana;
 	protected final BufferedImage imagenDestruida;
 	protected Parte parte;
@@ -26,18 +29,29 @@ public class VistaParte implements ObjetoDibujable {
 		imagenDestruida = ImageIO.read(new File(dirDestruida));
 		imagenSana = ImageIO.read(new File(dirSana));
 		objetoPosicionable = posicionable;
+		imagenActual = imagenSana;
+	}
+
+	private int conversionDeCoordenada(int coordenada) {
+		return 40 * (coordenada - 1);
 	}
 
 	@Override
 	public void dibujar(SuperficieDeDibujo superficieDeDibujo) {
 		Graphics grafico = ((SuperficiePanel) superficieDeDibujo).getBuffer();
-		if (parte.estaDestruida()) {
-			grafico.drawImage(this.imagenDestruida,
-					this.objetoPosicionable.getX(),
-					this.objetoPosicionable.getY(), 40, 40, null);
-		} else {
-			grafico.drawImage(this.imagenSana, this.objetoPosicionable.getX(),
-					this.objetoPosicionable.getY(), 40, 40, null);
-		}
+
+		grafico.drawImage(this.imagenActual,
+				conversionDeCoordenada(this.objetoPosicionable.getX()),
+				conversionDeCoordenada(this.objetoPosicionable.getY()), 40, 40,
+				null);
+	}
+
+	@Override
+	public void actualizar() {
+		if (parte.getVida() == 0)
+			imagenActual = imagenDestruida;
+	}
+
+	public void cambiarDireccion(Vector direccion) {
 	}
 }

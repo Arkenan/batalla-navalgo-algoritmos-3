@@ -5,14 +5,30 @@ import java.util.ArrayList;
 
 import partes.Parte;
 import vista.VistaParte;
+import vistasbarcos.VistaBarco;
+import barcos.Barco;
 import barcos.Vector;
 
 public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	ArrayList<String> directorioImagenesPartesSanas;
 	ArrayList<String> directorioImagenesPartesDestruidas;
 	ArrayList<Parte> partes;
+	String nombreBarco;
+	Barco barco;
 
-	public VistasBarcoFactory(int tamanio, Vector orientacionBarco,
+	public VistasBarcoFactory(String nombreDeUnBarco) {
+		nombreBarco = nombreDeUnBarco;
+	}
+
+	@Override
+	public void setBarco(Barco unBarco) {
+		barco = unBarco;
+		this.setParametros(barco.obtenerTamanio(), barco.obtenerOrientacion(),
+				nombreBarco, barco.obtenerPartes());
+
+	}
+
+	public void setParametros(int tamanio, Vector orientacionBarco,
 			String nombreBarco, ArrayList<Parte> partesAUtilizar) {
 		partes = partesAUtilizar;
 		String orientacion;
@@ -37,20 +53,26 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	}
 
 	@Override
-	public ArrayList<VistaParte> crearVistas() {
-		ArrayList<VistaParte> vistasADevolver = new ArrayList<VistaParte>();
+	public VistaBarco crearVista() {
+		ArrayList<VistaParte> vistasDePartes = new ArrayList<VistaParte>();
+		Parte parteAuxiliar;
 		for (int i = 0; i < partes.size(); i++) {
 			try {
-				vistasADevolver.add(new VistaParte(
+				parteAuxiliar = partes.get(i);
+				VistaParte vistaParteAuxiliar = new VistaParte(
 						directorioImagenesPartesSanas.get(i),
-						directorioImagenesPartesDestruidas.get(i), partes
-								.get(i)));
+						directorioImagenesPartesDestruidas.get(i),
+						parteAuxiliar);
+
+				vistasDePartes.add(vistaParteAuxiliar);
+				parteAuxiliar.agregarObservador(vistaParteAuxiliar);
+
 			} catch (IOException error) {
-				System.out.println(error);
+				System.out.println("error en la creacion de las vistas");
 			}
 		}
-		return vistasADevolver;
+		VistaBarco vistaBarco = new VistaBarco(vistasDePartes, barco);
+		return vistaBarco;
 
 	}
-
 }

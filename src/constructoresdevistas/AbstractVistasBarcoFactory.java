@@ -1,9 +1,10 @@
 package constructoresdevistas;
 
-import java.util.ArrayList;
-
-import vista.VistaParte;
+import vistasbarcos.VistaBarco;
+import barcos.Barco;
 
 public interface AbstractVistasBarcoFactory {
-	public abstract ArrayList<VistaParte> crearVistas();
+	public abstract VistaBarco crearVista();
+
+	public abstract void setBarco(Barco barco);
 }
