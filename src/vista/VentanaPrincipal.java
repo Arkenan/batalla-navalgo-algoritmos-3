@@ -82,15 +82,15 @@ public class VentanaPrincipal extends Ventana {
 
         int posicionY = 50;
 
-        JButton btnIniciar = this.addBotonIniciar(posicion, posicionY, tamX, tamY);
+        JButton btnIniciar = this.addBotonIniciar(posicion, posicionY);
 
         posicionY += tamY;
 
-        JButton btnDetener = this.addBotonDetener(posicion, posicionY, tamX, tamY);
+        JButton btnDetener = this.addBotonDetener(posicion, posicionY);
 
         posicionY += tamY;
 
-        JButton btnPasarTurno = this.addBotonPasarTurno(posicion, posicionY, tamX, tamY);
+        JButton btnPasarTurno = this.addBotonPasarTurno(posicion, posicionY);
 
         int posicionPanelX = posicion + tamX;
 
@@ -106,17 +106,17 @@ public class VentanaPrincipal extends Ventana {
 
         int posicionY1 = 50;
 
-        JButton btnDisparar = this.addBotonDisparar(posicionX, posicionY1, tamX, tamY);
+        JButton btnDisparar = this.addBotonDisparar(posicionX, posicionY1);
 
         posicionY1 += tamY;
 
-        JButton btnMina = this.addBotonMina(posicionX, posicionY1, tamX, tamY);
+        JButton btnMina = this.addBotonMina(posicionX, posicionY1);
 
         posicionY1 += tamY;
-        JButton btnMina1 = this.addBotonMina1(posicionX, posicionY1, tamX, tamY);
+        JButton btnMina1 = this.addBotonMina1(posicionX, posicionY1);
 
         posicionY1 += tamY;
-        JButton btnMina2 = this.addBotonMina2(posicionX, posicionY1, tamX, tamY);
+        JButton btnMina2 = this.addBotonMina2(posicionX, posicionY1);
 
         this.addAyudaBuque();
 
@@ -148,18 +148,9 @@ public class VentanaPrincipal extends Ventana {
     private void addAyudaBuque() {
         ImageIcon icono = new ImageIcon("imagenes/lancha/lancha.png");
         JLabel iconoBuque = new JLabel(icono);
-        // JLabel vida = new JLabel("Vida:1");
-        // JLabel factores = new JLabel("Factores que lo dañan");
-        // JLabel minaContacto = new JLabel("Mina Contacto : SI");
-        // JLabel minaRadio = new JLabel("Mina Radio : SI");
-        // JLabel disparo = new JLabel("Disparo : SI");
         iconoBuque.setBounds(0, 500, 500, 200);
         frame.getContentPane().add(iconoBuque);
-        // frame.getContentPane().add(vida);
-        // frame.getContentPane().add(factores);
-        // frame.getContentPane().add(minaContacto);
-        // frame.getContentPane().add(minaRadio);
-        // frame.getContentPane().add(disparo);
+
     }
 
     private JLabel addCosaPrueba2() {
@@ -169,26 +160,22 @@ public class VentanaPrincipal extends Ventana {
         return coso;
     }
 
-    private JButton addBotonMina2(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon iconoMinaRadio2 = new ImageIcon("imagenes/iconos/mina_radio2.png");
-        JButton btnMina2 = new JButton("Mina Radio 2", iconoMinaRadio2);
+    private JButton addBotonMina2(int posicionX, int posicionY) {
+        Boton btnMina2 = new Boton(posicionX, posicionY, "imagenes/iconos/mina_radio2.png", "Mina Radio 2");
         btnMina2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 partida.colocarDaniador("minadobleradio", ultimaPosicionClickeada);
                 puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
                 verificarFinDelJuego();
-
             }
         });
-        btnMina2.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnMina2);
         return btnMina2;
     }
 
-    private JButton addBotonMina1(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon iconoMinaRadio1 = new ImageIcon("imagenes/iconos/mina_radio1.png");
-        JButton btnMina1 = new JButton("Mina Radio 1", iconoMinaRadio1);
+    private JButton addBotonMina1(int posicionX, int posicionY) {
+        Boton btnMina1 = new Boton(posicionX, posicionY, "imagenes/iconos/mina_radio1.png", "Mina Radio 1");
         btnMina1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -197,14 +184,12 @@ public class VentanaPrincipal extends Ventana {
                 verificarFinDelJuego();
             }
         });
-        btnMina1.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnMina1);
         return btnMina1;
     }
 
-    private JButton addBotonMina(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon iconoMinaRadio = new ImageIcon("imagenes/iconos/mina_contacto.png");
-        JButton btnMina = new JButton("Mina Contacto", iconoMinaRadio);
+    private JButton addBotonMina(int posicionX, int posicionY) {
+        Boton btnMina = new Boton(posicionX, posicionY, "imagenes/iconos/mina_contacto.png", "Mina Contacto");
         btnMina.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -213,16 +198,12 @@ public class VentanaPrincipal extends Ventana {
                 verificarFinDelJuego();
             }
         });
-
-        btnMina.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnMina);
-
         return btnMina;
     }
 
-    private JButton addBotonDisparar(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon icono = new ImageIcon("imagenes/iconos/disparo.png");
-        JButton btnDisparar = new JButton("Disparar", icono);
+    private JButton addBotonDisparar(int posicionX, int posicionY) {
+        Boton btnDisparar = new Boton(posicionX, posicionY, "imagenes/iconos/disparo.png", "Disparar");
         btnDisparar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -231,7 +212,6 @@ public class VentanaPrincipal extends Ventana {
                 verificarFinDelJuego();
             }
         });
-        btnDisparar.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnDisparar);
         return btnDisparar;
     }
@@ -306,26 +286,20 @@ public class VentanaPrincipal extends Ventana {
         return panel;
     }
 
-    private JButton addBotonDetener(int posicionX, int posicionY, int tamX, int tamY) {
-        // I
-        // JPanel fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
-        // panel.add(comp)
-        ImageIcon iconoCerrar = new ImageIcon("imagenes/iconos/cerrar.png");
-        JButton btnDetener = new JButton("Detener", iconoCerrar);
+    private JButton addBotonDetener(int posicionX, int posicionY) {
+        Boton btnDetener = new Boton(posicionX, posicionY, "imagenes/iconos/cerrar.png", "Detener");
         btnDetener.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameLoop.detenerEjecucion();
             }
         });
-        btnDetener.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnDetener);
         return btnDetener;
     }
 
-    private JButton addBotonPasarTurno(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon iconoPasarTurno = new ImageIcon("imagenes/iconos/pasar_turno.png");
-        JButton btnPasarTurno = new JButton("Pasar Turno", iconoPasarTurno);
+    private JButton addBotonPasarTurno(int posicionX, int posicionY) {
+        Boton btnPasarTurno = new Boton(posicionX, posicionY, "imagenes/iconos/pasar_turno.png", "Pasar Turno");
         btnPasarTurno.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -334,7 +308,6 @@ public class VentanaPrincipal extends Ventana {
                 verificarFinDelJuego();
             }
         });
-        btnPasarTurno.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnPasarTurno);
         return btnPasarTurno;
     }
@@ -368,16 +341,14 @@ public class VentanaPrincipal extends Ventana {
         }
     }
 
-    private JButton addBotonIniciar(int posicionX, int posicionY, int tamX, int tamY) {
-        ImageIcon iconoIniciar = new ImageIcon("imagenes/iconos/iniciar.png");
-        JButton btnIniciar = new JButton("Iniciar", iconoIniciar);
+    private JButton addBotonIniciar(int posicionX, int posicionY) {
+        Boton btnIniciar = new Boton(posicionX, posicionY, "imagenes/iconos/iniciar.png", "Iniciar");
         btnIniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 gameLoop.iniciarEjecucion();
             }
         });
-        btnIniciar.setBounds(posicionX, posicionY, tamX, tamY);
         frame.getContentPane().add(btnIniciar);
         return btnIniciar;
     }
@@ -387,6 +358,7 @@ public class VentanaPrincipal extends Ventana {
         ultimaPosicionClickeada.setX((e.getX() / 40) + 1);
         ultimaPosicionClickeada.setY((e.getY() / 40) + 1);
         posicionClickeada.setText("Posicion a afectar: (" + Integer.toString(ultimaPosicionClickeada.x()) + "," + Integer.toString(ultimaPosicionClickeada.y()) + ")");
+        puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
     }
 
 }
