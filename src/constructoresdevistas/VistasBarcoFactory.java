@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import partes.Parte;
-import vista.VistaParte;
-import vista.VistaParteHorizontal;
-import vista.VistaParteVertical;
 import vistasbarcos.VistaBarco;
+import vistasbarcos.VistaParte;
+import vistasbarcos.VistaParteHorizontal;
+import vistasbarcos.VistaParteVertical;
 import barcos.Barco;
 import barcos.Vector;
 

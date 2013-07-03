@@ -17,16 +17,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import observador.Observador;
 import partida.Partida;
+import vistadaniadores.VistaMina;
 import vistasbarcos.VistaBarco;
+import vistasbarcos.VistaParte;
 import barcos.Barco;
 import barcos.Vector;
 import constructoresdevistas.AbstractVistasBarcoFactory;
+import disparos.Mina;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VentanaPrincipal extends Ventana {
+public class VentanaPrincipal extends Ventana implements Observador {
 
 	private JFrame frame;
 	private GameLoop gameLoop;
@@ -35,6 +39,8 @@ public class VentanaPrincipal extends Ventana {
 	private Vector ultimaPosicionClickeada;
 	JLabel puntaje;
 	JLabel posicionClickeada;
+	protected ArrayList<VistaMina> vistasMina;
+	protected ArrayList<VistaBarco> vistasBarcos;
 
 	/**
 	 * Launch the application.
@@ -76,6 +82,10 @@ public class VentanaPrincipal extends Ventana {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Batalla Naval - Grupo 11");
+
+		vistasBarcos = new ArrayList<VistaBarco>();
+
+		vistasMina = new ArrayList<VistaMina>();
 
 		int tamX = 250;
 
@@ -166,17 +176,26 @@ public class VentanaPrincipal extends Ventana {
 		return coso;
 	}
 
+	private void colocarMina(String nombre) {
+		Vector posicionDaniador = new Vector(ultimaPosicionClickeada.x(),
+				ultimaPosicionClickeada.y());
+		Mina unaMina = (Mina) partida.colocarDaniador(nombre, posicionDaniador);
+		VistaMina vistaMina = new VistaMina(unaMina);
+		unaMina.agregarObservador(vistaMina);
+		gameLoop.agregar(vistaMina);
+		vistaMina.agregarObservador(this);
+		vistasMina.add(vistaMina);
+		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+		verificarFinDelJuego();
+	}
+
 	private JButton addBotonMina2(int posicionX, int posicionY) {
 		Boton btnMina2 = new Boton(posicionX, posicionY,
 				"imagenes/iconos/mina_radio2.png", "Mina Radio 2");
 		btnMina2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partida.colocarDaniador("minadobleradio",
-						ultimaPosicionClickeada);
-				puntaje.setText("Puntaje:"
-						+ Integer.toString(partida.getPuntos()));
-				verificarFinDelJuego();
+				colocarMina("minadobleradio");
 			}
 		});
 		frame.getContentPane().add(btnMina2);
@@ -189,10 +208,7 @@ public class VentanaPrincipal extends Ventana {
 		btnMina1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partida.colocarDaniador("minaradio", ultimaPosicionClickeada);
-				puntaje.setText("Puntaje:"
-						+ Integer.toString(partida.getPuntos()));
-				verificarFinDelJuego();
+				colocarMina("minaradio");
 			}
 		});
 		frame.getContentPane().add(btnMina1);
@@ -205,10 +221,7 @@ public class VentanaPrincipal extends Ventana {
 		btnMina.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partida.colocarDaniador("minacontacto", ultimaPosicionClickeada);
-				puntaje.setText("Puntaje:"
-						+ Integer.toString(partida.getPuntos()));
-				verificarFinDelJuego();
+				colocarMina("minacontacto");
 			}
 		});
 		frame.getContentPane().add(btnMina);
@@ -221,8 +234,9 @@ public class VentanaPrincipal extends Ventana {
 		btnDisparar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partida.colocarDaniador("disparoconvencional",
-						ultimaPosicionClickeada);
+				Vector posicionDaniador = new Vector(ultimaPosicionClickeada
+						.x(), ultimaPosicionClickeada.y());
+				partida.colocarDaniador("disparoconvencional", posicionDaniador);
 				puntaje.setText("Puntaje:"
 						+ Integer.toString(partida.getPuntos()));
 				verificarFinDelJuego();
@@ -256,6 +270,7 @@ public class VentanaPrincipal extends Ventana {
 			constructorAuxiliar = constructoresDeVistas.get(i);
 			constructorAuxiliar.setBarco(barcoAux);
 			vistaBarcoAuxiliar = constructorAuxiliar.crearVista();
+			vistaBarcoAuxiliar.agregarObservador(this);
 			vistasDePartes = vistaBarcoAuxiliar.obtenerVistasPartes();
 			for (int j = 0; j < vistasDePartes.size(); j++) {
 				this.gameLoop.agregar(vistasDePartes.get(j));
@@ -307,6 +322,7 @@ public class VentanaPrincipal extends Ventana {
 		panel.setVisible(true);
 		panel.addMouseListener(this);
 		panel.setBounds(posicionX, posicionY, tamX, tamY);
+		panel.setBackground(Color.BLUE);
 		frame.getContentPane().add(panel);
 
 		return panel;
@@ -393,4 +409,29 @@ public class VentanaPrincipal extends Ventana {
 		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
 	}
 
+	@Override
+	public void actualizar() {
+		VistaBarco vistaBarcoAux;
+		VistaMina vistaMinaAux;
+		ArrayList<VistaParte> vistasPartesAux;
+		for (int i = 0; i < vistasMina.size(); i++) {
+			vistaMinaAux = vistasMina.get(i);
+			if (vistaMinaAux.obtenerEstado().equals("explosion")) {
+				vistaMinaAux.dibujar(gameLoop.getSuperficieDeDibujo());
+				gameLoop.remover(vistaMinaAux);
+				vistasMina.remove(vistaMinaAux);
+			}
+
+		}
+		for (int j = 0; j < vistasBarcos.size(); j++) {
+			vistaBarcoAux = vistasBarcos.get(j);
+			if (vistaBarcoAux.estaDestruido()) {
+				vistasPartesAux = vistaBarcoAux.obtenerVistasPartes();
+				for (int h = 0; h < vistasPartesAux.size(); h++) {
+					gameLoop.remover(vistasPartesAux.get(h));
+				}
+				vistasBarcos.remove(vistaBarcoAux);
+			}
+		}
+	}
 }

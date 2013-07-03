@@ -15,15 +15,27 @@ public abstract class Mina extends Disparo {
 	protected int radio;
 	protected LinkedList<Casillero> casillerosAfectados;
 
+	@Override
+	public int getX() {
+		return posicion.x();
+	}
+
+	@Override
+	public int getY() {
+		return posicion.y();
+	}
+
 	public int radio() {
 		return radio;
 	}
 
 	@Override
-	public void cambiarCasillerosAfectados(Vector posicion)
+	public void cambiarCasillerosAfectados(Vector unaPosicion)
 			throws PosicionInvalida {
 		Tablero tablero = Tablero.getTablero();
-		casillerosAfectados = tablero.casillasAfectadas(posicion, this.radio());
+		casillerosAfectados = tablero.casillasAfectadas(unaPosicion,
+				this.radio());
+		posicion = unaPosicion;
 	}
 
 	@Override
@@ -36,6 +48,11 @@ public abstract class Mina extends Disparo {
 				(partesAfectadas.get(i)).explosion(this);
 			}
 		}
+		notificar();
+	}
+
+	public Vector obtenerPosicion() {
+		return posicion;
 	}
 
 	@Override

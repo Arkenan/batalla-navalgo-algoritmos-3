@@ -1,4 +1,4 @@
-package vista;
+package vistasbarcos;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

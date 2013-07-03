@@ -1,4 +1,4 @@
-package vista;
+package vistasbarcos;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,10 +19,10 @@ public class VistaParteVertical extends VistaParte {
 			ObjetoPosicionable posicionable, Vector direccion)
 			throws IOException {
 		super(posicionable, direccion);
-		// imagenDestruidaArriba = ImageIO.read(new File(dirDestruida
-		// + "arriba.png"));
-		// imagenDestruidaAbajo = ImageIO
-		// .read(new File(dirDestruida + "abajo.png"));
+		imagenDestruidaArriba = ImageIO.read(new File(dirDestruida
+				+ "arriba.png"));
+		imagenDestruidaAbajo = ImageIO
+				.read(new File(dirDestruida + "abajo.png"));
 		imagenSanaArriba = ImageIO.read(new File(dirSana + "arriba.png"));
 		imagenSanaAbajo = ImageIO.read(new File(dirSana + "abajo.png"));
 		imagenActual = this.obtenerImagenCorrespondiente(direccion);

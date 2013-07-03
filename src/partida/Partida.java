@@ -109,20 +109,23 @@ public class Partida {
 		return puntos;
 	}
 
-	public void colocarDaniador(String nombre, Vector posicion) {
+	public Daniador colocarDaniador(String nombre, Vector posicion) {
 		ConstructorDeDaniador constructorDeDaniador = new ConstructorDeDaniador();
 		Disparo unDisparo;
 		try {
 			unDisparo = constructorDeDaniador
 					.construirDisparo(nombre, posicion);
 		} catch (DisparoInvalido error) {
-			return;
+			error.printStackTrace();
+			return null;
 		}
 		if (unDisparo.costo() <= this.getPuntos()) {
 			daniadores.add(unDisparo);
 			this.reducirPuntosEn(unDisparo.costo());
 			this.realizarCambiosPasoTurno();
+			return unDisparo;
 		}
+		return null;
 	}
 
 	// Paso de turno sin realizar acciones.

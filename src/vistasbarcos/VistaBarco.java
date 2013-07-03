@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import observador.ObjetoObservable;
 import observador.Observador;
-import vista.VistaParte;
 import barcos.Barco;
 
 public class VistaBarco extends ObjetoObservable implements Observador {

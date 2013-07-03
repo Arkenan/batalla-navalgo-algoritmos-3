@@ -22,14 +22,15 @@ public class DisparoConvencional extends Disparo {
 	}
 
 	@Override
-	public void cambiarCasillerosAfectados(Vector posicion)
+	public void cambiarCasillerosAfectados(Vector unaPosicion)
 			throws PosicionInvalida {
 		Tablero tablero = Tablero.getTablero();
-		if (tablero.fueraDeRango(posicion)) {
+		if (tablero.fueraDeRango(unaPosicion)) {
 			throw new PosicionInvalida(
 					"El disparo queda fuera de rango. Imposible colocar.");
 		}
-		casilleroAfectado = tablero.obtenerCasillero(posicion);
+		casilleroAfectado = tablero.obtenerCasillero(unaPosicion);
+		posicion = unaPosicion;
 	}
 
 	@Override
@@ -60,6 +61,16 @@ public class DisparoConvencional extends Disparo {
 		Element nodoADevolver = DocumentHelper
 				.createElement("DisparoConvencional");
 		return nodoADevolver;
+	}
+
+	@Override
+	public int getX() {
+		return posicion.x();
+	}
+
+	@Override
+	public int getY() {
+		return posicion.y();
 	}
 
 }

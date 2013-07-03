@@ -1,18 +1,23 @@
 package disparos;
 
+import observador.ObjetoObservable;
 import partes.ParteDanioDisparo;
 import partes.ParteDanioTotal;
 import barcos.Vector;
 import excepciones.PosicionInvalida;
+import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 
-public abstract class Disparo implements Daniador {
+public abstract class Disparo extends ObjetoObservable implements Daniador,
+		ObjetoPosicionable {
 	protected int costo;
 	protected String nombre;
+	protected Vector posicion;
 
 	public int costo() {
 		return costo;
 	}
 
+	@Override
 	public String obtenerNombre() {
 		return nombre;
 	}
