@@ -71,8 +71,15 @@ public abstract class Barco extends ObjetoObservable implements Movible,
 
 	@Override
 	public void actualizar() {
-		if (this.estaDestruido())
+		if (this.estaDestruido()) {
 			notificar();
+			Tablero tablero = Tablero.getTablero();
+			Parte parteAux;
+			for (int i = 0; i < partesDelBarco.size(); i++) {
+				parteAux = partesDelBarco.get(i);
+				tablero.sacarElemento(parteAux.obtenerPosicion(), parteAux);
+			}
+		}
 	}
 
 	public void colocarEnTablero(Vector posicion) throws PosicionInvalida {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import movimientostrategyfactory.AbstractMovimientoFactory;
 import movimientostrategyfactory.MovimientoLinealFactory;
+import observador.Observador;
 
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -28,7 +29,7 @@ import barcos.Vector;
 import barcos.strategies.MovimientoLinealStrategy;
 import barcos.strategies.MovimientoStrategy;
 
-public class ManejadorDeElementosDelTablero {
+public class ManejadorDeElementosDelTablero implements Observador {
 
 	protected ArrayList<Movible> elementosAMoverPorTurno;
 	protected ArrayList<Destructible> elementosADestruirParaGanar;
@@ -63,6 +64,7 @@ public class ManejadorDeElementosDelTablero {
 			barcoAuxiliar = factoryDeBarcoAuxiliar.crearBarco(
 					this.crearOrientacionAleatoria(),
 					this.crearMovimientoAleatorio());
+			barcoAuxiliar.agregarObservador(this);
 			elementosAMoverPorTurno.add(barcoAuxiliar);
 			elementosADestruirParaGanar.add(barcoAuxiliar);
 			barcoAuxiliar.colocarEnTablero(this.crearPosicionAleatoria());
@@ -215,6 +217,20 @@ public class ManejadorDeElementosDelTablero {
 		AbstractMovimientoFactory constructorAleatorio = constructoresDeMovimientosPosibles
 				.get(posicionAleatoria);
 		return constructorAleatorio.crearMovimientoStrategy(direccion);
+	}
+
+	@Override
+	public void actualizar() {
+		Destructible elementoAux;
+		for (int i = 0; i < elementosADestruirParaGanar.size(); i++) {
+			elementoAux = elementosADestruirParaGanar.get(i);
+			if (elementoAux.estaDestruido()) {
+				elementosADestruirParaGanar.remove(elementoAux);
+				if (elementosAMoverPorTurno.contains(elementoAux))
+					elementosAMoverPorTurno.remove(elementoAux);
+			}
+		}
+
 	}
 
 }
