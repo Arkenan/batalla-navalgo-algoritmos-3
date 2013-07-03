@@ -17,6 +17,7 @@ public class VentanaInicio extends JFrame implements ItemListener {
     JButton btnIniciarPartida, btnCargarPartida, btnJugar;
     JComboBox<String> menu;
     JFileChooser fc;
+    JFrame frame;
     int tamX = 218; // largo de los botones
     int tamY = 54; // ancho de los botones
 
@@ -28,7 +29,8 @@ public class VentanaInicio extends JFrame implements ItemListener {
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
         this.addImagenDeFondo();
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = this;
 
     }
 
@@ -108,7 +110,10 @@ public class VentanaInicio extends JFrame implements ItemListener {
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                VentanaPrincipal ventana = new VentanaPrincipal();
+                frame.setVisible(false);
+                VentanaJuego ventana = new VentanaJuego();
+                ventana.setVisible(true);
+
             }
         });
         this.getContentPane().add(btnJugar);
