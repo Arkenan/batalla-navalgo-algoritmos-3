@@ -11,7 +11,6 @@ import observador.ObjetoObservable;
 import disparos.Mina;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
-import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
@@ -19,14 +18,14 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 	protected BufferedImage imagenActual;
 	protected BufferedImage imagenMina;
 	protected BufferedImage imagenExplosion;
-	protected ObjetoPosicionable posicionable;
+
 	protected Mina mina;
 	final static String DIRECTORIO_IMAGEN_MINA = "imagenes/mina.png";
 	final static String DIRECTORIO_IMAGEN_EXPLOSION = "imagenes/explosion.png";
 	protected String estado;
 
 	public VistaMina(Mina unaMina) {
-		posicionable = unaMina;
+
 		estado = "mina";
 		mina = unaMina;
 		try {
@@ -92,6 +91,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 		this.notificar();
 	}
 
+	@Override
 	public String obtenerEstado() {
 		return estado;
 	}

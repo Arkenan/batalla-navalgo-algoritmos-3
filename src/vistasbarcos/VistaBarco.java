@@ -29,7 +29,8 @@ public class VistaBarco extends ObjetoObservable implements Observador {
 	@Override
 	public void actualizar() {
 		if (barco.estaDestruido()) {
-			this.notificar();
+			System.out.println("esta Notificando");
+			notificar();
 		} else {
 			for (int i = 0; i < vistasPartes.size(); i++) {
 				vistasPartes.get(i).cambiarDireccion(

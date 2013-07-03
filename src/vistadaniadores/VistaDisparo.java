@@ -45,7 +45,8 @@ public class VistaDisparo extends ObjetoObservable implements VistaDaniador,
 	@Override
 	public void actualizar() {
 		estado = "gastado";
-		this.notificar();
+		System.out.println("fue notificado");
+		notificar();
 	}
 
 	@Override

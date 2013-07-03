@@ -17,6 +17,7 @@ public class DisparoConvencional extends Disparo {
 	protected Casillero casilleroAfectado;
 
 	public DisparoConvencional() {
+		super();
 		costo = 200;
 		nombre = "disparoconvencional";
 	}

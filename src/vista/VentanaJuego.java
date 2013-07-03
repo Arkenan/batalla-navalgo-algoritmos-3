@@ -27,7 +27,7 @@ import vistasbarcos.VistaParte;
 import barcos.Barco;
 import barcos.Vector;
 import constructoresdevistas.AbstractVistasBarcoFactory;
-import disparos.DisparoConvencional;
+import disparos.Disparo;
 import disparos.Mina;
 import escenario.Tablero;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
@@ -183,11 +183,11 @@ public class VentanaJuego extends Ventana implements Observador {
 	private void colocarDisparo(String nombre, Vector posicionClickeada) {
 		Vector posicionDaniador = new Vector(posicionClickeada.x(),
 				posicionClickeada.y());
-		DisparoConvencional unDisparo = (DisparoConvencional) partida
-				.colocarDaniador(nombre, posicionDaniador);
+		Disparo unDisparo = (Disparo) partida.colocarDaniador(nombre,
+				posicionDaniador);
 		VistaDisparo vistaDisparo = new VistaDisparo(unDisparo);
-		unDisparo.agregarObservador(vistaDisparo);
 		gameLoop.agregar(vistaDisparo);
+		unDisparo.agregarObservador(vistaDisparo);
 		vistaDisparo.agregarObservador(this);
 		vistasDaniadores.add(vistaDisparo);
 		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
@@ -289,6 +289,7 @@ public class VentanaJuego extends Ventana implements Observador {
 			constructorAuxiliar.setBarco(barcoAux);
 			vistaBarcoAuxiliar = constructorAuxiliar.crearVista();
 			vistaBarcoAuxiliar.agregarObservador(this);
+			vistasBarcos.add(vistaBarcoAuxiliar);
 			vistasDePartes = vistaBarcoAuxiliar.obtenerVistasPartes();
 			for (int j = 0; j < vistasDePartes.size(); j++) {
 				this.gameLoop.agregar(vistasDePartes.get(j));
@@ -432,6 +433,7 @@ public class VentanaJuego extends Ventana implements Observador {
 		ArrayList<VistaParte> vistasPartesAux;
 		for (int i = 0; i < vistasDaniadores.size(); i++) {
 			vistaDaniadorAux = vistasDaniadores.get(i);
+			System.out.println(vistaDaniadorAux.obtenerEstado());
 			if (vistaDaniadorAux.obtenerEstado().equals("gastado")) {
 				vistaDaniadorAux.dibujar(gameLoop.getSuperficieDeDibujo());
 				gameLoop.remover(vistaDaniadorAux);
@@ -444,7 +446,6 @@ public class VentanaJuego extends Ventana implements Observador {
 			if (vistaBarcoAux.estaDestruido()) {
 				vistasPartesAux = vistaBarcoAux.obtenerVistasPartes();
 				for (int h = 0; h < vistasPartesAux.size(); h++) {
-					gameLoop.remover((vistasPartesAux.get(h)));
 					gameLoop.remover((vistasPartesAux.get(h)));
 				}
 				vistasBarcos.remove(vistaBarcoAux);

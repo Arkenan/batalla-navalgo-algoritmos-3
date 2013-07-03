@@ -96,7 +96,6 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 			break;
 		}
 		VistaBarco vistaBarco = new VistaBarco(vistasDePartes, barco);
-		barco.agregarObservador(vistaBarco);
 		return vistaBarco;
 
 	}
