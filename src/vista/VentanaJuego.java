@@ -27,14 +27,14 @@ import vistasbarcos.VistaParte;
 import barcos.Barco;
 import barcos.Vector;
 import constructoresdevistas.AbstractVistasBarcoFactory;
-import disparos.Disparo;
+import disparos.DisparoConvencional;
 import disparos.Mina;
 import escenario.Tablero;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VentanaPrincipal extends Ventana implements Observador {
+public class VentanaJuego extends Ventana implements Observador {
 
 	private JFrame frame;
 	private GameLoop gameLoop;
@@ -53,7 +53,7 @@ public class VentanaPrincipal extends Ventana implements Observador {
 			@Override
 			public void run() {
 				try {
-					VentanaPrincipal window = new VentanaPrincipal();
+					VentanaJuego window = new VentanaJuego();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +65,7 @@ public class VentanaPrincipal extends Ventana implements Observador {
 	/**
 	 * Create the application.
 	 */
-	public VentanaPrincipal() {
+	public VentanaJuego() {
 		try {
 			initialize();
 		} catch (IOException e) {
@@ -170,14 +170,6 @@ public class VentanaPrincipal extends Ventana implements Observador {
 
 	}
 
-	/*
-	 * private JLabel addCosaPrueba2() { JLabel coso = new
-	 * JLabel("Posicion a afectar: (" +
-	 * Integer.toString(ultimaPosicionClickeada.x()) + "," +
-	 * Integer.toString(ultimaPosicionClickeada.y()) + ")"); coso.setBounds(300,
-	 * 10, 200, 20); frame.add(coso); return coso; }
-	 */
-
 	private void colocarDaniador(String nombre, String tipo, Vector posicion) {
 		switch (tipo) {
 		case "mina":
@@ -191,8 +183,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 	private void colocarDisparo(String nombre, Vector posicionClickeada) {
 		Vector posicionDaniador = new Vector(posicionClickeada.x(),
 				posicionClickeada.y());
-		Disparo unDisparo = (Disparo) partida.colocarDaniador(nombre,
-				posicionDaniador);
+		DisparoConvencional unDisparo = (DisparoConvencional) partida
+				.colocarDaniador(nombre, posicionDaniador);
 		VistaDisparo vistaDisparo = new VistaDisparo(unDisparo);
 		unDisparo.agregarObservador(vistaDisparo);
 		gameLoop.agregar(vistaDisparo);
@@ -452,7 +444,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 			if (vistaBarcoAux.estaDestruido()) {
 				vistasPartesAux = vistaBarcoAux.obtenerVistasPartes();
 				for (int h = 0; h < vistasPartesAux.size(); h++) {
-					gameLoop.remover(vistasPartesAux.get(h));
+					gameLoop.remover((vistasPartesAux.get(h)));
+					gameLoop.remover((vistasPartesAux.get(h)));
 				}
 				vistasBarcos.remove(vistaBarcoAux);
 			}

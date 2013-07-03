@@ -40,6 +40,9 @@ public abstract class Barco extends ObjetoObservable implements Movible,
 		this.estrategia = estrategia;
 		estrategia.setBarco(this);
 		estrategia.agregarObservador(this);
+		for (int i = 0; i < partesDelBarco.size(); i++) {
+			partesDelBarco.get(i).agregarObservador(this);
+		}
 	}
 
 	public Barco(int tam, int vida, MovimientoStrategy estrategia,

@@ -22,7 +22,6 @@ public abstract class NaveConDanioTotal extends Barco {
 		for (int i = 0; i < tamanio; i++) {
 			partesDelBarco.add(new ParteDanioTotal(vida));
 		}
-
 	}
 
 	@Override
