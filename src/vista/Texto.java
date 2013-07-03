@@ -10,7 +10,7 @@ public class Texto extends JLabel {
 
 	public Texto(String texto, int posX, int posY) {
 		super(texto);
-		this.setForeground(Color.WHITE);
+		this.setForeground(Color.BLACK);
 		this.setBounds(posX, posY, tamX, tamY);
 	}
 }
