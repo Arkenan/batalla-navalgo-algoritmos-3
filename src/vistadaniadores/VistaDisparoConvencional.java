@@ -8,19 +8,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import observador.ObjetoObservable;
-import disparos.Disparo;
+import disparos.DisparoConvencional;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VistaDisparo extends ObjetoObservable implements VistaDaniador,
-		ObjetoDibujable {
+public class VistaDisparoConvencional extends ObjetoObservable implements
+		VistaDaniador, ObjetoDibujable {
 	protected BufferedImage imagenActual;
-	protected Disparo disparo;
+	protected DisparoConvencional disparo;
 	final static String DIRECTORIO_IMAGEN_DISPARO = "imagenes/disparo.png";
 	protected String estado;
 
-	public VistaDisparo(Disparo unDisparo) {
+	public VistaDisparoConvencional(DisparoConvencional unDisparo) {
 		disparo = unDisparo;
 		try {
 			imagenActual = ImageIO.read(new File(DIRECTORIO_IMAGEN_DISPARO));
