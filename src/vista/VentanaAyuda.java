@@ -80,12 +80,7 @@ public class VentanaAyuda extends JFrame {
         Texto vida = new Texto("Vida : 1", 520, 355);
         Texto[] lista = {nombre, tamanio, disparo, minaContacto, minasRadios, vida};
         this.addTextoAlPanel(lista);
-        // this.getContentPane().add(vida);
-        // this.getContentPane().add(nombre);
-        // this.getContentPane().add(tamanio);
-        // this.getContentPane().add(disparo);
-        // this.getContentPane().add(minaContacto);
-        // this.getContentPane().add(minasRadios);
+
     }
 
     private void addImageLancha() {
@@ -120,11 +115,7 @@ public class VentanaAyuda extends JFrame {
         this.getContentPane().add(vida);
         Texto[] lista = {nombre, tamanio, disparo, minaContacto, minasRadios, vida};
         this.addTextoAlPanel(lista);
-        // this.getContentPane().add(nombre);
-        // this.getContentPane().add(tamanio);
-        // this.getContentPane().add(disparo);
-        // this.getContentPane().add(minaContacto);
-        // this.getContentPane().add(minasRadios);
+
     }
 
     private void addAyudaDestructor() {
