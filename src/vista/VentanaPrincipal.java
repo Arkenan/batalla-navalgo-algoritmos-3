@@ -176,6 +176,16 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		return coso;
 	}
 
+	private void colocarDaniador(String nombre, String tipo) {
+		switch (tipo) {
+		case "mina":
+			colocarMina(nombre);
+			break;
+		case "disparo":
+			colocarDisparo(nombre);
+		}
+	}
+
 	private void colocarMina(String nombre) {
 		Vector posicionDaniador = new Vector(ultimaPosicionClickeada.x(),
 				ultimaPosicionClickeada.y());
