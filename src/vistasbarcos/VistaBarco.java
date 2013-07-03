@@ -19,7 +19,6 @@ public class VistaBarco extends ObjetoObservable implements Observador {
 
 	public ArrayList<VistaParte> obtenerVistasPartes() {
 		return vistasPartes;
-
 	}
 
 	public boolean estaDestruido() {
@@ -29,7 +28,6 @@ public class VistaBarco extends ObjetoObservable implements Observador {
 	@Override
 	public void actualizar() {
 		if (barco.estaDestruido()) {
-			System.out.println("esta Notificando");
 			notificar();
 		} else {
 			for (int i = 0; i < vistasPartes.size(); i++) {

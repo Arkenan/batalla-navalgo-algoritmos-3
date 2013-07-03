@@ -16,13 +16,13 @@ public abstract class VistaParte implements ObjetoDibujable, Observador {
 
 	protected BufferedImage imagenActual;
 	protected Parte parte;
-	protected ObjetoPosicionable objetoPosicionable;
+
 	protected Vector direccion;
 
 	public VistaParte(ObjetoPosicionable posicionable, Vector unaDireccion)
 			throws IOException {
 		parte = (Parte) posicionable;
-		objetoPosicionable = posicionable;
+
 		direccion = unaDireccion;
 
 	}
@@ -36,9 +36,8 @@ public abstract class VistaParte implements ObjetoDibujable, Observador {
 		Graphics grafico = ((SuperficiePanel) superficieDeDibujo).getBuffer();
 
 		grafico.drawImage(this.imagenActual,
-				conversionDeCoordenada(this.objetoPosicionable.getX()),
-				conversionDeCoordenada(this.objetoPosicionable.getY()), 40, 40,
-				null);
+				conversionDeCoordenada(this.parte.getX()),
+				conversionDeCoordenada(this.parte.getY()), 40, 40, null);
 	}
 
 	public abstract void cambiarDireccion(Vector direccion);
