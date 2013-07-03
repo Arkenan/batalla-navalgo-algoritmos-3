@@ -13,4 +13,6 @@ public interface Daniador {
 
 	public abstract String obtenerNombre();
 
+	public int costo();
+
 }
