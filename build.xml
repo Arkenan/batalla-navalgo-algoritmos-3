@@ -41,7 +41,7 @@
   	</target>
 
   <target name="ejecutar" depends="testear">
-    <java classname="vista.VentanaPrincipal" fork="true" failonerror="true">
+    <java classname="vista.VentanaInicio" fork="true" failonerror="true">
       <classpath refid="librerias" />
     </java>
   </target>
