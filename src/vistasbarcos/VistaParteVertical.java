@@ -32,15 +32,15 @@ public class VistaParteVertical extends VistaParte {
 
 	public BufferedImage obtenerImagenCorrespondiente(Vector direccion) {
 		if (parte.estaDestruida()) {
-			if (direccion.y() == 1)
-				return imagenDestruidaAbajo;
-			else
+			if (direccion.y() == -1)
 				return imagenDestruidaArriba;
-		} else {
-			if (direccion.y() == 1)
-				return imagenSanaAbajo;
 			else
+				return imagenDestruidaAbajo;
+		} else {
+			if (direccion.y() == -1)
 				return imagenSanaArriba;
+			else
+				return imagenSanaAbajo;
 		}
 
 	}

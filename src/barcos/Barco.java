@@ -1,6 +1,7 @@
 package barcos;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -183,6 +184,12 @@ public abstract class Barco extends ObjetoObservable implements Movible,
 
 		}
 		return nodoADevolver;
+
+	}
+
+	public void invertirPartes() {
+
+		Collections.reverse(partesDelBarco);
 
 	}
 

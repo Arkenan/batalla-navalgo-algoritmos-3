@@ -28,6 +28,10 @@ public class MovimientoLinealStrategy extends ObjetoObservable implements
 			return nuevaPosicion;
 		} else {
 			direccionActual.asignar(direccionActual.porEscalar(-1));
+			if (!(this.obtenerDireccionMovimiento().sonOrtogonales(barco
+					.obtenerOrientacion()))) {
+				this.barco.invertirPartes();
+			}
 			notificar();
 			return this.ejecutar();
 		}
