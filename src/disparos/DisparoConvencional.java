@@ -44,6 +44,7 @@ public class DisparoConvencional extends Disparo {
 		for (int i = 0; i < partesAfectadas.size(); i++) {
 			(partesAfectadas.get(i)).explosion(this);
 		}
+		notificar();
 	}
 
 	@Override

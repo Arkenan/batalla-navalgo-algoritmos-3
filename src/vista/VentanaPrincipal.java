@@ -19,13 +19,17 @@ import javax.swing.JPanel;
 
 import observador.Observador;
 import partida.Partida;
+import vistadaniadores.VistaDaniador;
+import vistadaniadores.VistaDisparo;
 import vistadaniadores.VistaMina;
 import vistasbarcos.VistaBarco;
 import vistasbarcos.VistaParte;
 import barcos.Barco;
 import barcos.Vector;
 import constructoresdevistas.AbstractVistasBarcoFactory;
+import disparos.Disparo;
 import disparos.Mina;
+import escenario.Tablero;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.GameLoop;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
@@ -36,10 +40,9 @@ public class VentanaPrincipal extends Ventana implements Observador {
 	private GameLoop gameLoop;
 	private Partida partida;
 	private String disparoSeleccionado;
-	private Vector ultimaPosicionClickeada;
+	private String tipoDisparoSeleccionado;
 	JLabel puntaje;
-	JLabel posicionClickeada;
-	protected ArrayList<VistaMina> vistasMina;
+	protected ArrayList<VistaDaniador> vistasDaniadores;
 	protected ArrayList<VistaBarco> vistasBarcos;
 
 	/**
@@ -85,7 +88,7 @@ public class VentanaPrincipal extends Ventana implements Observador {
 
 		vistasBarcos = new ArrayList<VistaBarco>();
 
-		vistasMina = new ArrayList<VistaMina>();
+		vistasDaniadores = new ArrayList<VistaDaniador>();
 
 		int tamX = 250;
 
@@ -140,7 +143,7 @@ public class VentanaPrincipal extends Ventana implements Observador {
 
 		puntaje = this.addCosaPrueba();
 
-		posicionClickeada = this.addCosaPrueba2();
+		// posicionClickeada = this.addCosaPrueba2();
 
 		this.addMouseListener(panel);
 
@@ -167,34 +170,47 @@ public class VentanaPrincipal extends Ventana implements Observador {
 
 	}
 
-	private JLabel addCosaPrueba2() {
-		JLabel coso = new JLabel("Posicion a afectar: ("
-				+ Integer.toString(ultimaPosicionClickeada.x()) + ","
-				+ Integer.toString(ultimaPosicionClickeada.y()) + ")");
-		coso.setBounds(300, 10, 200, 20);
-		frame.add(coso);
-		return coso;
-	}
+	/*
+	 * private JLabel addCosaPrueba2() { JLabel coso = new
+	 * JLabel("Posicion a afectar: (" +
+	 * Integer.toString(ultimaPosicionClickeada.x()) + "," +
+	 * Integer.toString(ultimaPosicionClickeada.y()) + ")"); coso.setBounds(300,
+	 * 10, 200, 20); frame.add(coso); return coso; }
+	 */
 
-	private void colocarDaniador(String nombre, String tipo) {
+	private void colocarDaniador(String nombre, String tipo, Vector posicion) {
 		switch (tipo) {
 		case "mina":
-			colocarMina(nombre);
+			colocarMina(nombre, posicion);
 			break;
 		case "disparo":
-			colocarDisparo(nombre);
+			colocarDisparo(nombre, posicion);
 		}
 	}
 
-	private void colocarMina(String nombre) {
-		Vector posicionDaniador = new Vector(ultimaPosicionClickeada.x(),
-				ultimaPosicionClickeada.y());
+	private void colocarDisparo(String nombre, Vector posicionClickeada) {
+		Vector posicionDaniador = new Vector(posicionClickeada.x(),
+				posicionClickeada.y());
+		Disparo unDisparo = (Disparo) partida.colocarDaniador(nombre,
+				posicionDaniador);
+		VistaDisparo vistaDisparo = new VistaDisparo(unDisparo);
+		unDisparo.agregarObservador(vistaDisparo);
+		gameLoop.agregar(vistaDisparo);
+		vistaDisparo.agregarObservador(this);
+		vistasDaniadores.add(vistaDisparo);
+		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+		verificarFinDelJuego();
+	}
+
+	private void colocarMina(String nombre, Vector posicionClickeada) {
+		Vector posicionDaniador = new Vector(posicionClickeada.x(),
+				posicionClickeada.y());
 		Mina unaMina = (Mina) partida.colocarDaniador(nombre, posicionDaniador);
 		VistaMina vistaMina = new VistaMina(unaMina);
 		unaMina.agregarObservador(vistaMina);
 		gameLoop.agregar(vistaMina);
 		vistaMina.agregarObservador(this);
-		vistasMina.add(vistaMina);
+		vistasDaniadores.add(vistaMina);
 		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
 		verificarFinDelJuego();
 	}
@@ -205,7 +221,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		btnMina2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				colocarMina("minadobleradio");
+				disparoSeleccionado = "minadobleradio";
+				tipoDisparoSeleccionado = "mina";
 			}
 		});
 		frame.getContentPane().add(btnMina2);
@@ -218,7 +235,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		btnMina1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				colocarMina("minaradio");
+				disparoSeleccionado = "minaradio";
+				tipoDisparoSeleccionado = "mina";
 			}
 		});
 		frame.getContentPane().add(btnMina1);
@@ -231,7 +249,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		btnMina.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				colocarMina("minacontacto");
+				disparoSeleccionado = "minadobleradio";
+				tipoDisparoSeleccionado = "mina";
 			}
 		});
 		frame.getContentPane().add(btnMina);
@@ -244,12 +263,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		btnDisparar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Vector posicionDaniador = new Vector(ultimaPosicionClickeada
-						.x(), ultimaPosicionClickeada.y());
-				partida.colocarDaniador("disparoconvencional", posicionDaniador);
-				puntaje.setText("Puntaje:"
-						+ Integer.toString(partida.getPuntos()));
-				verificarFinDelJuego();
+				disparoSeleccionado = "disparoconvencional";
+				tipoDisparoSeleccionado = "disparo";
 			}
 		});
 		frame.getContentPane().add(btnDisparar);
@@ -265,7 +280,8 @@ public class VentanaPrincipal extends Ventana implements Observador {
 		 * partida.crearBarcos(nodoPartida);
 		 */
 
-		ultimaPosicionClickeada = new Vector(0, 0);
+		disparoSeleccionado = "disparoconvencional";
+		tipoDisparoSeleccionado = "disparo";
 		partida = new Partida();
 
 		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
@@ -411,25 +427,23 @@ public class VentanaPrincipal extends Ventana implements Observador {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		ultimaPosicionClickeada.setX((e.getX() / 40) + 1);
-		ultimaPosicionClickeada.setY((e.getY() / 40) + 1);
-		posicionClickeada.setText("Posicion a afectar: ("
-				+ Integer.toString(ultimaPosicionClickeada.x()) + ","
-				+ Integer.toString(ultimaPosicionClickeada.y()) + ")");
-		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
+		Vector posicion = new Vector((e.getX() / 40) + 1, (e.getY() / 40) + 1);
+		if (!Tablero.getTablero().fueraDeRango(posicion))
+			this.colocarDaniador(disparoSeleccionado, tipoDisparoSeleccionado,
+					posicion);
 	}
 
 	@Override
 	public void actualizar() {
 		VistaBarco vistaBarcoAux;
-		VistaMina vistaMinaAux;
+		VistaDaniador vistaDaniadorAux;
 		ArrayList<VistaParte> vistasPartesAux;
-		for (int i = 0; i < vistasMina.size(); i++) {
-			vistaMinaAux = vistasMina.get(i);
-			if (vistaMinaAux.obtenerEstado().equals("explosion")) {
-				vistaMinaAux.dibujar(gameLoop.getSuperficieDeDibujo());
-				gameLoop.remover(vistaMinaAux);
-				vistasMina.remove(vistaMinaAux);
+		for (int i = 0; i < vistasDaniadores.size(); i++) {
+			vistaDaniadorAux = vistasDaniadores.get(i);
+			if (vistaDaniadorAux.obtenerEstado().equals("gastado")) {
+				vistaDaniadorAux.dibujar(gameLoop.getSuperficieDeDibujo());
+				gameLoop.remover(vistaDaniadorAux);
+				vistasDaniadores.remove(vistaDaniadorAux);
 			}
 
 		}

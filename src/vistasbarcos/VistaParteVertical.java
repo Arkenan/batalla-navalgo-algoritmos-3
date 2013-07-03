@@ -16,15 +16,17 @@ public class VistaParteVertical extends VistaParte {
 	protected BufferedImage imagenSanaAbajo;
 
 	public VistaParteVertical(String dirSana, String dirDestruida,
-			ObjetoPosicionable posicionable, Vector direccion)
+			ObjetoPosicionable posicionable, Vector direccion, String nombre)
 			throws IOException {
 		super(posicionable, direccion);
-		imagenDestruidaArriba = ImageIO.read(new File(dirDestruida
-				+ "arriba.png"));
-		imagenDestruidaAbajo = ImageIO
-				.read(new File(dirDestruida + "abajo.png"));
-		imagenSanaArriba = ImageIO.read(new File(dirSana + "arriba.png"));
-		imagenSanaAbajo = ImageIO.read(new File(dirSana + "abajo.png"));
+		imagenDestruidaArriba = ImageIO.read(new File(dirDestruida + "arriba"
+				+ "/" + nombre));
+		imagenDestruidaAbajo = ImageIO.read(new File(dirDestruida + "abajo"
+				+ "/" + nombre));
+		imagenSanaArriba = ImageIO.read(new File(dirSana + "arriba" + "/"
+				+ nombre));
+		imagenSanaAbajo = ImageIO.read(new File(dirSana + "abajo" + "/"
+				+ nombre));
 		imagenActual = this.obtenerImagenCorrespondiente(direccion);
 	}
 

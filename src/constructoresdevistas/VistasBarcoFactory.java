@@ -14,6 +14,7 @@ import barcos.Vector;
 public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	ArrayList<String> directorioImagenesPartesSanas;
 	ArrayList<String> directorioImagenesPartesDestruidas;
+	ArrayList<String> nombres;
 	ArrayList<Parte> partes;
 	String nombreBarco;
 	Barco barco;
@@ -21,6 +22,7 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 
 	public VistasBarcoFactory(String nombreDeUnBarco) {
 		nombreBarco = nombreDeUnBarco;
+		nombres = new ArrayList<String>();
 	}
 
 	@Override
@@ -42,15 +44,14 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 		directorioImagenesPartesSanas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
 			directorioImagenesPartesSanas.add("imagenes/" + nombreBarco
-					+ "/sano/" + orientacion + "/" + nombreBarco
-					+ Integer.toString(i));
+					+ "/sano/" + orientacion + "/");
+			nombres.add(nombreBarco + Integer.toString(i) + ".png");
 		}
 
 		directorioImagenesPartesDestruidas = new ArrayList<String>();
 		for (int i = 1; i <= tamanio; i++) {
 			directorioImagenesPartesDestruidas.add("imagenes/" + nombreBarco
-					+ "/destruido/" + orientacion + "/" + nombreBarco
-					+ Integer.toString(i));
+					+ "/destruido/" + orientacion + "/");
 		}
 	}
 
@@ -66,7 +67,8 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 					VistaParte vistaParteAuxiliar = new VistaParteHorizontal(
 							directorioImagenesPartesSanas.get(i),
 							directorioImagenesPartesDestruidas.get(i),
-							parteAuxiliar, barco.obtenerDireccionMovimiento());
+							parteAuxiliar, barco.obtenerDireccionMovimiento(),
+							nombres.get(i));
 					vistasDePartes.add(vistaParteAuxiliar);
 					parteAuxiliar.agregarObservador(vistaParteAuxiliar);
 
@@ -82,7 +84,8 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 					VistaParte vistaParteAuxiliar = new VistaParteVertical(
 							directorioImagenesPartesSanas.get(i),
 							directorioImagenesPartesDestruidas.get(i),
-							parteAuxiliar, barco.obtenerDireccionMovimiento());
+							parteAuxiliar, barco.obtenerDireccionMovimiento(),
+							nombres.get(i));
 					vistasDePartes.add(vistaParteAuxiliar);
 					parteAuxiliar.agregarObservador(vistaParteAuxiliar);
 

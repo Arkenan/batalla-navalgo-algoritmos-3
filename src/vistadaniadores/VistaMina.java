@@ -8,7 +8,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import observador.ObjetoObservable;
-import observador.Observador;
 import disparos.Mina;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
@@ -16,7 +15,7 @@ import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
-		Observador {
+		VistaDaniador {
 	protected BufferedImage imagenActual;
 	protected BufferedImage imagenMina;
 	protected BufferedImage imagenExplosion;
@@ -45,7 +44,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 		switch (estado) {
 		case "mina":
 			return mina.getX();
-		case "explosion":
+		case "gastado":
 			return mina.getX() - mina.radio();
 		}
 		return 0;
@@ -55,7 +54,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 		switch (estado) {
 		case "mina":
 			return mina.getY();
-		case "explosion":
+		case "gastado":
 			return mina.getY() - mina.radio();
 		}
 		return 0;
@@ -70,7 +69,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 		switch (estado) {
 		case "mina":
 			return 2;
-		case "explosion":
+		case "gastado":
 			return 2 * (mina.radio()) + 2;
 		}
 		return 10;
@@ -88,7 +87,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 
 	@Override
 	public void actualizar() {
-		estado = "explosion";
+		estado = "gastado";
 		imagenActual = imagenExplosion;
 		this.notificar();
 	}

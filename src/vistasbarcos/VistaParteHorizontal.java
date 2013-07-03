@@ -16,15 +16,17 @@ public class VistaParteHorizontal extends VistaParte {
 	protected BufferedImage imagenSanaIzquierda;
 
 	public VistaParteHorizontal(String dirSana, String dirDestruida,
-			ObjetoPosicionable posicionable, Vector direccion)
+			ObjetoPosicionable posicionable, Vector direccion, String nombre)
 			throws IOException {
 		super(posicionable, direccion);
 		imagenDestruidaIzquierda = ImageIO.read(new File(dirDestruida
-				+ "izquierda.png"));
-		imagenDestruidaDerecha = ImageIO.read(new File(dirDestruida
-				+ "derecha.png"));
-		imagenSanaDerecha = ImageIO.read(new File(dirSana + "derecha.png"));
-		imagenSanaIzquierda = ImageIO.read(new File(dirSana + "izquierda.png"));
+				+ "izquierda" + "/" + nombre));
+		imagenDestruidaDerecha = ImageIO.read(new File(dirDestruida + "derecha"
+				+ "/" + nombre));
+		imagenSanaDerecha = ImageIO.read(new File(dirSana + "derecha" + "/"
+				+ nombre));
+		imagenSanaIzquierda = ImageIO.read(new File(dirSana + "izquierda" + "/"
+				+ nombre));
 		imagenActual = this.obtenerImagenCorrespondiente(direccion);
 	}
 
