@@ -109,23 +109,27 @@ public class Partida {
 		return puntos;
 	}
 
-	public Daniador colocarDaniador(String nombre, Vector posicion) {
+	public Daniador crearDaniador(String nombre, Vector posicion) {
 		ConstructorDeDaniador constructorDeDaniador = new ConstructorDeDaniador();
 		Disparo unDisparo;
 		try {
 			unDisparo = constructorDeDaniador
 					.construirDisparo(nombre, posicion);
 		} catch (DisparoInvalido error) {
-			error.printStackTrace();
+			// error.printStackTrace();
 			return null;
 		}
-		if (unDisparo.costo() <= this.getPuntos()) {
-			daniadores.add(unDisparo);
-			this.reducirPuntosEn(unDisparo.costo());
+		return unDisparo;
+	}
+
+	public void colocarDaniador(Daniador unDaniador) {
+		if (unDaniador == null)
+			return;
+		if (unDaniador.costo() <= this.getPuntos()) {
+			daniadores.add(unDaniador);
+			this.reducirPuntosEn(unDaniador.costo());
 			this.realizarCambiosPasoTurno();
-			return unDisparo;
 		}
-		return null;
 	}
 
 	// Paso de turno sin realizar acciones.

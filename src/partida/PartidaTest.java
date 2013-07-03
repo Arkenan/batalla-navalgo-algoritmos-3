@@ -33,7 +33,8 @@ public class PartidaTest {
 	public void testAlTerminarseLosPuntosElMetodoFaltanPuntosParaSeguirDeberiaDarTrue() {
 		Partida partida = new Partida();
 		for (int x = 1; x <= 50; x++) {
-			partida.colocarDaniador("disparoconvencional", new Vector(3, 3));
+			partida.colocarDaniador(partida.crearDaniador(
+					"disparoconvencional", new Vector(3, 3)));
 		}
 		assertTrue(partida.faltanPuntosParaSeguir());
 	}
@@ -43,7 +44,7 @@ public class PartidaTest {
 		Partida partida = new Partida();
 		Vector posicion = new Vector(10, 10);
 		int puntosIniciales = partida.getPuntos();
-		partida.colocarDaniador("minacontacto", posicion);
+		partida.colocarDaniador(partida.crearDaniador("minacontacto", posicion));
 		assertTrue(puntosIniciales > partida.getPuntos());
 
 	}
@@ -53,7 +54,8 @@ public class PartidaTest {
 		Partida partida = new Partida();
 		int puntosIniciales = partida.getPuntos();
 		for (int i = 0; i < 10; i++)
-			partida.colocarDaniador("minacontacto", new Vector(101, 1100));
+			partida.colocarDaniador(partida.crearDaniador("minacontacto",
+					new Vector(101, 1100)));
 		assertEquals(puntosIniciales, partida.getPuntos());
 	}
 
@@ -68,8 +70,8 @@ public class PartidaTest {
 				partes = (barcos.get(i)).obtenerPartes();
 				for (int j = 0; j < partes.size(); j++) {
 					posicionDisparo = (partes.get(j)).obtenerPosicion();
-					partida.colocarDaniador("disparoconvencional",
-							posicionDisparo);
+					partida.colocarDaniador(partida.crearDaniador(
+							"disparoconvencional", posicionDisparo));
 				}
 			}
 		}

@@ -23,7 +23,8 @@ public class TestsIntegracion {
 		Vector posicion = new Vector(1, 1);
 		for (int i = 0; i < 60; i++) {
 			try {
-				partida.colocarDaniador("disparoconvencional", posicion);
+				partida.colocarDaniador(partida.crearDaniador(
+						"disparoconvencional", posicion));
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
@@ -37,7 +38,8 @@ public class TestsIntegracion {
 		Vector posicion = new Vector(1, 1);
 		for (int i = 0; i < 20; i++) {
 			try {
-				partida.colocarDaniador("disparoconvencional", posicion);
+				partida.colocarDaniador(partida.crearDaniador(
+						"disparoconvencional", posicion));
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
@@ -51,7 +53,8 @@ public class TestsIntegracion {
 		Vector posicion = new Vector(1, 1);
 		for (int i = 0; i < 20; i++) {
 			try {
-				partida.colocarDaniador("disparoconvencional", posicion);
+				partida.colocarDaniador(partida.crearDaniador(
+						"disparoconvencional", posicion));
 			} catch (DisparoInvalido e) {
 				System.out.println("\nDisparo Invalido\n");
 			}
