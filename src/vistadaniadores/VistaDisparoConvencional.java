@@ -45,7 +45,6 @@ public class VistaDisparoConvencional extends ObjetoObservable implements
 	@Override
 	public void actualizar() {
 		estado = "gastado";
-		System.out.println("fue notificado");
 		notificar();
 	}
 

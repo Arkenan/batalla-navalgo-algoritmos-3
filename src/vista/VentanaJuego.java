@@ -41,9 +41,11 @@ public class VentanaJuego extends Ventana implements Observador {
 	private Partida partida;
 	private String disparoSeleccionado;
 	private String tipoDisparoSeleccionado;
-	JLabel puntaje;
+	JLabel puntaje, armaSeleccionada;
 	protected ArrayList<VistaDaniador> vistasDaniadores;
 	protected ArrayList<VistaBarco> vistasBarcos;
+	protected Dibujante dibujante;
+	final static String DISPARO_POR_DEFAULT = "disparoconvencional";
 
 	/**
 	 * Launch the application.
@@ -81,7 +83,7 @@ public class VentanaJuego extends Ventana implements Observador {
 	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setForeground(new Color(0, 0, 0));
-		frame.setBounds(100, 100, 800, 1000);
+		frame.setBounds(100, 100, 650, 425);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Batalla Naval - Grupo 11");
@@ -108,6 +110,19 @@ public class VentanaJuego extends Ventana implements Observador {
 
 		JButton btnPasarTurno = this.addBotonPasarTurno(posicion, posicionY);
 
+		posicionY += tamY;
+		JButton btnDisparar = this.addBotonDisparar(posicion, posicionY);
+
+		posicionY += tamY;
+
+		JButton btnMina = this.addBotonMina(posicion, posicionY);
+
+		posicionY += tamY;
+		JButton btnMina1 = this.addBotonMina1(posicion, posicionY);
+
+		posicionY += tamY;
+
+		JButton btnMina2 = this.addBotonMina2(posicion, posicionY);
 		int posicionPanelX = posicion + tamX;
 
 		int posicionPanelY = 50;
@@ -116,24 +131,12 @@ public class VentanaJuego extends Ventana implements Observador {
 
 		int tamPanelY = 400;
 
-		JPanel panel = this.addSuperficiePanel(posicionPanelX, posicionPanelY,
-				tamPanelX, tamPanelY);
+		JPanel panel = this.addSuperficiePanel(posicionPanelX,
+				posicionPanelY - 50, tamPanelX, tamPanelY);
 
 		int posicionX = posicionPanelX + tamPanelX;
 
 		int posicionY1 = 50;
-
-		JButton btnDisparar = this.addBotonDisparar(posicionX, posicionY1);
-
-		posicionY1 += tamY;
-
-		JButton btnMina = this.addBotonMina(posicionX, posicionY1);
-
-		posicionY1 += tamY;
-		JButton btnMina1 = this.addBotonMina1(posicionX, posicionY1);
-
-		posicionY1 += tamY;
-		JButton btnMina2 = this.addBotonMina2(posicionX, posicionY1);
 
 		this.addAyudaBuque();
 
@@ -141,7 +144,9 @@ public class VentanaJuego extends Ventana implements Observador {
 
 		this.inicializarModelo();
 
-		puntaje = this.addCosaPrueba();
+		puntaje = this.addPuntaje();
+
+		armaSeleccionada = this.addArmaSeleccionada();
 
 		// posicionClickeada = this.addCosaPrueba2();
 
@@ -153,13 +158,22 @@ public class VentanaJuego extends Ventana implements Observador {
 
 	}
 
-	private JLabel addCosaPrueba() {
-		int puntaje = partida.getPuntos();
-		JLabel coso = new JLabel("Puntaje:" + Integer.toString(puntaje));
-		coso.setBounds(200, 10, 200, 20);
-		frame.add(coso);
-		return coso;
+	private JLabel addPuntaje() {
+		int puntos = partida.getPuntos();
+		JLabel puntaje = new JLabel("Puntaje:" + Integer.toString(puntos));
+		puntaje.setBounds(50, 5, 200, 20);
+		frame.add(puntaje);
+		return puntaje;
 
+	}
+
+	private JLabel addArmaSeleccionada() {
+		int puntos = partida.getPuntos();
+		JLabel puntaje = new JLabel("Arma seleccionada:" + " "
+				+ disparoSeleccionado);
+		puntaje.setBounds(0, 25, 250, 20);
+		frame.add(puntaje);
+		return puntaje;
 	}
 
 	public void setVisible(boolean valor) {
@@ -191,7 +205,7 @@ public class VentanaJuego extends Ventana implements Observador {
 				.crearDaniador(nombre, posicionDaniador);
 		VistaDisparoConvencional vistaDisparo = new VistaDisparoConvencional(
 				unDisparo);
-		gameLoop.agregar(vistaDisparo);
+		dibujante.agregarDisparo(vistaDisparo);
 		unDisparo.agregarObservador(vistaDisparo);
 		vistaDisparo.agregarObservador(this);
 		vistasDaniadores.add(vistaDisparo);
@@ -206,12 +220,19 @@ public class VentanaJuego extends Ventana implements Observador {
 		Mina unaMina = (Mina) partida.crearDaniador(nombre, posicionDaniador);
 		VistaMina vistaMina = new VistaMina(unaMina);
 		unaMina.agregarObservador(vistaMina);
-		gameLoop.agregar(vistaMina);
+		dibujante.agregarMina(vistaMina);
 		vistaMina.agregarObservador(this);
 		vistasDaniadores.add(vistaMina);
 		partida.colocarDaniador(unaMina);
 		puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
 		verificarFinDelJuego();
+	}
+
+	private void seleccionArma(String nombre, String tipo) {
+		disparoSeleccionado = nombre;
+		tipoDisparoSeleccionado = tipo;
+		armaSeleccionada.setText("Arma seleccionada:" + " "
+				+ disparoSeleccionado);
 	}
 
 	private JButton addBotonMina2(int posicionX, int posicionY) {
@@ -220,8 +241,7 @@ public class VentanaJuego extends Ventana implements Observador {
 		btnMina2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				disparoSeleccionado = "minadobleradio";
-				tipoDisparoSeleccionado = "mina";
+				seleccionArma("minadobleradio", "mina");
 			}
 		});
 		frame.getContentPane().add(btnMina2);
@@ -234,8 +254,7 @@ public class VentanaJuego extends Ventana implements Observador {
 		btnMina.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				disparoSeleccionado = "minacontacto";
-				tipoDisparoSeleccionado = "mina";
+				seleccionArma("minacontacto", "mina");
 			}
 		});
 		frame.getContentPane().add(btnMina);
@@ -248,8 +267,7 @@ public class VentanaJuego extends Ventana implements Observador {
 		btnMina1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				disparoSeleccionado = "minaradio";
-				tipoDisparoSeleccionado = "mina";
+				seleccionArma("minaradio", "mina");
 			}
 		});
 		frame.getContentPane().add(btnMina1);
@@ -262,8 +280,7 @@ public class VentanaJuego extends Ventana implements Observador {
 		btnDisparar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				disparoSeleccionado = "disparoconvencional";
-				tipoDisparoSeleccionado = "disparoconvencional";
+				seleccionArma("disparoconvencional", "disparoconvencional");
 			}
 		});
 		frame.getContentPane().add(btnDisparar);
@@ -279,9 +296,12 @@ public class VentanaJuego extends Ventana implements Observador {
 		 * partida.crearBarcos(nodoPartida);
 		 */
 
-		disparoSeleccionado = "disparoconvencional";
-		tipoDisparoSeleccionado = "disparo";
+		disparoSeleccionado = DISPARO_POR_DEFAULT;
+		tipoDisparoSeleccionado = DISPARO_POR_DEFAULT;
 		partida = new Partida();
+		Dibujante unDibujante = new Dibujante(new Fondo(0, 0, 400, 400,
+				"imagenes/mar.png"));
+		dibujante = unDibujante;
 
 		ArrayList<Barco> barcos = partida.crearBarcosPorDefault();
 		ArrayList<AbstractVistasBarcoFactory> constructoresDeVistas = partida
@@ -299,11 +319,10 @@ public class VentanaJuego extends Ventana implements Observador {
 			vistasBarcos.add(vistaBarcoAuxiliar);
 			vistasDePartes = vistaBarcoAuxiliar.obtenerVistasPartes();
 			for (int j = 0; j < vistasDePartes.size(); j++) {
-				this.gameLoop.agregar(vistasDePartes.get(j));
+				dibujante.agregarVistaParte(vistasDePartes.get(j));
 			}
 		}
-		Fondo fondo = new Fondo(0, 0, 400, 400, "imagenes/mar.png");
-		this.gameLoop.agregar(fondo);
+		gameLoop.agregar(dibujante);
 	}
 
 	private void setComponentsFocus(JButton btnIniciar, JButton btnDetener) {
@@ -441,8 +460,10 @@ public class VentanaJuego extends Ventana implements Observador {
 		for (int i = 0; i < vistasDaniadores.size(); i++) {
 			vistaDaniadorAux = vistasDaniadores.get(i);
 			if (vistaDaniadorAux.obtenerEstado().equals("gastado")) {
-				vistaDaniadorAux.dibujar(gameLoop.getSuperficieDeDibujo());
-				gameLoop.remover(vistaDaniadorAux);
+				dibujante.cambiarAlTope(vistaDaniadorAux);
+				for (int j = 0; j < 20; j++)
+					dibujante.dibujar(gameLoop.getSuperficieDeDibujo());
+				dibujante.remover(vistaDaniadorAux);
 				vistasDaniadores.remove(vistaDaniadorAux);
 			}
 
@@ -452,7 +473,7 @@ public class VentanaJuego extends Ventana implements Observador {
 			if (vistaBarcoAux.estaDestruido()) {
 				vistasPartesAux = vistaBarcoAux.obtenerVistasPartes();
 				for (int h = 0; h < vistasPartesAux.size(); h++) {
-					gameLoop.remover((vistasPartesAux.get(h)));
+					dibujante.remover((vistasPartesAux.get(h)));
 				}
 				vistasBarcos.remove(vistaBarcoAux);
 			}

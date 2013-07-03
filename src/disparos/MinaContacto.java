@@ -16,7 +16,7 @@ public class MinaContacto extends Mina {
 	@Override
 	public boolean debeDaniarEnEsteTurno() {
 		Casillero casilleroAfectado = casillerosAfectados.get(0);
-		return casilleroAfectado.contienePartes();
+		return casilleroAfectado.contieneElementos();
 	}
 
 	@Override

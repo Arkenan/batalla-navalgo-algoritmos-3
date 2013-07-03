@@ -40,6 +40,7 @@ public abstract class Mina extends Disparo {
 
 	@Override
 	public void daniar() {
+		notificar();
 		for (int j = 0; j < casillerosAfectados.size(); j++) {
 			Casillero casilleroAfectado = casillerosAfectados.get(j);
 			ArrayList<Parte> partesAfectadas = casilleroAfectado
@@ -48,7 +49,6 @@ public abstract class Mina extends Disparo {
 				(partesAfectadas.get(i)).explosion(this);
 			}
 		}
-		notificar();
 	}
 
 	public Vector obtenerPosicion() {

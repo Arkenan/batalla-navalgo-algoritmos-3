@@ -86,8 +86,8 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 
 	@Override
 	public void actualizar() {
-		estado = "gastado";
 		imagenActual = imagenExplosion;
+		estado = "gastado";
 		this.notificar();
 	}
 

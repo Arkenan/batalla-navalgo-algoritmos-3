@@ -5,25 +5,25 @@ import java.util.ArrayList;
 import partes.Parte;
 
 public class Casillero {
-    private final ArrayList<Parte> elementos = new ArrayList<Parte>();
+	private final ArrayList<Parte> elementos = new ArrayList<Parte>();
 
-    public void colocarElemento(Parte parte) {
-        elementos.add(parte);
-    }
+	public void colocarElemento(Parte parte) {
+		elementos.add(parte);
+	}
 
-    public boolean contienePartes() {
-        return !(elementos.isEmpty());
-    }
+	public boolean contieneElementos() {
+		return !(elementos.isEmpty());
+	}
 
-    public ArrayList<Parte> obtenerPartes() {
-        return elementos;
-    }
+	public ArrayList<Parte> obtenerPartes() {
+		return elementos;
+	}
 
-    public void quitarElemento(Parte elemento) {
-        elementos.remove(elemento);
-    }
+	public void quitarElemento(Parte elemento) {
+		elementos.remove(elemento);
+	}
 
-    public boolean contiene(Parte elemento) {
-        return elementos.contains(elemento);
-    }
+	public boolean contiene(Parte elemento) {
+		return elementos.contains(elemento);
+	}
 }
