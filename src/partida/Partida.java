@@ -38,8 +38,6 @@ public class Partida {
     // crea una partida a través de un nodo XML. Puede ser tanto un nivel como
     // una partida guardada.
     public Partida(Element nodoPartida) {
-        System.out.println("Nombre de la Partida: " + nodoPartida.attributeValue("nombre"));
-
         puntos = Integer.parseInt(nodoPartida.attributeValue("puntos"));
 
         ConstructorDeDaniador ConstructorDeDaniador = new ConstructorDeDaniador();
@@ -68,6 +66,7 @@ public class Partida {
         nodoPartida.add(nodoDisparos);
         // ESTO ES PROVISORIO.
         nodoPartida.add(manejadorDeElementosDelTablero.generarNodoBarcos());
+        nodoPartida.addAttribute("puntos", Integer.toString(this.getPuntos()));
         return nodoPartida;
     }
 
@@ -83,16 +82,11 @@ public class Partida {
         Element nodoPartida;
         SAXReader lector = new SAXReader();
         try {
-            // aca buscamos el documento segun su direccion.
+            // aca buscamos el documento segun su direccion y sacamos su nodo raiz.
             Document documento = lector.read(dirArchivo);
-            // el Element es el nodo. Sacamos el nodo raiz (suponemos que es una
-            // persona).
             nodoPartida = documento.getRootElement();
-            // aca, una vez obtenido el nodo XML que representa a la persona,
-            // creamos la persona
-            // para devolver.
         } catch (DocumentException ex) {
-            throw new IOException("ERROR AL TRABAJAR CON EL ARCHIVO");
+            throw new IOException("ERROR AL TRABAJAR CON EL ARCHIVO" + dirArchivo);
         }
         return nodoPartida;
     }

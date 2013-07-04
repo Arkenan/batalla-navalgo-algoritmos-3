@@ -25,7 +25,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         super("Batalla Navalgo");
         btnAtras = this.addBtnAtras();
         btnIniciarPartida = this.addBtnNuevaPartida();
-        btnCargarPartida = this.addBtnGargarPartida();
+        btnCargarPartida = this.addBtnCargarPartida();
         btnTutorial = this.addBtnTutorial();
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
@@ -86,10 +86,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         return btnNuevaPartida;
     }
 
-    private JButton addBtnGargarPartida() {
-        // ImageIcon icono = new ImageIcon("imagenes/inicio/guardarPartida.png");
-        // JButton btnGuardarPartida = new JButton(icono);
-        // btnGuardarPartida.setBounds(41, 200, tamX, tamY);
+    private JButton addBtnCargarPartida() {
         Boton btnGuardarPartida = new Boton("imagenes/inicio/guardarPartida.png", 41, 200);
         btnGuardarPartida.addActionListener(new ActionListener() {
             @Override
@@ -100,7 +97,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 int seleccion = fileChooser.showOpenDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
-                    manejador.abrirJuego((fichero.getName().split("\\.")[0]));
+                    manejador.abrirJuego((fichero.getAbsolutePath()).replace("\\", "/"));
                 }
 
             }
@@ -142,7 +139,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                manejador.abrirJuego(menu.getSelectedItem().toString());
+                manejador.abrirJuego("Niveles XML/" + menu.getSelectedItem().toString() + ".xml");
             }
         });
         this.getContentPane().add(btnJugar);
