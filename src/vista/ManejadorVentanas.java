@@ -24,8 +24,8 @@ public class ManejadorVentanas {
         ventanaAyudaIntro.setVisible(true);
     }
 
-    public void abrirJuego() {
-        ventanaJuego = new VentanaJuego(this);
+    public void abrirJuego(String nombrePartida) {
+        ventanaJuego = new VentanaJuego(nombrePartida, this);
         ventanaJuego.setVisible(true);
         ventanaInicio.setVisible(false);
     }

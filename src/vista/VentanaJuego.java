@@ -79,9 +79,10 @@ public class VentanaJuego extends Ventana implements Observador {
         }
     }
 
-    public VentanaJuego(String dirArchivo) {
+    public VentanaJuego(String dirArchivo, ManejadorVentanas manejadorV) {
         try {
             initialize(dirArchivo);
+            manejador = manejadorV;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -276,16 +277,21 @@ public class VentanaJuego extends Ventana implements Observador {
 
     private void inicializarModelo(String dirArchivo) throws IOException {
         ArrayList<Barco> barcos;
+        ArrayList<AbstractVistasBarcoFactory> constructoresDeVistas;
         /* PARA NIVELES Y PARTIDAS */
         if (!dirArchivo.equals("")) {
             System.out.println(dirArchivo);
+            // fijarse de los disparos para juegos guardados!
             ArrayList<Daniador> disparos = new ArrayList<Daniador>();
+            System.out.println(dirArchivo);
             Element nodoPartida = Partida.obtenerNodoPartida("niveles XML/" + dirArchivo + ".xml");
             partida = new Partida(nodoPartida);
             barcos = partida.crearBarcos(nodoPartida);
+            constructoresDeVistas = VistaBarco.obetenerVistas(nodoPartida);
         } else {
             partida = new Partida();
             barcos = partida.crearBarcosPorDefault();
+            constructoresDeVistas = partida.getConstructoresDeVistasPorDefault();
         }
 
         disparoSeleccionado = DISPARO_POR_DEFAULT;
@@ -293,8 +299,6 @@ public class VentanaJuego extends Ventana implements Observador {
 
         dibujante = new Dibujante(new Fondo(0, 0, 400, 400, "imagenes/mar.png"));
 
-        ArrayList<AbstractVistasBarcoFactory> constructoresDeVistas = partida.getConstructoresDeVistasPorDefault();
-        ArrayList<VistaParte> vistasDePartes;
         Barco barcoAux;
         AbstractVistasBarcoFactory constructorAuxiliar;
         VistaBarco vistaBarcoAuxiliar;
@@ -307,6 +311,7 @@ public class VentanaJuego extends Ventana implements Observador {
             vistasBarcos.add(vistaBarcoAuxiliar);
             dibujante.agregarVistaBarco(vistaBarcoAuxiliar);
         }
+
         gameLoop.agregar(dibujante);
     }
 

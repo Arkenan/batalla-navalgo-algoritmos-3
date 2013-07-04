@@ -134,7 +134,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                manejador.abrirJuego();
+                manejador.abrirJuego(menu.getSelectedItem().toString());
             }
         });
         this.getContentPane().add(btnJugar);
