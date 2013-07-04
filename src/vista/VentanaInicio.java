@@ -98,9 +98,11 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 int seleccion = fileChooser.showOpenDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
+                    if (!new File(("file:///" + fichero.getAbsolutePath()).replace("\\", "/")).isFile()) {
+                        this.actionPerformed(arg0);
+                    }
                     manejador.abrirJuego(("file:///" + fichero.getAbsolutePath()).replace("\\", "/"));
                 }
-
             }
         });
         this.getContentPane().add(btnGuardarPartida);

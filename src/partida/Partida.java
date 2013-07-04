@@ -86,7 +86,7 @@ public class Partida {
             Document documento = lector.read(dirArchivo);
             nodoPartida = documento.getRootElement();
         } catch (DocumentException ex) {
-            throw new IOException("ERROR AL TRABAJAR CON EL ARCHIVO" + dirArchivo + ex.getMessage());
+            throw new IOException("ERROR AL TRABAJAR CON EL ARCHIVO " + dirArchivo + " " + ex.getMessage());
         }
         return nodoPartida;
     }
