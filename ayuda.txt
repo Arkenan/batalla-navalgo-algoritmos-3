@@ -1,0 +1,17 @@
+Ventana Principal
+
+Para comenzar el juego haz click en "Iniciar". Esto dará comienzo a la partida que hayas seleccionado antes.
+
+Una vez comenzado el juego, tu ojetivo es destruir todos los barcos del enemigo sin quedarte sin puntos. Para lograrlo, tienes a tu disposición disparos y minas submarinas. Para utilizar cada uno de ellos, debes hacer click en su botón correspondiente y luego en el lugar del mapa que quieras colocarlo. Pero cuidado! Todos funcionan diferente y todas tienen su costo.
+
+Disparar: 200 puntos. es un disparo convencional. Al colocarlo en una posición le harás daño instantáneo a todas las partes de barco que se encuentren allí.
+
+Mina Contacto: 150 puntos. Explota al entrar en contacto con un barco y daña a todas las partes que se encuentren en su misma posición.
+
+Mina Radio 1: 50 puntos. Tarda 3 turnos en explotar y explota un cuadrado de una casilla de radio (8 casilleros al rededor de la posición de la mina más la posición de esta).
+
+Mina Radio 2: 100 puntos. Tarda 3 turnos en explotar y explota un cuadrado de dos casillas de radio.(24 casilleros alrededor de la mina más la posición de esta).
+
+Pasar Turno: 10 puntos. Puede que a veces te convenga esperar a que los barcos estén en mejor posición para atacarlos, pero esto también tiene su costo!
+
+Para dejar 
