@@ -29,6 +29,7 @@ public class VistaParteVertical extends VistaParte {
 		imagenActual = this.obtenerImagenCorrespondiente(direccion);
 	}
 
+	@Override
 	public BufferedImage obtenerImagenCorrespondiente(Vector direccion) {
 		if (parte.estaDestruida()) {
 			if (direccion.y() == -1)
@@ -51,9 +52,4 @@ public class VistaParteVertical extends VistaParte {
 
 	}
 
-	@Override
-	public void actualizar() {
-		imagenActual = this.obtenerImagenCorrespondiente(direccion);
-
-	}
 }

@@ -38,4 +38,12 @@ public abstract class VistaParte implements ObjetoDibujable, Observador {
 	}
 
 	public abstract void cambiarDireccion(Vector direccion);
+
+	public abstract BufferedImage obtenerImagenCorrespondiente(Vector direccion);
+
+	@Override
+	public void actualizar() {
+		imagenActual = this.obtenerImagenCorrespondiente(direccion);
+
+	}
 }
