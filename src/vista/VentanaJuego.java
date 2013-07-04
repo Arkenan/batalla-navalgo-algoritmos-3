@@ -228,7 +228,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonMina2(int posicionX, int posicionY) {
-        BotonJuego btnMina2 = new BotonJuego(posicionX, posicionY, "imagenes/iconos/mina_radio2.png", "Mina Radio 2");
+        Boton btnMina2 = new Boton(posicionX, posicionY, "imagenes/iconos/mina_radio2.png", "Mina Radio 2");
         btnMina2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -240,7 +240,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonMina(int posicionX, int posicionY) {
-        BotonJuego btnMina = new BotonJuego(posicionX, posicionY, "imagenes/iconos/mina_contacto.png", "Mina Contacto");
+        Boton btnMina = new Boton(posicionX, posicionY, "imagenes/iconos/mina_contacto.png", "Mina Contacto");
         btnMina.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -252,7 +252,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonMina1(int posicionX, int posicionY) {
-        BotonJuego btnMina1 = new BotonJuego(posicionX, posicionY, "imagenes/iconos/mina_radio1.png", "Mina Radio 1");
+        Boton btnMina1 = new Boton(posicionX, posicionY, "imagenes/iconos/mina_radio1.png", "Mina Radio 1");
         btnMina1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -264,7 +264,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonDisparar(int posicionX, int posicionY) {
-        BotonJuego btnDisparar = new BotonJuego(posicionX, posicionY, "imagenes/iconos/disparo.png", "Disparar");
+        Boton btnDisparar = new Boton(posicionX, posicionY, "imagenes/iconos/disparo.png", "Disparar");
         btnDisparar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -287,7 +287,7 @@ public class VentanaJuego extends Ventana implements Observador {
             Element nodoPartida = Partida.obtenerNodoPartida("niveles XML/" + dirArchivo + ".xml");
             partida = new Partida(nodoPartida);
             barcos = partida.crearBarcos(nodoPartida);
-            constructoresDeVistas = VistaBarco.obtenerVistas(nodoPartida);
+            constructoresDeVistas = VistaBarco.obetnerVistas(nodoPartida);
         } else {
             partida = new Partida();
             barcos = partida.crearBarcosPorDefault();
@@ -363,7 +363,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonDetener(int posicionX, int posicionY) {
-        BotonJuego btnDetener = new BotonJuego(posicionX, posicionY, "imagenes/iconos/cerrar.png", "Inicio");
+        Boton btnDetener = new Boton(posicionX, posicionY, "imagenes/iconos/cerrar.png", "Inicio");
         btnDetener.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -378,7 +378,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonPasarTurno(int posicionX, int posicionY) {
-        BotonJuego btnPasarTurno = new BotonJuego(posicionX, posicionY, "imagenes/iconos/pasar_turno.png", "Pasar Turno");
+        Boton btnPasarTurno = new Boton(posicionX, posicionY, "imagenes/iconos/pasar_turno.png", "Pasar Turno");
         btnPasarTurno.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -406,7 +406,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonIniciar(int posicionX, int posicionY) {
-        BotonJuego btnIniciar = new BotonJuego(posicionX, posicionY, "imagenes/iconos/iniciar.png", "Iniciar");
+        Boton btnIniciar = new Boton(posicionX, posicionY, "imagenes/iconos/iniciar.png", "Iniciar");
         btnIniciar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {

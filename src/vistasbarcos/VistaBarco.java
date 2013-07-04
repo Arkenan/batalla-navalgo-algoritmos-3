@@ -23,7 +23,7 @@ public class VistaBarco extends ObjetoObservable implements Observador, ObjetoDi
     ArrayList<VistaParte> vistasPartes;
     Barco barco;
 
-    public static ArrayList<AbstractVistasBarcoFactory> obetenerVistas(Element nodoPartida) {
+    public static ArrayList<AbstractVistasBarcoFactory> obtenerVistas(Element nodoPartida) {
         ArrayList<AbstractVistasBarcoFactory> listaFactories = new ArrayList<AbstractVistasBarcoFactory>();
         List<Element> listaNodosBarcos = nodoPartida.element("Barcos").elements();
         Iterator<Element> it = listaNodosBarcos.iterator();
