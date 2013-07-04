@@ -122,25 +122,27 @@ public class VentanaJuego extends Ventana implements Observador {
 
         int posicionY = 50;
 
-        JButton btnIniciar = this.addBotonIniciar(posicion, posicionY);
+        this.addBotonIniciar(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnDetener = this.addBotonDetener(posicion, posicionY);
+        this.addBotonDetener(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnPasarTurno = this.addBotonPasarTurno(posicion, posicionY);
+        this.addBotonPasarTurno(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnDisparar = this.addBotonDisparar(posicion, posicionY);
+        this.addBotonDisparar(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnMina = this.addBotonMina(posicion, posicionY);
+        this.addBotonMina(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnMina1 = this.addBotonMina1(posicion, posicionY);
+        this.addBotonMina1(posicion, posicionY);
         posicionY += tamY;
 
-        JButton btnMina2 = this.addBotonMina2(posicion, posicionY);
+        this.addBotonMina2(posicion, posicionY);
+
+        this.addBtnGuardar();
 
         int posicionPanelX = posicion + tamX;
         int posicionPanelY = 0;
@@ -163,7 +165,7 @@ public class VentanaJuego extends Ventana implements Observador {
 
         this.addKeyListener();
 
-        this.setComponentsFocus(btnIniciar, btnDetener);
+        // this.setComponentsFocus(btnIniciar, btnDetener);
 
     }
 
@@ -173,6 +175,13 @@ public class VentanaJuego extends Ventana implements Observador {
         puntaje.setBounds(50, 5, 200, 20);
         frame.add(puntaje);
         return puntaje;
+    }
+
+    private void addBtnGuardar() {
+        JButton btnGuardar = new JButton("guardar");
+        btnGuardar.setBounds(650, 50, 100, 100);
+        btnGuardar.setVisible(true);
+        frame.getContentPane().add(btnGuardar);
     }
 
     private JLabel addArmaSeleccionada() {
