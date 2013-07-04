@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Partida nombre="Nivel Medio" puntos="3000">
+<Partida nombre="Nivel Difícil" puntos="3000">
   <Disparos></Disparos>
   <Barcos>
     <Rompehielo orientacion="(0,1)" posicion="(3,3)" completo="si">
