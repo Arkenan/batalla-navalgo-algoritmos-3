@@ -14,30 +14,33 @@ import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VentanaInicio extends JFrame implements ItemListener {
-    JButton btnIniciarPartida, btnCargarPartida, btnJugar;
+    JButton btnIniciarPartida, btnCargarPartida, btnJugar, btnTutorial;
     JComboBox<String> menu;
     JFileChooser fc;
     JFrame frame;
+    ManejadorVentanas manejador;
     int tamX = 218; // largo de los botones
     int tamY = 54; // ancho de los botones
 
-    public VentanaInicio() {
+    public VentanaInicio(ManejadorVentanas manejadorVentana) {
         setSize(800, 481);
         this.setTitle("Batalla Navalgo");
         btnIniciarPartida = this.addBtnNuevaPartida();
         btnCargarPartida = this.addBtnGargarPartida();
+        btnTutorial = this.addBtnTutorial();
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
         this.addImagenDeFondo();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame = this;
+        manejador = manejadorVentana;
 
     }
 
-    public static void main(String[] args) {
-        VentanaInicio ventana = new VentanaInicio();
-        ventana.setVisible(true);
-    }
+    /*
+     * public static void main(String[] args) { VentanaInicio ventana = new VentanaInicio();
+     * ventana.setVisible(true); }
+     */
 
     private void addImagenDeFondo() {
         ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/inicio/a.jpg");
@@ -54,6 +57,7 @@ public class VentanaInicio extends JFrame implements ItemListener {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 btnCargarPartida.setVisible(false);
+                btnTutorial.setVisible(false);
                 menu.setVisible(true);
             }
         });
@@ -113,12 +117,26 @@ public class VentanaInicio extends JFrame implements ItemListener {
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                frame.setVisible(false);
-                VentanaJuego ventana = new VentanaJuego(menu.getSelectedItem().toString());
-                ventana.setVisible(true);
+                manejador.abrirJuego();
             }
         });
         this.getContentPane().add(btnJugar);
         return btnJugar;
+    }
+
+    private JButton addBtnTutorial() {
+        ImageIcon icono = new ImageIcon("imagenes/inicio/tutorial.png");
+        JButton btnTutorial = new JButton(icono);
+        btnTutorial.setBounds(41, 300, tamX, tamY);
+        btnTutorial.setVisible(true);
+        btnTutorial.setOpaque(false);
+        btnTutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                manejador.abrirTutorial(frame);
+            }
+        });
+        this.getContentPane().add(btnTutorial);
+        return btnTutorial;
     }
 }

@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,12 +15,18 @@ public class VentanaAyudaBarcos extends JFrame {
      */
     private static final long serialVersionUID = 1L;
     JButton btnAyudaBarcos, btnAyudaDisparos;
-    int posTextoX = 400;
+    int posTextoX = 400; // posicion en X de los textos ayuda
     ManejadorVentanas manejador;
+    int tamX = 218; // ancho de los botones
+    int tamY = 54; // altura de los botones
+    int posY = 355; // posicion en Y de los botones
+    JFrame frame;
 
     public VentanaAyudaBarcos(ManejadorVentanas manejadorV) {
         setSize(800, 481);
         this.setTitle("Batalla Navalgo - Ayuda");
+        this.addBtnAtras();
+        this.addBtnSig();
         this.addAyudaBuque();
         this.addAyudaDestructor();
         this.addAyudaLancha();
@@ -27,10 +35,11 @@ public class VentanaAyudaBarcos extends JFrame {
         this.addImagenDeFondo();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         manejador = manejadorV;
+        frame = this;
     }
 
     private void addImagenDeFondo() {
-        ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/ayuda/ayuda.png");
+        ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/ayuda/barcos/ayuda.png");
         JLabel icono = new JLabel(iconoNuevaPartida);
         icono.setBounds(0, 0, 800, 481);
         this.getContentPane().add(icono);
@@ -43,7 +52,7 @@ public class VentanaAyudaBarcos extends JFrame {
     }
 
     private void addImageBuque() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/buque.png");
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/buque.png");
         JLabel iconoBuque = new JLabel(icono);
         iconoBuque.setOpaque(false);
         iconoBuque.setBounds(50, 5, 294, 76);
@@ -83,10 +92,10 @@ public class VentanaAyudaBarcos extends JFrame {
     }
 
     private void addImageLancha() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/lancha.png");
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/lancha.png");
         JLabel iconoBuque = new JLabel(icono);
         iconoBuque.setOpaque(false);
-        iconoBuque.setBounds(10, 355, 294, 76);
+        iconoBuque.setBounds(150, 355, 294, 76);
         this.getContentPane().add(iconoBuque);
     }
 
@@ -96,7 +105,7 @@ public class VentanaAyudaBarcos extends JFrame {
     }
 
     private void addImagePortaaviones() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/portaaviones.png");
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/portaaviones.png");
         JLabel iconoJ = new JLabel(icono);
         iconoJ.setOpaque(false);
         iconoJ.setBounds(60, 270, 387, 82);
@@ -134,7 +143,7 @@ public class VentanaAyudaBarcos extends JFrame {
     }
 
     private void addImageDestructor() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/destructor.png");
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/destructor.png");
         JLabel iconoJ = new JLabel(icono);
         iconoJ.setOpaque(false);
         iconoJ.setBounds(60, 180, 261, 84);
@@ -158,7 +167,7 @@ public class VentanaAyudaBarcos extends JFrame {
     }
 
     private void addImageRompehielo() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/rompehielo.png");
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/rompehielo.png");
         JLabel iconoJ = new JLabel(icono);
         iconoJ.setOpaque(false);
         iconoJ.setBounds(60, 90, 294, 76);
@@ -170,5 +179,34 @@ public class VentanaAyudaBarcos extends JFrame {
             JLabel texto = lista[i];
             this.getContentPane().add(texto);
         }
+    }
+
+    private JButton addBtnAtras() {
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/intro.png");
+        JButton btnAtras = new JButton(icono);
+        btnAtras.setBounds(0, posY, tamX, tamY);
+        btnAtras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                manejador.abrirTutorial(frame);
+            }
+        });
+        this.getContentPane().add(btnAtras);
+        return btnAtras;
+    }
+
+    private JButton addBtnSig() {
+        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/disparos.png");
+        JButton btnSiguiente = new JButton(icono);
+        btnSiguiente.setBounds(550, posY, tamX, tamY);
+        btnSiguiente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                manejador.abrirAyudaDisparos(frame);
+            }
+        });
+        this.getContentPane().add(btnSiguiente);
+        return btnSiguiente;
+
     }
 }
