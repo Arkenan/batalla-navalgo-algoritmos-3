@@ -98,7 +98,6 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML", "xml");
                 fileChooser.setFileFilter(filtro);
                 int seleccion = fileChooser.showOpenDialog(null);
-                System.out.println("Asd seleccion" + seleccion);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
                     manejador.abrirJuego((fichero.getName().split("\\.")[0]));

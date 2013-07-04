@@ -280,10 +280,8 @@ public class VentanaJuego extends Ventana implements Observador {
         ArrayList<AbstractVistasBarcoFactory> constructoresDeVistas;
         /* PARA NIVELES Y PARTIDAS */
         if (!dirArchivo.equals("")) {
-            System.out.println(dirArchivo);
             // fijarse de los disparos para juegos guardados!
             ArrayList<Daniador> disparos = new ArrayList<Daniador>();
-            System.out.println(dirArchivo);
             Element nodoPartida = Partida.obtenerNodoPartida("niveles XML/" + dirArchivo + ".xml");
             partida = new Partida(nodoPartida);
             barcos = partida.crearBarcos(nodoPartida);
@@ -326,7 +324,6 @@ public class VentanaJuego extends Ventana implements Observador {
 
             @Override
             public void keyTyped(KeyEvent arg0) {
-                System.out.println("Key pressed");
             }
 
             @Override
@@ -335,7 +332,6 @@ public class VentanaJuego extends Ventana implements Observador {
 
             @Override
             public void keyPressed(KeyEvent arg0) {
-                System.out.println("Ping");
             }
 
         });
