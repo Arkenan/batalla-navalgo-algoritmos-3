@@ -2,8 +2,8 @@
 <Partida nombre="La lancha inmovil" puntos="2000">
   <Disparos></Disparos>
   <Barcos>  
-    <Lancha orientacion="(1,1)" posicion="(5,5)" completo="si">
-      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>      
+    <Lancha orientacion="(1,0)" posicion="(5,5)" completo="si">
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,0)"></Estrategia>      
     </Lancha>
   </Barcos>
 </Partida>
