@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class ManejadorVentanas {
     VentanaJuego ventanaJuego;
-    JFrame ventanaInicio, ventanaAyudaIntro, ventanaAyudaBarcos, ventanaAyudaDisparos, ventanaGano, VentanaPerdio;
+    JFrame ventanaInicio, ventanaAyudaIntro, ventanaAyudaBarcos, ventanaAyudaDisparos;
 
     public ManejadorVentanas() {
         ventanaInicio = new VentanaInicio(this);
@@ -25,7 +25,7 @@ public class ManejadorVentanas {
     }
 
     public void abrirJuego() {
-        ventanaJuego = new VentanaJuego();
+        ventanaJuego = new VentanaJuego(this);
         ventanaJuego.setVisible(true);
         ventanaInicio.setVisible(false);
     }
@@ -42,6 +42,9 @@ public class ManejadorVentanas {
 
     public void abrirInicio(JFrame ventana) {
         ventanaInicio.setVisible(true);
+        if (ventana == null) {
+            System.out.println("ppppppppppp");
+        }
         ventana.setVisible(false);
 
     }

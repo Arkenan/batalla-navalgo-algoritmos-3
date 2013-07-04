@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class VentanaAyudaIntro extends JFrame {
+public class VentanaAyudaIntro extends VentanaGeneral {
     JButton btnAtras, btnSig;
     JFrame siguiente, anterior, frame;
     ManejadorVentanas manejador;
@@ -17,7 +17,7 @@ public class VentanaAyudaIntro extends JFrame {
     int posY = 355;
 
     public VentanaAyudaIntro(ManejadorVentanas manejadorV) {
-        setSize(800, 481);
+        super("Ayuda - Intro");
         siguiente = new VentanaAyudaBarcos(manejadorV);
         btnAtras = this.addBtnAtras();
         btnSig = this.addBtnSig();

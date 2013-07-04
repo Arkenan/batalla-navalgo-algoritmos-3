@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class VentanaAyudaBarcos extends JFrame {
+public class VentanaAyudaBarcos extends VentanaGeneral {
     /**
      * 
      */
@@ -23,8 +23,7 @@ public class VentanaAyudaBarcos extends JFrame {
     JFrame frame;
 
     public VentanaAyudaBarcos(ManejadorVentanas manejadorV) {
-        setSize(800, 481);
-        this.setTitle("Batalla Navalgo - Ayuda");
+        super("Batalla Navalgo - Ayuda");
         this.addBtnAtras();
         this.addBtnSig();
         this.addAyudaBuque();
@@ -33,7 +32,6 @@ public class VentanaAyudaBarcos extends JFrame {
         this.addAyudaPortaaviones();
         this.addAyudaRompehielo();
         this.addImagenDeFondo();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         manejador = manejadorV;
         frame = this;
     }

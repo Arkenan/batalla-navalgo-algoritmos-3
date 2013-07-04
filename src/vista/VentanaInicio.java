@@ -9,29 +9,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class VentanaInicio extends JFrame implements ItemListener {
-    JButton btnIniciarPartida, btnCargarPartida, btnJugar, btnTutorial;
+public class VentanaInicio extends VentanaGeneral implements ItemListener {
+    JButton btnIniciarPartida, btnCargarPartida, btnJugar, btnTutorial, btnAtras;
     JComboBox<String> menu;
     JFileChooser fc;
-    JFrame frame;
+    VentanaInicio frame;
     ManejadorVentanas manejador;
     int tamX = 218; // largo de los botones
     int tamY = 54; // ancho de los botones
 
     public VentanaInicio(ManejadorVentanas manejadorVentana) {
-        setSize(800, 481);
-        this.setTitle("Batalla Navalgo");
+        super("Batalla Navalgo");
+        btnAtras = this.addBtnAtras();
         btnIniciarPartida = this.addBtnNuevaPartida();
         btnCargarPartida = this.addBtnGargarPartida();
         btnTutorial = this.addBtnTutorial();
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
         this.addImagenDeFondo();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame = this;
         manejador = manejadorVentana;
 
@@ -41,6 +39,25 @@ public class VentanaInicio extends JFrame implements ItemListener {
      * public static void main(String[] args) { VentanaInicio ventana = new VentanaInicio();
      * ventana.setVisible(true); }
      */
+
+    private JButton addBtnAtras() {
+        ImageIcon icono = new ImageIcon("imagenes/inicio/atras.png");
+        JButton btnAtras = new JButton(icono);
+        btnAtras.setBounds(38, 400, tamX, tamY);
+        btnAtras.setVisible(false);
+        btnAtras.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                btnCargarPartida.setVisible(true);
+                btnTutorial.setVisible(true);
+                btnJugar.setVisible(false);
+                menu.setVisible(false);
+                frame.sacarBtnAtras();
+            }
+        });
+        this.getContentPane().add(btnAtras);
+        return btnAtras;
+    }
 
     private void addImagenDeFondo() {
         ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/inicio/a.jpg");
@@ -59,6 +76,7 @@ public class VentanaInicio extends JFrame implements ItemListener {
                 btnCargarPartida.setVisible(false);
                 btnTutorial.setVisible(false);
                 menu.setVisible(true);
+                btnAtras.setVisible(true);
             }
         });
         this.getContentPane().add(btnNuevaPartida);
@@ -113,7 +131,6 @@ public class VentanaInicio extends JFrame implements ItemListener {
         JButton btnJugar = new JButton(icono);
         btnJugar.setBounds(100, 300, 90, 90);
         btnJugar.setVisible(false);
-        btnJugar.setOpaque(false);
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -128,8 +145,6 @@ public class VentanaInicio extends JFrame implements ItemListener {
         ImageIcon icono = new ImageIcon("imagenes/inicio/tutorial.png");
         JButton btnTutorial = new JButton(icono);
         btnTutorial.setBounds(41, 300, tamX, tamY);
-        btnTutorial.setVisible(true);
-        btnTutorial.setOpaque(false);
         btnTutorial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -138,5 +153,9 @@ public class VentanaInicio extends JFrame implements ItemListener {
         });
         this.getContentPane().add(btnTutorial);
         return btnTutorial;
+    }
+
+    private void sacarBtnAtras() {
+        btnAtras.setVisible(false);
     }
 }

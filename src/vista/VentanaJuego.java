@@ -49,7 +49,7 @@ public class VentanaJuego extends Ventana implements Observador {
     protected ArrayList<VistaBarco> vistasBarcos;
     protected Dibujante dibujante;
     final static String DISPARO_POR_DEFAULT = "disparoconvencional";
-    private ManejadorVentanas manejador;
+    ManejadorVentanas manejador;
 
     /**
      * Launch the application.
@@ -82,6 +82,15 @@ public class VentanaJuego extends Ventana implements Observador {
     public VentanaJuego(String dirArchivo) {
         try {
             initialize(dirArchivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public VentanaJuego(ManejadorVentanas manejadorV) {
+        try {
+            initialize("");
+            manejador = manejadorV;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -349,11 +358,14 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private JButton addBotonDetener(int posicionX, int posicionY) {
-        Boton btnDetener = new Boton(posicionX, posicionY, "imagenes/iconos/cerrar.png", "Detener");
+        Boton btnDetener = new Boton(posicionX, posicionY, "imagenes/iconos/cerrar.png", "Inicio");
         btnDetener.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameLoop.detenerEjecucion();
+                if (gameLoop.estaEjecutando() == true) {
+                    gameLoop.detenerEjecucion();
+                }
+                manejador.abrirInicio(frame);
             }
         });
         frame.getContentPane().add(btnDetener);
@@ -376,30 +388,15 @@ public class VentanaJuego extends Ventana implements Observador {
 
     public void verificarFinDelJuego() {
         if (partida.gano()) {
-            JFrame frame2 = new JFrame();
-            frame2.setForeground(new Color(0, 0, 0));
-            frame2.setBounds(100, 100, 800, 1000);
-            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame2.getContentPane().setLayout(null);
-            frame2.setTitle("Batalla Naval - Grupo 11");
+            VentanaFondo ventana = new VentanaFondo("VICTORIA", "imagenes/gano.png");
+            ventana.setVisible(true);
             frame.dispose();
-            frame2.setVisible(true);
-            JLabel gano = new JLabel("Has ganado");
-            gano.setBounds(200, 200, 200, 200);
-            frame2.add(gano);
+
         }
         if (partida.perdio()) {
-            JFrame frame2 = new JFrame();
-            frame2.setForeground(new Color(0, 0, 0));
-            frame2.setBounds(100, 100, 800, 1000);
-            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame2.getContentPane().setLayout(null);
-            frame2.setTitle("Batalla Naval - Grupo 11");
+            VentanaFondo ventana = new VentanaFondo("DERROTA", "imagenes/perdio.png");
+            ventana.setVisible(true);
             frame.dispose();
-            frame2.setVisible(true);
-            JLabel perdio = new JLabel("Has perdido..");
-            perdio.setBounds(200, 200, 200, 200);
-            frame2.add(perdio);
         }
     }
 

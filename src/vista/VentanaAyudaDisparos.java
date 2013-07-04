@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class VentanaAyudaDisparos extends JFrame {
+public class VentanaAyudaDisparos extends VentanaGeneral {
 
     ManejadorVentanas manejador;
     int tamX = 218; // ancho de los botones
@@ -17,13 +17,11 @@ public class VentanaAyudaDisparos extends JFrame {
     JFrame frame;
 
     public VentanaAyudaDisparos(ManejadorVentanas manejadorV) {
+        super("Batalla Navalgo - Ayuda Disparos");
         manejador = manejadorV;
-        setSize(800, 481);
-        this.setTitle("Batalla Navalgo - Ayuda Disparos");
         this.addBtnAtras();
         this.addBtnSig();
         this.addImagenDeFondo();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame = this;
     }
 
