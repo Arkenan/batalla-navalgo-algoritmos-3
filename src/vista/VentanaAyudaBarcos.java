@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class VentanaAyudaBarcos extends VentanaGeneral {
@@ -14,35 +13,34 @@ public class VentanaAyudaBarcos extends VentanaGeneral {
      * 
      */
     private static final long serialVersionUID = 1L;
-    JButton btnAyudaBarcos, btnAyudaDisparos;
+    // JButton btnAyudaBarcos, btnAyudaDisparos;
     int posTextoX = 400; // posicion en X de los textos ayuda
     ManejadorVentanas manejador;
-    int tamX = 218; // ancho de los botones
-    int tamY = 54; // altura de los botones
+    // int tamX = 218; // ancho de los botones
+    // int tamY = 54; // altura de los botones
     int posY = 355; // posicion en Y de los botones
-    JFrame frame;
 
     public VentanaAyudaBarcos(ManejadorVentanas manejadorV) {
         super("Batalla Navalgo - Ayuda");
         this.addBtnAtras();
         this.addBtnSig();
-        this.addAyudaBuque();
-        this.addAyudaDestructor();
-        this.addAyudaLancha();
-        this.addAyudaPortaaviones();
-        this.addAyudaRompehielo();
-        this.addImagenDeFondo();
+        // this.addAyudaBuque();
+        // this.addAyudaDestructor();
+        // this.addAyudaLancha();
+        // this.addAyudaPortaaviones();
+        // this.addAyudaRompehielo();
+        this.addImagenDeFondo("imagenes/ayuda/barcos/ayuda.png");
         manejador = manejadorV;
-        frame = this;
+        // frame = this;
     }
 
-    private void addImagenDeFondo() {
-        ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/ayuda/barcos/ayuda.png");
-        JLabel icono = new JLabel(iconoNuevaPartida);
-        icono.setBounds(0, 0, 800, 481);
-        this.getContentPane().add(icono);
-
-    }
+    /*
+     * private void addImagenDeFondo() { ImageIcon iconoNuevaPartida = new
+     * ImageIcon("imagenes/ayuda/barcos/ayuda.png"); JLabel icono = new JLabel(iconoNuevaPartida);
+     * icono.setBounds(0, 0, 800, 481); this.getContentPane().add(icono);
+     * 
+     * }
+     */
 
     private void addAyudaBuque() {
         this.addTextoBuque();
@@ -180,9 +178,10 @@ public class VentanaAyudaBarcos extends VentanaGeneral {
     }
 
     private JButton addBtnAtras() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/intro.png");
-        JButton btnAtras = new JButton(icono);
-        btnAtras.setBounds(0, posY, tamX, tamY);
+        // ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/intro.png");
+        // JButton btnAtras = new JButton(icono);
+        // btnAtras.setBounds(0, posY, tamX, tamY);
+        Boton btnAtras = new Boton("imagenes/ayuda/barcos/intro.png", 0, posY);
         btnAtras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -194,9 +193,10 @@ public class VentanaAyudaBarcos extends VentanaGeneral {
     }
 
     private JButton addBtnSig() {
-        ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/disparos.png");
-        JButton btnSiguiente = new JButton(icono);
-        btnSiguiente.setBounds(550, posY, tamX, tamY);
+        Boton btnSiguiente = new Boton("imagenes/ayuda/barcos/disparos.png", 550, posY);
+        // ImageIcon icono = new ImageIcon("imagenes/ayuda/barcos/disparos.png");
+        // JButton btnSiguiente = new JButton(icono);
+        // btnSiguiente.setBounds(550, posY, tamX, tamY);
         btnSiguiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {

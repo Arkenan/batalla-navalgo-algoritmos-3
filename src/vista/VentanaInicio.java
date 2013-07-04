@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VentanaInicio extends VentanaGeneral implements ItemListener {
@@ -29,8 +28,8 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         btnTutorial = this.addBtnTutorial();
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
-        this.addImagenDeFondo();
-        frame = this;
+        this.addImagenDeFondo("imagenes/inicio/a.jpg");
+        frame = this; // no cambiar
         manejador = manejadorVentana;
 
     }
@@ -41,9 +40,11 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
      */
 
     private JButton addBtnAtras() {
-        ImageIcon icono = new ImageIcon("imagenes/inicio/atras.png");
-        JButton btnAtras = new JButton(icono);
-        btnAtras.setBounds(38, 400, tamX, tamY);
+        // ImageIcon icono = new ImageIcon("imagenes/inicio/atras.png");
+        // JButton btnAtras = new JButton(icono);
+        // btnAtras.setBounds(38, 400, tamX, tamY);
+        Boton btnAtras = new Boton("imagenes/inicio/atras.png", 38, 400);
+
         btnAtras.setVisible(false);
         btnAtras.addActionListener(new ActionListener() {
             @Override
@@ -59,17 +60,18 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         return btnAtras;
     }
 
-    private void addImagenDeFondo() {
-        ImageIcon iconoNuevaPartida = new ImageIcon("imagenes/inicio/a.jpg");
-        JLabel icono = new JLabel(iconoNuevaPartida);
-        icono.setBounds(10, 40, 50, 100);
-        this.getContentPane().add(icono);
-    }
+    /*
+     * private void addImagenDeFondo() { ImageIcon iconoNuevaPartida = new
+     * ImageIcon("imagenes/inicio/a.jpg"); JLabel icono = new JLabel(iconoNuevaPartida);
+     * icono.setBounds(10, 40, 50, 100); this.getContentPane().add(icono); }
+     */
 
     private JButton addBtnNuevaPartida() {
-        ImageIcon icono = new ImageIcon("imagenes/inicio/nuevaPartida.png");
-        JButton btnNuevaPartida = new JButton(icono);
-        btnNuevaPartida.setBounds(42, 100, tamX, tamY);
+        // ImageIcon icono = new ImageIcon("imagenes/inicio/nuevaPartida.png");
+        // JButton btnNuevaPartida = new JButton(icono);
+        // btnNuevaPartida.setBounds(42, 100, tamX, tamY);
+        Boton btnNuevaPartida = new Boton("imagenes/inicio/nuevaPartida.png", 42, 100);
+
         btnNuevaPartida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -84,9 +86,10 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JButton addBtnGargarPartida() {
-        ImageIcon icono = new ImageIcon("imagenes/inicio/guardarPartida.png");
-        JButton btnGuardarPartida = new JButton(icono);
-        btnGuardarPartida.setBounds(41, 200, tamX, tamY);
+        // ImageIcon icono = new ImageIcon("imagenes/inicio/guardarPartida.png");
+        // JButton btnGuardarPartida = new JButton(icono);
+        // btnGuardarPartida.setBounds(41, 200, tamX, tamY);
+        Boton btnGuardarPartida = new Boton("imagenes/inicio/guardarPartida.png", 41, 200);
         btnGuardarPartida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -142,9 +145,10 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JButton addBtnTutorial() {
-        ImageIcon icono = new ImageIcon("imagenes/inicio/tutorial.png");
-        JButton btnTutorial = new JButton(icono);
-        btnTutorial.setBounds(41, 300, tamX, tamY);
+        // ImageIcon icono = new ImageIcon("imagenes/inicio/tutorial.png");
+        // JButton btnTutorial = new JButton(icono);
+        // btnTutorial.setBounds(41, 300, tamX, tamY);
+        Boton btnTutorial = new Boton("imagenes/inicio/tutorial.png", 41, 300);
         btnTutorial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {

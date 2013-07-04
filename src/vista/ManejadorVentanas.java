@@ -42,9 +42,9 @@ public class ManejadorVentanas {
 
     public void abrirInicio(JFrame ventana) {
         ventanaInicio.setVisible(true);
-        if (ventana == null) {
-            System.out.println("ppppppppppp");
-        }
+        // if (ventana == null) {
+        // System.out.println("ppppppppppp");
+        // }
         ventana.setVisible(false);
 
     }
