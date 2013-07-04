@@ -49,19 +49,19 @@ estrategiaDeMovimiento):Barco</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>16.0</double>
+      <double>9.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>131.0</double>
+      <double>121.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>16.0</double>
-     <double>131.0</double>
+     <double>9.0</double>
+     <double>121.0</double>
     </void>
    </object>
   </void>
@@ -158,19 +158,19 @@ estrategiaDeMovimiento):Barco</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>446.0</double>
+      <double>481.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>127.0</double>
+      <double>119.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>446.0</double>
-     <double>127.0</double>
+     <double>481.0</double>
+     <double>119.0</double>
     </void>
    </object>
   </void>

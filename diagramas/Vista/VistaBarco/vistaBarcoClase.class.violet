@@ -11,7 +11,8 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+actualizar()</string>
+      <string>+actualizar()
++dibujar(SuperficieDeDibujo superficie)</string>
      </void>
     </void>
     <void property="name">
