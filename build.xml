@@ -40,7 +40,7 @@
 	    </junit>
   	</target>
 
-  <target name="ejecutar" depends="testear">
+  <target name="ejecutar" depends="compilar">
     <java classname="vista.ManejadorVentanas" fork="true" failonerror="true">
       <classpath refid="librerias" />
     </java>

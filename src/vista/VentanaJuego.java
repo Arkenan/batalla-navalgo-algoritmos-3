@@ -191,7 +191,7 @@ public class VentanaJuego extends Ventana implements Observador {
                 FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML", "xml");
                 fileChooser.setFileFilter(filtro);
                 fileChooser.setCurrentDirectory(new File("Niveles XML"));
-                int seleccion = fileChooser.showOpenDialog(null);
+                int seleccion = fileChooser.showSaveDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
                     String[] partesDelNombre = fichero.getName().split("\\.");
