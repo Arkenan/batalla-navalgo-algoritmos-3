@@ -93,11 +93,12 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
             public void actionPerformed(ActionEvent arg0) {
                 JFileChooser fileChooser = new JFileChooser();
                 FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML", "xml");
+                fileChooser.setCurrentDirectory(new File("Niveles XML"));
                 fileChooser.setFileFilter(filtro);
                 int seleccion = fileChooser.showOpenDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
-                    manejador.abrirJuego((fichero.getAbsolutePath()).replace("\\", "/"));
+                    manejador.abrirJuego(("file:///" + fichero.getAbsolutePath()).replace("\\", "/"));
                 }
 
             }
