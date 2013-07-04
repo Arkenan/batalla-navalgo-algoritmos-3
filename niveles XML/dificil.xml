@@ -21,7 +21,7 @@
       <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(0,1)"></Estrategia>
     </Lancha>
     <Lancha orientacion="(0,1)" posicion="(10,1)" completo="si">
-      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,-1)"></Estrategia>
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(-1,1)"></Estrategia>
     </Lancha>
     <Destructor orientacion="(0,1)" posicion="(1,1)"  completo="si">
       <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
