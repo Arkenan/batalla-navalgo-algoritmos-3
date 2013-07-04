@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import partes.Parte;
 import barcos.Vector;
-import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 
 public class VistaParteVertical extends VistaParte {
 	protected BufferedImage imagenDestruidaArriba;
@@ -15,10 +15,9 @@ public class VistaParteVertical extends VistaParte {
 	protected BufferedImage imagenSanaArriba;
 	protected BufferedImage imagenSanaAbajo;
 
-	public VistaParteVertical(String dirSana, String dirDestruida,
-			ObjetoPosicionable posicionable, Vector direccion, String nombre)
-			throws IOException {
-		super(posicionable, direccion);
+	public VistaParteVertical(String dirSana, String dirDestruida, Parte parte,
+			Vector direccion, String nombre) throws IOException {
+		super(parte, direccion);
 		imagenDestruidaArriba = ImageIO.read(new File(dirDestruida + "arriba"
 				+ "/" + nombre));
 		imagenDestruidaAbajo = ImageIO.read(new File(dirDestruida + "abajo"

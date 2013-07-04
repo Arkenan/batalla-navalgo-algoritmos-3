@@ -9,7 +9,6 @@ import partes.Parte;
 import barcos.Vector;
 import fiuba.algo3.titiritero.dibujables.SuperficiePanel;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
-import fiuba.algo3.titiritero.modelo.ObjetoPosicionable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
 public abstract class VistaParte implements ObjetoDibujable, Observador {
@@ -19,10 +18,8 @@ public abstract class VistaParte implements ObjetoDibujable, Observador {
 
 	protected Vector direccion;
 
-	public VistaParte(ObjetoPosicionable posicionable, Vector unaDireccion)
-			throws IOException {
-		parte = (Parte) posicionable;
-
+	public VistaParte(Parte unaParte, Vector unaDireccion) throws IOException {
+		parte = unaParte;
 		direccion = unaDireccion;
 
 	}

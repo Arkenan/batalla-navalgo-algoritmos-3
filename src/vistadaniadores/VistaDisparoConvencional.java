@@ -28,6 +28,7 @@ public class VistaDisparoConvencional extends ObjetoObservable implements
 			e.printStackTrace();
 		}
 		estado = "disparo";
+		disparo.agregarObservador(this);
 	}
 
 	private int conversionDeCoordenada(int coordenada) {

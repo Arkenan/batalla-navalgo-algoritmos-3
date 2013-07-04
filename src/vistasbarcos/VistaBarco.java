@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import observador.ObjetoObservable;
 import observador.Observador;
 import barcos.Barco;
+import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
+import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
-public class VistaBarco extends ObjetoObservable implements Observador {
+public class VistaBarco extends ObjetoObservable implements Observador,
+		ObjetoDibujable {
 	ArrayList<VistaParte> vistasPartes;
 	Barco barco;
 
@@ -34,6 +37,14 @@ public class VistaBarco extends ObjetoObservable implements Observador {
 				vistasPartes.get(i).cambiarDireccion(
 						barco.obtenerDireccionMovimiento());
 			}
+		}
+
+	}
+
+	@Override
+	public void dibujar(SuperficieDeDibujo superficieDeDibujo) {
+		for (int i = 0; i < vistasPartes.size(); i++) {
+			vistasPartes.get(i).dibujar(superficieDeDibujo);
 		}
 
 	}

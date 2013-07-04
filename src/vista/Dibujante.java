@@ -2,6 +2,7 @@ package vista;
 
 import java.util.ArrayList;
 
+import vistasbarcos.VistaBarco;
 import fiuba.algo3.titiritero.modelo.ObjetoDibujable;
 import fiuba.algo3.titiritero.modelo.SuperficieDeDibujo;
 
@@ -17,10 +18,6 @@ public class Dibujante implements ObjetoDibujable {
 	public void cambiarFondo(ObjetoDibujable fondo) {
 		dibujables.remove(0);
 		dibujables.add(0, fondo);
-	}
-
-	public void agregarVistaParte(ObjetoDibujable vistaParte) {
-		dibujables.add(vistaParte);
 	}
 
 	public void agregarDisparo(ObjetoDibujable disparo) {
@@ -49,4 +46,8 @@ public class Dibujante implements ObjetoDibujable {
 		}
 	}
 
+	public void agregarVistaBarco(VistaBarco vistaBarco) {
+		dibujables.add(vistaBarco);
+
+	}
 }

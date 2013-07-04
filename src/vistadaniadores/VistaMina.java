@@ -28,6 +28,7 @@ public class VistaMina extends ObjetoObservable implements ObjetoDibujable,
 
 		estado = "mina";
 		mina = unaMina;
+		mina.agregarObservador(this);
 		try {
 			imagenMina = ImageIO.read(new File(DIRECTORIO_IMAGEN_MINA));
 			imagenExplosion = ImageIO
