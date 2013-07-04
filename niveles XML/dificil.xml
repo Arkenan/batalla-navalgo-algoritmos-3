@@ -27,11 +27,10 @@
       <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
     </Destructor>
     <Destructor orientacion="(0,1)" posicion="(10,6)"  completo="si">
-      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(-1,-1)"></Estrategia>
+      <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,1)"></Estrategia>
     </Destructor>
     <Destructor orientacion="(1,0)" posicion="(1,10)"  completo="si">
       <Estrategia tipo="MovimientoLinealStrategy" direccionActual="(1,0)"></Estrategia>
     </Destructor>
-  
   </Barcos>
 </Partida>
