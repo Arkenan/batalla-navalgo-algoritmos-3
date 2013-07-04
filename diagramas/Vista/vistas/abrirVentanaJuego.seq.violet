@@ -5,7 +5,9 @@
    <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>abrir ventana juego</string>
+      <string>explica en forma general como se abre y se cierra la ventana
+que lo ordena.
+Ejemplo:ventanaInicio ordena abrir ventana juego</string>
      </void>
     </void>
    </object>
@@ -269,7 +271,7 @@ Juego</string>
   <void method="connect">
    <object class="com.horstmann.violet.CallEdge">
     <void property="middleLabel">
-     <string>setVIsible(false)</string>
+     <string>setVIsible(true)</string>
     </void>
    </object>
    <object idref="ActivationBarNode1"/>
