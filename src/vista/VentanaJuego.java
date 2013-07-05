@@ -491,8 +491,8 @@ public class VentanaJuego extends Ventana implements Observador {
             VentanaFondo ventana = new VentanaFondo(manejador, "VICTORIA", "imagenes/victoria");
             ventana.setVisible(true);
             frame.dispose();
-
         }
+
         if (partida.perdio()) {
             VentanaFondo ventana = new VentanaFondo(manejador, "DERROTA", "imagenes/derrota");
             ventana.setVisible(true);

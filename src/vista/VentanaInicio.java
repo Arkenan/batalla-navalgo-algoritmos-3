@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VentanaInicio extends VentanaGeneral implements ItemListener {
@@ -98,10 +100,17 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 int seleccion = fileChooser.showOpenDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
                     File fichero = fileChooser.getSelectedFile();
-                    if (!(new File(("file:///" + fichero.getAbsolutePath()).replace("\\", "/")).isFile())) {
-                        this.actionPerformed(arg0);
+                    String dirArchivo;
+                    try {
+                        dirArchivo = fichero.getCanonicalPath();
+                    } catch (IOException e) {
+                        dirArchivo = "";
                     }
-                    manejador.abrirJuego(("file:///" + fichero.getAbsolutePath()).replace("\\", "/"));
+                    if (!(new File(dirArchivo).exists())) {
+                        JOptionPane.showMessageDialog(null, "Archivo no encontrado: " + dirArchivo);
+                    } else {
+                        manejador.abrirJuego("file:///" + dirArchivo);
+                    }
                 }
             }
         });
@@ -111,7 +120,8 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
 
     private JComboBox<String> addMenuDespegable() {
         JComboBox<String> menu = new JComboBox<String>();
-        menu.setBounds(90, 170, 100, 40);
+
+        menu.setBounds(90, 170, 125, 40);
         menu.setVisible(false);
         menu.addItemListener(this);
 

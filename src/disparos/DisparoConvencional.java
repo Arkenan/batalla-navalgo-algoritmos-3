@@ -14,65 +14,69 @@ import escenario.Tablero;
 import excepciones.PosicionInvalida;
 
 public class DisparoConvencional extends Disparo {
-	protected Casillero casilleroAfectado;
+    protected Casillero casilleroAfectado;
 
-	public DisparoConvencional() {
-		super();
-		costo = 200;
-		nombre = "disparoconvencional";
-	}
+    public DisparoConvencional() {
+        super();
+        costo = 200;
+        nombre = "disparoconvencional";
+    }
 
-	@Override
-	public void cambiarCasillerosAfectados(Vector unaPosicion)
-			throws PosicionInvalida {
-		Tablero tablero = Tablero.getTablero();
-		if (tablero.fueraDeRango(unaPosicion)) {
-			throw new PosicionInvalida(
-					"El disparo queda fuera de rango. Imposible colocar.");
-		}
-		casilleroAfectado = tablero.obtenerCasillero(unaPosicion);
-		posicion = unaPosicion;
-	}
+    public DisparoConvencional(Element nodoDisparo) {
+        costo = 200;
+        nombre = "disparoconvencional";
+        cambiarCasillerosAfectados(new Vector(nodoDisparo.attributeValue("posicion")));
+    }
 
-	@Override
-	public boolean debeDaniarEnEsteTurno() {
-		return true;
-	}
+    @Override
+    public void cambiarCasillerosAfectados(Vector unaPosicion) throws PosicionInvalida {
+        Tablero tablero = Tablero.getTablero();
+        if (tablero.fueraDeRango(unaPosicion)) {
+            throw new PosicionInvalida("El disparo queda fuera de rango. Imposible colocar.");
+        }
+        casilleroAfectado = tablero.obtenerCasillero(unaPosicion);
+        posicion = unaPosicion;
+    }
 
-	@Override
-	public void daniar() {
-		ArrayList<Parte> partesAfectadas = casilleroAfectado.obtenerPartes();
-		for (int i = 0; i < partesAfectadas.size(); i++) {
-			(partesAfectadas.get(i)).explosion(this);
-		}
-		notificar();
-	}
+    @Override
+    public boolean debeDaniarEnEsteTurno() {
+        return true;
+    }
 
-	@Override
-	public void afectar(ParteDanioTotal parte) {
-		parte.recibirDanio(1);
-	}
+    @Override
+    public void daniar() {
+        ArrayList<Parte> partesAfectadas = casilleroAfectado.obtenerPartes();
+        for (int i = 0; i < partesAfectadas.size(); i++) {
+            (partesAfectadas.get(i)).explosion(this);
+        }
+        notificar();
+    }
 
-	@Override
-	public void afectar(ParteDanioDisparo parte) {
-		parte.recibirDanio(1);
-	}
+    @Override
+    public void afectar(ParteDanioTotal parte) {
+        parte.recibirDanio(1);
+    }
 
-	@Override
-	public Element generarNodo() {
-		Element nodoADevolver = DocumentHelper
-				.createElement("DisparoConvencional");
-		return nodoADevolver;
-	}
+    @Override
+    public void afectar(ParteDanioDisparo parte) {
+        parte.recibirDanio(1);
+    }
 
-	@Override
-	public int getX() {
-		return posicion.x();
-	}
+    @Override
+    public Element generarNodo() {
+        Element nodoADevolver = DocumentHelper.createElement("DisparoConvencional");
+        nodoADevolver.addAttribute("Posicion", posicion.toString());
+        return nodoADevolver;
+    }
 
-	@Override
-	public int getY() {
-		return posicion.y();
-	}
+    @Override
+    public int getX() {
+        return posicion.x();
+    }
+
+    @Override
+    public int getY() {
+        return posicion.y();
+    }
 
 }
