@@ -31,6 +31,7 @@ public class MinaContacto extends Mina {
     @Override
     public Element generarNodo() {
         Element nodoADevolver = DocumentHelper.createElement("MinaContacto");
+        nodoADevolver.addAttribute("posicion", posicion.toString());
         return nodoADevolver;
     }
 

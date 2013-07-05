@@ -55,8 +55,6 @@ public class Partida {
         Element nodoPartida = DocumentHelper.createElement("Partida");
         ArrayList listaAGuardar = new ArrayList();
         ArrayList<Element> listaNodosAGuardar = new ArrayList<Element>();
-        // acá tengo que recorrer las listas de destructibles, movibles y
-        // disparos.
         Iterator<Daniador> it = daniadores.iterator();
         Element nodoDisparos = DocumentHelper.createElement("Disparos");
         while (it.hasNext()) {
@@ -64,7 +62,6 @@ public class Partida {
             nodoDisparos.add(daniador.generarNodo());
         }
         nodoPartida.add(nodoDisparos);
-        // ESTO ES PROVISORIO.
         nodoPartida.add(manejadorDeElementosDelTablero.generarNodoBarcos());
         nodoPartida.addAttribute("puntos", Integer.toString(this.getPuntos()));
         return nodoPartida;
