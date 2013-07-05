@@ -12,23 +12,9 @@ public class VentanaFondo extends VentanaGeneral {
         super(titulo);
         carpeta = dirCarpeta;
         this.addBtnSalir();
-        this.addBtnVolverAjugar();
         this.addBtnVolverInicio();
         this.addImagenDeFondo(dirCarpeta + "/fondo.png");
         manejador = manejadorV;
-    }
-
-    private void addBtnVolverAjugar() {
-        Boton btnVolverAJugar = new Boton(carpeta + "/volver.png", 292, posY);
-        btnVolverAJugar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                // por lo pronto no hace nada, la idea es que empieze de nuevo la partida
-            }
-        });
-        this.getContentPane().add(btnVolverAJugar);
-        // return btnVolverAJugar;
-
     }
 
     private void addBtnVolverInicio() {

@@ -43,6 +43,7 @@ public class ManejadorVentanas {
     }
 
     public void abrirInicio(JFrame ventana) {
+        ventanaInicio = new VentanaInicio(this);
         ventanaInicio.setVisible(true);
         ventana.setVisible(false);
 

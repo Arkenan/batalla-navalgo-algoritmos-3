@@ -112,7 +112,7 @@ public class VentanaJuego extends Ventana implements Observador {
     private void initialize(String dirArchivo) throws IOException {
         frame = new JFrame();
         frame.setForeground(new Color(0, 0, 0));
-        frame.setSize(800, 481);
+        frame.setSize(800, 501);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.setTitle("Batalla Naval - Grupo 11");
