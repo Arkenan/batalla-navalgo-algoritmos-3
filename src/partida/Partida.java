@@ -129,7 +129,7 @@ public class Partida {
     // Nos devuelve un booleano que informa si los puntos son suficientes o no
     // para seguir jugando.
     public boolean faltanPuntosParaSeguir() {
-        return (puntos < decrecimientoDePuntosPorPasoDeTurno);
+        return (puntos < 50);
     }
 
     // Este metodo se ocupa del movimiento de barcos y explosion de minas.
