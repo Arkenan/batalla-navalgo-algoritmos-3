@@ -59,11 +59,18 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 	public VistaBarco crearVista() {
 		ArrayList<VistaParte> vistasDePartes = new ArrayList<VistaParte>();
 		Parte parteAuxiliar;
+		Vector orientacionAux;
+		Vector direccionAux;
 		switch (orientacion) {
 		case "horizontal":
 			for (int i = 0; i < partes.size(); i++) {
 				try {
-					parteAuxiliar = partes.get(i);
+					orientacionAux = barco.obtenerOrientacion();
+					direccionAux = barco.obtenerDireccionMovimiento();
+					if (orientacionAux.productoEscalar(direccionAux) == -1) {
+						parteAuxiliar = partes.get(partes.size() - 1 - i);
+					} else
+						parteAuxiliar = partes.get(i);
 					VistaParte vistaParteAuxiliar = new VistaParteHorizontal(
 							directorioImagenesPartesSanas.get(i),
 							directorioImagenesPartesDestruidas.get(i),
@@ -80,7 +87,12 @@ public abstract class VistasBarcoFactory implements AbstractVistasBarcoFactory {
 		case "vertical":
 			for (int i = 0; i < partes.size(); i++) {
 				try {
-					parteAuxiliar = partes.get(i);
+					orientacionAux = barco.obtenerOrientacion();
+					direccionAux = barco.obtenerDireccionMovimiento();
+					if (orientacionAux.productoEscalar(direccionAux) == -1) {
+						parteAuxiliar = partes.get(partes.size() - 1 - i);
+					} else
+						parteAuxiliar = partes.get(i);
 					VistaParte vistaParteAuxiliar = new VistaParteVertical(
 							directorioImagenesPartesSanas.get(i),
 							directorioImagenesPartesDestruidas.get(i),
