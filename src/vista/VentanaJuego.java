@@ -179,16 +179,16 @@ public class VentanaJuego extends Ventana implements Observador {
 	private JLabel addPuntaje() {
 		int puntos = partida.getPuntos();
 		JLabel puntaje = new JLabel("Puntaje:" + Integer.toString(puntos));
-		Font font = new Font("Freestyle Script", Font.ITALIC, 30);
+		Font font = new Font("Elephant", Font.ITALIC, 20);
 		puntaje.setFont(font);
-		puntaje.setBounds(50, 5, 150, 45);
+		puntaje.setBounds(50, 5, 190, 45);
 		frame.add(puntaje);
 		return puntaje;
 	}
 
 	private void addBtnGuardar() {
 		JButton btnGuardar = new JButton("guardar");
-		btnGuardar.setBounds(650, 5, 100, 40);
+		btnGuardar.setBounds(640, 5, 80, 40);
 		btnGuardar.setVisible(true);
 		btnGuardar.addActionListener(new ActionListener() {
 			@Override
@@ -239,16 +239,20 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JLabel addTurno() {
-		JLabel unTurno = new JLabel("Turno numero: "
+		JLabel unTurno = new JLabel("Turno: "
 				+ Integer.toString(this.numeroTurno));
-		unTurno.setBounds(200, 5, 200, 45);
+		Font font = new Font("Elephant", Font.ITALIC, 18);
+		unTurno.setFont(font);
+		unTurno.setBounds(220, 5, 150, 45);
 		frame.add(unTurno);
 		return unTurno;
 	}
 
 	private JLabel addArmaSeleccionada() {
-		JLabel armaSeleccionada = new JLabel("Arma seleccionada:");
-		armaSeleccionada.setBounds(325, 5, 150, 45);
+		JLabel armaSeleccionada = new JLabel("Arma actual:");
+		Font font = new Font("Elephant", Font.ITALIC, 19);
+		armaSeleccionada.setFont(font);
+		armaSeleccionada.setBounds(330, 5, 150, 45);
 		frame.add(armaSeleccionada);
 		return armaSeleccionada;
 	}
@@ -275,7 +279,7 @@ public class VentanaJuego extends Ventana implements Observador {
 
 	private JLabel addImagenArma() {
 		JLabel imagenArma = new JLabel(this.obtenerImagenArma());
-		imagenArma.setBounds(400, 5, 150, 45);
+		imagenArma.setBounds(415, 5, 150, 45);
 		frame.add(imagenArma);
 		return imagenArma;
 	}
@@ -315,7 +319,7 @@ public class VentanaJuego extends Ventana implements Observador {
 			vistasDaniadores.add(vistaDisparo);
 			partida.colocarDaniador(unDisparo);
 			numeroTurno++;
-			turno.setText("Turno numero: " + Integer.toString(this.numeroTurno));
+			turno.setText("Turno: " + Integer.toString(this.numeroTurno));
 			puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
 			verificarFinDelJuego();
 		} else {
@@ -334,7 +338,7 @@ public class VentanaJuego extends Ventana implements Observador {
 			vistasDaniadores.add(vistaMina);
 			partida.colocarDaniador(unaMina);
 			numeroTurno++;
-			turno.setText("Turno numero: " + Integer.toString(this.numeroTurno));
+			turno.setText("Turno: " + Integer.toString(this.numeroTurno));
 			puntaje.setText("Puntaje:" + Integer.toString(partida.getPuntos()));
 			verificarFinDelJuego();
 		} else {
@@ -489,7 +493,7 @@ public class VentanaJuego extends Ventana implements Observador {
 
 	private JButton addBotonVolver(int posicionX, int posicionY) {
 		JButton btnVolver = new JButton("Volver al menu");
-		btnVolver.setBounds(525, 5, 120, 40);
+		btnVolver.setBounds(515, 5, 120, 40);
 		btnVolver.setVisible(true);
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
@@ -512,7 +516,7 @@ public class VentanaJuego extends Ventana implements Observador {
 			public void actionPerformed(ActionEvent arg0) {
 				partida.pasarTurno();
 				numeroTurno++;
-				turno.setText("Turno numero: " + Integer.toString(numeroTurno));
+				turno.setText("Turno: " + Integer.toString(numeroTurno));
 				puntaje.setText("Puntaje:"
 						+ Integer.toString(partida.getPuntos()));
 				verificarFinDelJuego();
