@@ -26,6 +26,7 @@ import observador.Observador;
 
 import org.dom4j.Element;
 
+import partida.ConstructorDeDaniador;
 import partida.Partida;
 import vistadaniadores.VistaDaniador;
 import vistadaniadores.VistaDisparoConvencional;
@@ -214,7 +215,6 @@ public class VentanaJuego extends Ventana implements Observador {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-
                             } else {
                                 this.actionPerformed(arg0);
                             }
@@ -296,7 +296,7 @@ public class VentanaJuego extends Ventana implements Observador {
     }
 
     private void notificarCantidadDePuntosInsuficientes() {
-        JOptionPane.showMessageDialog(null, "Puntos insuficientes: el arma que intentas utilizar cuesta m√°s puntos que los que tienes.");
+        JOptionPane.showMessageDialog(null, "Puntos insuficientes: el arma que intentas utilizar cuesta m·s puntos que los que tienes.");
     }
 
     private void colocarDisparoConvencional(String nombre, Vector posicionClickeada) {
@@ -393,26 +393,25 @@ public class VentanaJuego extends Ventana implements Observador {
     private void inicializarModelo(String dirArchivo) throws IOException {
         ArrayList<Barco> barcos;
         ArrayList<AbstractVistasBarcoFactory> constructoresDeVistas;
+        dibujante = new Dibujante(new Fondo(0, 0, 400, 400, "imagenes/mar.png"));
         /* PARA NIVELES Y PARTIDAS */
-        if (!dirArchivo.equals("")) {
-            // fijarse de los disparos para juegos guardados!
-            ArrayList<Daniador> disparos = new ArrayList<Daniador>();
-            Element nodoPartida = Partida.obtenerNodoPartida(dirArchivo);
 
+        if (!dirArchivo.equals("")) {
+            Element nodoPartida = Partida.obtenerNodoPartida(dirArchivo);
             partida = new Partida(nodoPartida);
             barcos = partida.crearBarcos(nodoPartida);
             constructoresDeVistas = VistaBarco.obtenerVistas(nodoPartida);
+
+            Element nodoDisparos = nodoPartida.element("Disparos");
+            ArrayList<Daniador> daniadores = partida.obtenerDaniadores();
+            ArrayList<VistaDaniador> vistasDaniadores = (new ConstructorDeDaniador()).construirVistasDaniadores(nodoDisparos, daniadores, dibujante);
         } else {
             partida = new Partida();
             barcos = partida.crearBarcosPorDefault();
             constructoresDeVistas = partida.getConstructoresDeVistasPorDefault();
         }
-
         disparoSeleccionado = DISPARO_POR_DEFAULT;
         tipoDisparoSeleccionado = DISPARO_POR_DEFAULT;
-
-        dibujante = new Dibujante(new Fondo(0, 0, 400, 400, "imagenes/mar.png"));
-
         Barco barcoAux;
         AbstractVistasBarcoFactory constructorAuxiliar;
         VistaBarco vistaBarcoAuxiliar;
@@ -455,7 +454,6 @@ public class VentanaJuego extends Ventana implements Observador {
 
     private void addMouseListener(JPanel panel) {
         panel.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseClicked(MouseEvent arg0) {
             }
@@ -470,8 +468,20 @@ public class VentanaJuego extends Ventana implements Observador {
         panel.setBounds(posicionX, posicionY, tamX, tamY);
         panel.setBackground(Color.BLUE);
         frame.getContentPane().add(panel);
-
         return panel;
+    }
+
+    public void verificarFinDelJuego() {
+        if (partida.gano()) {
+            VentanaFondo ventana = new VentanaFondo(manejador, "VICTORIA", "imagenes/victoria");
+            ventana.setVisible(true);
+            frame.dispose();
+        }
+        if (partida.perdio()) {
+            VentanaFondo ventana = new VentanaFondo(manejador, "DERROTA", "imagenes/derrota");
+            ventana.setVisible(true);
+            frame.dispose();
+        }
     }
 
     private JButton addBotonVolver(int posicionX, int posicionY) {
@@ -491,6 +501,18 @@ public class VentanaJuego extends Ventana implements Observador {
         return btnVolver;
     }
 
+    private JButton addBotonIniciar(int posicionX, int posicionY) {
+        Boton btnIniciar = new Boton("imagenes/iconos/iniciar.png", posicionX, posicionY);
+        btnIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                gameLoop.iniciarEjecucion();
+            }
+        });
+        frame.getContentPane().add(btnIniciar);
+        return btnIniciar;
+    }
+
     private JButton addBotonPasarTurno(int posicionX, int posicionY) {
         Boton btnPasarTurno = new Boton("imagenes/iconos/pasar turno.png", posicionX, posicionY);
         btnPasarTurno.addActionListener(new ActionListener() {
@@ -505,31 +527,6 @@ public class VentanaJuego extends Ventana implements Observador {
         });
         frame.getContentPane().add(btnPasarTurno);
         return btnPasarTurno;
-    }
-
-    public void verificarFinDelJuego() {
-        if (partida.gano()) {
-            VentanaFondo ventana = new VentanaFondo(manejador, "VICTORIA", "imagenes/victoria");
-            ventana.setVisible(true);
-            frame.dispose();
-        }
-        if (partida.perdio()) {
-            VentanaFondo ventana = new VentanaFondo(manejador, "DERROTA", "imagenes/derrota");
-            ventana.setVisible(true);
-            frame.dispose();
-        }
-    }
-
-    private JButton addBotonIniciar(int posicionX, int posicionY) {
-        Boton btnIniciar = new Boton("imagenes/iconos/iniciar.png", posicionX, posicionY);
-        btnIniciar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                gameLoop.iniciarEjecucion();
-            }
-        });
-        frame.getContentPane().add(btnIniciar);
-        return btnIniciar;
     }
 
     @Override
