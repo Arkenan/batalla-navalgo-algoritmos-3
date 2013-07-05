@@ -40,6 +40,7 @@ public class VentanaFondo extends VentanaGeneral {
         btnVolverInicio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                // pepe
                 manejador.abrirInicio(frame);
             }
         });
