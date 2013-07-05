@@ -23,7 +23,7 @@ public class VentanaFondo extends VentanaGeneral {
         btnVolverAJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                manejador.abrirTutorial(frame);
+                // por lo pronto no hace nada, la idea es que empieze de nuevo la partida
             }
         });
         this.getContentPane().add(btnVolverAJugar);
