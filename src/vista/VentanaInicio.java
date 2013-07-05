@@ -41,7 +41,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JButton addBtnAtras() {
-        Boton btnAtras = new Boton("imagenes/inicio/atras.png", 57, 341);
+        Boton btnAtras = new Boton("imagenes/inicio/atras.png", 60, 341);
         btnAtras.setVisible(false);
         btnAtras.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +68,6 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 menu.setVisible(true); // medio
                 btnAtras.setVisible(true); // inferior izquierda
                 texto.setVisible(true); // medio
-                btnJugar.setVisible(true);
                 sacarBtnIniciar();
             }
         });
@@ -83,7 +82,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
             public void actionPerformed(ActionEvent arg0) {
                 JFileChooser fileChooser = new JFileChooser();
                 FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos XML", "xml");
-                fileChooser.setCurrentDirectory(new File("Niveles XML"));
+                fileChooser.setCurrentDirectory(new File("niveles XML"));
                 fileChooser.setFileFilter(filtro);
                 int seleccion = fileChooser.showOpenDialog(null);
                 if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -109,7 +108,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     private JComboBox<String> addMenuDespegable() {
         JComboBox<String> menu = new JComboBox<String>();
 
-        menu.setBounds(90, 170, 150, 40); // mover la barra al medio
+        menu.setBounds(330, 170, 150, 40); // mover la barra al medio
         menu.setVisible(false);
         menu.addItemListener(this);
 
@@ -140,7 +139,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         btnJugar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                manejador.abrirJuego("Niveles XML/" + menu.getSelectedItem().toString() + ".xml");
+                manejador.abrirJuego("niveles XML/" + menu.getSelectedItem().toString() + ".xml");
             }
         });
         this.getContentPane().add(btnJugar);
@@ -163,7 +162,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         ImageIcon imagen = new ImageIcon("imagenes/inicio/textoAyuda.png");
         JLabel icono = new JLabel(imagen);
         icono.setVisible(false);
-        icono.setBounds(244, 68, 332, 58);
+        icono.setBounds(246, 68, 332, 58);
         this.getContentPane().add(icono);
         return icono;
     }
