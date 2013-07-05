@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -18,6 +19,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     JButton btnIniciarPartida, btnCargarPartida, btnJugar, btnTutorial, btnAtras;
     JComboBox<String> menu;
     JFileChooser fc;
+    JLabel texto;
     VentanaInicio frame;
     ManejadorVentanas manejador;
     int tamX = 218; // largo de los botones
@@ -31,23 +33,15 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         btnTutorial = this.addBtnTutorial();
         btnJugar = this.addBtnJugar();
         menu = this.addMenuDespegable();
+        texto = this.addTextoAyuda();
         this.addImagenDeFondo("imagenes/inicio/a.jpg");
         frame = this; // no cambiar
         manejador = manejadorVentana;
 
     }
 
-    /*
-     * public static void main(String[] args) { VentanaInicio ventana = new VentanaInicio();
-     * ventana.setVisible(true); }
-     */
-
     private JButton addBtnAtras() {
-        // ImageIcon icono = new ImageIcon("imagenes/inicio/atras.png");
-        // JButton btnAtras = new JButton(icono);
-        // btnAtras.setBounds(38, 400, tamX, tamY);
         Boton btnAtras = new Boton("imagenes/inicio/atras.png", 38, 400);
-
         btnAtras.setVisible(false);
         btnAtras.addActionListener(new ActionListener() {
             @Override
@@ -56,32 +50,24 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 btnTutorial.setVisible(true);
                 btnJugar.setVisible(false);
                 menu.setVisible(false);
-                frame.sacarBtnAtras();
+                sacarBtnAtras();
             }
         });
         this.getContentPane().add(btnAtras);
         return btnAtras;
     }
 
-    /*
-     * private void addImagenDeFondo() { ImageIcon iconoNuevaPartida = new
-     * ImageIcon("imagenes/inicio/a.jpg"); JLabel icono = new JLabel(iconoNuevaPartida);
-     * icono.setBounds(10, 40, 50, 100); this.getContentPane().add(icono); }
-     */
-
     private JButton addBtnNuevaPartida() {
-        // ImageIcon icono = new ImageIcon("imagenes/inicio/nuevaPartida.png");
-        // JButton btnNuevaPartida = new JButton(icono);
-        // btnNuevaPartida.setBounds(42, 100, tamX, tamY);
         Boton btnNuevaPartida = new Boton("imagenes/inicio/nuevaPartida.png", 42, 100);
-
         btnNuevaPartida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 btnCargarPartida.setVisible(false);
                 btnTutorial.setVisible(false);
-                menu.setVisible(true);
-                btnAtras.setVisible(true);
+                menu.setVisible(true); // medio
+                btnAtras.setVisible(true); // inferior izquierda
+                texto.setVisible(true); // medio
+                sacarBtnIniciar();
             }
         });
         this.getContentPane().add(btnNuevaPartida);
@@ -121,7 +107,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     private JComboBox<String> addMenuDespegable() {
         JComboBox<String> menu = new JComboBox<String>();
 
-        menu.setBounds(90, 170, 125, 40);
+        menu.setBounds(90, 170, 150, 40); // mover la barra al medio
         menu.setVisible(false);
         menu.addItemListener(this);
 
@@ -137,7 +123,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == menu) {
             if (!menu.getSelectedItem().equals("--seleccionar--")) {
-                btnJugar.setVisible(true);
+                btnJugar.setVisible(true); // medio abajo del menu
             } else {
                 btnJugar.setVisible(false);
             }
@@ -160,9 +146,6 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JButton addBtnTutorial() {
-        // ImageIcon icono = new ImageIcon("imagenes/inicio/tutorial.png");
-        // JButton btnTutorial = new JButton(icono);
-        // btnTutorial.setBounds(41, 300, tamX, tamY);
         Boton btnTutorial = new Boton("imagenes/inicio/tutorial.png", 41, 300);
         btnTutorial.addActionListener(new ActionListener() {
             @Override
@@ -174,7 +157,20 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
         return btnTutorial;
     }
 
+    private JLabel addTextoAyuda() {
+        ImageIcon imagen = new ImageIcon("Imagenes/inicio/textoAyuda.png");
+        JLabel icono = new JLabel(imagen);
+        icono.setBounds(332, 58, 0, 0); // donde estan los ceros pone la posicion (centro arriba de
+                                        // todo)
+        frame.getContentPane().add(icono);
+        return icono;
+    }
+
     private void sacarBtnAtras() {
         btnAtras.setVisible(false);
+    }
+
+    private void sacarBtnIniciar() {
+        btnIniciarPartida.setVisible(false);
     }
 }
