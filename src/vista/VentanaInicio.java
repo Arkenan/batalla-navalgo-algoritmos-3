@@ -158,11 +158,10 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JLabel addTextoAyuda() {
-        ImageIcon imagen = new ImageIcon("Imagenes/inicio/textoAyuda.png");
+        ImageIcon imagen = new ImageIcon("imagenes/inicio/textoAyuda.png");
         JLabel icono = new JLabel(imagen);
-        icono.setBounds(332, 58, 0, 0); // donde estan los ceros pone la posicion (centro arriba de
-                                        // todo)
-        frame.getContentPane().add(icono);
+        icono.setBounds(243, 50, 332, 58);
+        this.getContentPane().add(icono);
         return icono;
     }
 

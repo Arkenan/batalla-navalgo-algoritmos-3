@@ -292,7 +292,7 @@ public class VentanaJuego extends Ventana implements Observador {
         Vector posicionDaniador = new Vector(posicionClickeada.x(), posicionClickeada.y());
         DisparoConvencional unDisparo = (DisparoConvencional) partida.crearDaniador(nombre, posicionDaniador);
         VistaDisparoConvencional vistaDisparo = new VistaDisparoConvencional(unDisparo);
-        if (unDisparo.costo() < partida.getPuntos()) {
+        if (unDisparo.costo() <= partida.getPuntos()) {
             dibujante.agregarDisparo(vistaDisparo);
             vistaDisparo.agregarObservador(this);
             vistasDaniadores.add(vistaDisparo);
@@ -308,7 +308,7 @@ public class VentanaJuego extends Ventana implements Observador {
         Vector posicionDaniador = new Vector(posicionClickeada.x(), posicionClickeada.y());
         Mina unaMina = (Mina) partida.crearDaniador(nombre, posicionDaniador);
         VistaMina vistaMina = new VistaMina(unaMina);
-        if (unaMina.costo() < partida.getPuntos()) {
+        if (unaMina.costo() <= partida.getPuntos()) {
             dibujante.agregarMina(vistaMina);
             vistaMina.agregarObservador(this);
             vistasDaniadores.add(vistaMina);
