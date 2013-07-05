@@ -29,5 +29,4 @@ public class MinaDobleRadio extends MinaRetardo {
         nodoADevolver.addAttribute("turnos", Integer.toString(cantidadDeTurnosAEsperar));
         return nodoADevolver;
     }
-
 }

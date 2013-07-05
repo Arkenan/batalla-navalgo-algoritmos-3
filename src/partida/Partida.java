@@ -41,7 +41,7 @@ public class Partida {
         puntos = Integer.parseInt(nodoPartida.attributeValue("puntos"));
 
         ConstructorDeDaniador ConstructorDeDaniador = new ConstructorDeDaniador();
-        daniadores = ConstructorDeDaniador.construirDisparos(nodoPartida.element("Disparos"));
+        daniadores = ConstructorDeDaniador.construirDaniadores(nodoPartida.element("Disparos"));
 
         manejadorDeElementosDelTablero = new ManejadorDeElementosDelTablero();
 
@@ -184,6 +184,10 @@ public class Partida {
         constructoresADevolver.add(new VistasRompehieloFactory());
 
         return constructoresADevolver;
+    }
+
+    public ArrayList<Daniador> obtenerDaniadores() {
+        return daniadores;
     }
 
 }

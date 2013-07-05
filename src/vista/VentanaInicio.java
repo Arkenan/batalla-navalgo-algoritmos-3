@@ -41,11 +41,12 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     }
 
     private JButton addBtnAtras() {
-        Boton btnAtras = new Boton("imagenes/inicio/atras.png", 38, 400);
+        Boton btnAtras = new Boton("imagenes/inicio/atras.png", 57, 341);
         btnAtras.setVisible(false);
         btnAtras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                btnIniciarPartida.setVisible(true);
                 btnCargarPartida.setVisible(true);
                 btnTutorial.setVisible(true);
                 btnJugar.setVisible(false);
@@ -67,6 +68,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
                 menu.setVisible(true); // medio
                 btnAtras.setVisible(true); // inferior izquierda
                 texto.setVisible(true); // medio
+                btnJugar.setVisible(true);
                 sacarBtnIniciar();
             }
         });
@@ -133,7 +135,7 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     private JButton addBtnJugar() {
         ImageIcon icono = new ImageIcon("imagenes/inicio/jugar.png");
         JButton btnJugar = new JButton(icono);
-        btnJugar.setBounds(100, 300, 90, 90);
+        btnJugar.setBounds(364, 225, 90, 90);
         btnJugar.setVisible(false);
         btnJugar.addActionListener(new ActionListener() {
             @Override
@@ -160,13 +162,15 @@ public class VentanaInicio extends VentanaGeneral implements ItemListener {
     private JLabel addTextoAyuda() {
         ImageIcon imagen = new ImageIcon("imagenes/inicio/textoAyuda.png");
         JLabel icono = new JLabel(imagen);
-        icono.setBounds(243, 50, 332, 58);
+        icono.setVisible(false);
+        icono.setBounds(244, 68, 332, 58);
         this.getContentPane().add(icono);
         return icono;
     }
 
     private void sacarBtnAtras() {
         btnAtras.setVisible(false);
+        texto.setVisible(false);
     }
 
     private void sacarBtnIniciar() {

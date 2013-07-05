@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.dom4j.Element;
 
+import vista.Dibujante;
+import vistadaniadores.VistaDaniador;
+import vistadaniadores.VistaDisparoConvencional;
+import vistadaniadores.VistaMina;
 import barcos.Vector;
 import disparos.Daniador;
 import disparos.Disparo;
@@ -52,12 +56,12 @@ public class ConstructorDeDaniador {
         throw new DisparoInvalido();
     }
 
-    public ArrayList<Daniador> construirDisparos(Element nodoDisparos) {
+    public ArrayList<Daniador> construirDaniadores(Element nodoDaniadores) {
         Element nodoDisparo;
         ArrayList<Daniador> listaADevolver = new ArrayList<Daniador>();
 
         // obtengo los nodos de cada disparo en una lista.
-        List<Element> listaNodosDisparo = nodoDisparos.elements();
+        List<Element> listaNodosDisparo = nodoDaniadores.elements();
         Iterator<Element> iterador = listaNodosDisparo.iterator();
 
         while (iterador.hasNext()) {
@@ -74,11 +78,57 @@ public class ConstructorDeDaniador {
                     listaADevolver.add(new MinaRadio(nodoDisparo));
                     break;
                 case "MinaDobleRadio":
-                    listaADevolver.add(new MinaContacto(nodoDisparo));
+                    listaADevolver.add(new MinaDobleRadio(nodoDisparo));
                     break;
                 default:
                     throw (new Error("Disparo no reconocido: " + nodoDisparo.getName()));
             }
+        }
+        return listaADevolver;
+    }
+
+    public ArrayList<VistaDaniador> construirVistasDaniadores(Element nodoDaniadores, ArrayList<Daniador> listaDaniadores, Dibujante dibujante) {
+        Element nodoDisparo;
+        VistaDisparoConvencional vistaDisparo;
+        VistaMina vistaMina;
+        ArrayList<VistaDaniador> listaADevolver = new ArrayList<VistaDaniador>();
+
+        List<Element> listaNodosDisparo = nodoDaniadores.elements();
+        for (int i = 0; i < listaDaniadores.size(); i++) {
+            nodoDisparo = listaNodosDisparo.get(i);
+            switch (nodoDisparo.getName()) {
+                case "DisparoConvencional":
+                    DisparoConvencional disparo = (DisparoConvencional) listaDaniadores.get(i);
+                    vistaDisparo = new VistaDisparoConvencional(disparo);
+                    listaADevolver.add(vistaDisparo);
+                    disparo.agregarObservador(vistaDisparo);
+                    dibujante.agregarDisparo(vistaDisparo);
+                    break;
+                case "MinaContacto":
+                    MinaContacto minaContacto = (MinaContacto) listaDaniadores.get(i);
+                    vistaMina = new VistaMina(minaContacto);
+                    listaADevolver.add(vistaMina);
+                    minaContacto.agregarObservador(vistaMina);
+                    dibujante.agregarMina(vistaMina);
+                    break;
+                case "MinaRadio":
+                    MinaRadio minaRadio = (MinaRadio) listaDaniadores.get(i);
+                    vistaMina = new VistaMina(minaRadio);
+                    listaADevolver.add(vistaMina);
+                    minaRadio.agregarObservador(vistaMina);
+                    dibujante.agregarMina(vistaMina);
+                    break;
+                case "MinaDobleRadio":
+                    MinaDobleRadio minaDobleRadio = (MinaDobleRadio) listaDaniadores.get(i);
+                    vistaMina = new VistaMina(minaDobleRadio);
+                    listaADevolver.add(vistaMina);
+                    minaDobleRadio.agregarObservador(vistaMina);
+                    dibujante.agregarMina(vistaMina);
+                    break;
+                default:
+                    throw (new Error("Disparo no reconocido: " + nodoDisparo.getName()));
+            }
+
         }
         return listaADevolver;
     }

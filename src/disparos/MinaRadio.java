@@ -25,6 +25,7 @@ public class MinaRadio extends MinaRetardo {
     @Override
     public Element generarNodo() {
         Element nodoADevolver = DocumentHelper.createElement("MinaRadio");
+        nodoADevolver.addAttribute("posicion", posicion.toString());
         nodoADevolver.addAttribute("turnos", Integer.toString(cantidadDeTurnosAEsperar));
         return nodoADevolver;
     }
