@@ -350,8 +350,8 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JButton addBotonMina2(int posicionX, int posicionY) {
-		Boton btnMina2 = new Boton("imagenes/iconos/mina_radio2.png",
-				posicionX, posicionY);
+		Boton btnMina2 = new Boton("imagenes/iconos/minaradio2.png", posicionX,
+				posicionY);
 		btnMina2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -363,7 +363,7 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JButton addBotonMina(int posicionX, int posicionY) {
-		Boton btnMina = new Boton("imagenes/iconos/mina_contacto.png",
+		Boton btnMina = new Boton("imagenes/iconos/minacontacto.png",
 				posicionX, posicionY);
 		btnMina.addActionListener(new ActionListener() {
 			@Override
@@ -376,8 +376,8 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JButton addBotonMina1(int posicionX, int posicionY) {
-		Boton btnMina1 = new Boton("imagenes/iconos/mina_radio1.png",
-				posicionX, posicionY);
+		Boton btnMina1 = new Boton("imagenes/iconos/minaradio1.png", posicionX,
+				posicionY);
 		btnMina1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -389,8 +389,8 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JButton addBotonDisparar(int posicionX, int posicionY) {
-		Boton btnDisparar = new Boton("imagenes/iconos/disparo.png", posicionX,
-				posicionY);
+		Boton btnDisparar = new Boton("imagenes/iconos/disparar.png",
+				posicionX, posicionY);
 		btnDisparar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -505,7 +505,7 @@ public class VentanaJuego extends Ventana implements Observador {
 	}
 
 	private JButton addBotonPasarTurno(int posicionX, int posicionY) {
-		Boton btnPasarTurno = new Boton("imagenes/iconos/pasar_turno.png",
+		Boton btnPasarTurno = new Boton("imagenes/iconos/pasar turno.png",
 				posicionX, posicionY);
 		btnPasarTurno.addActionListener(new ActionListener() {
 			@Override
